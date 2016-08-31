@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<oepe:metadata xmlns:oepe="http://xmlns.oracle.com/oepe/metadata/1.0">
+  <oepe:mobileAssembly runtimeVersion="2.3.0">
+    <oepe:applicationController>
+      <oepe:project>TheSCOUTApplication</oepe:project>
+    </oepe:applicationController>
+    <oepe:assemblyUnit id="TheSCOUTView">
+      <oepe:project>TheSCOUTView</oepe:project>
+    </oepe:assemblyUnit>
+  </oepe:mobileAssembly>
+</oepe:metadata>

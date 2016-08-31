@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<adfmf_targets:Targets xmlns:adfmf_targets="oracle.eclipse.tools.adf.mobile/adfmf_targets">
+  <target id="iOS_Target_1" name="iOS Target 1" stagingDir=".main.ios">
+    <sdk href="adfmf_target://workspacePrefs/sdks#iOS0"/>
+    <platform href="adfmf_target://workspacePrefs/sdks#ios-9.2.0-iOS0"/>
+    <mafRuntimeConfiguration version="2.3.0.1_3010_20160427-0841" name="MAF Runtime 2.3.0" id="oracle.eclipse.tools.adf.mobile.runtime-definition.2.3"/>
+  </target>
+  <target id="Android_Target_1" name="Android Target 1" stagingDir=".main.android">
+    <sdk href="adfmf_target://workspacePrefs/sdks#Android0"/>
+    <platform href="adfmf_target://workspacePrefs/sdks#android-18.0.0-Android0"/>
+    <mafRuntimeConfiguration version="2.3.0.1_3010_20160427-0841" name="MAF Runtime 2.3.0" id="oracle.eclipse.tools.adf.mobile.runtime-definition.2.3"/>
+  </target>
+</adfmf_targets:Targets>
