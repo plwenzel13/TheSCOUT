@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MafFeatureViewController">
+            <connections>
+                <outlet property="securedFeatureWatermarkLabel" destination="4kS-bv-ScM" id="xb9-39-GT8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Watermark - Big Sliding Window">
+            <rect key="frame" x="0.0" y="0.0" width="279" height="225"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L6e-p2-Fmf">
+                    <rect key="frame" x="92" y="53" width="96" height="120"/>
+                    <subviews>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="securedFeature.png" translatesAutoresizingMaskIntoConstraints="NO" id="mPn-4y-mSr">
+                            <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="96" id="Pv1-KU-ZaI"/>
+                                <constraint firstAttribute="width" constant="96" id="zdu-YK-PJG"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secured" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kS-bv-ScM">
+                            <rect key="frame" x="14" y="99" width="68" height="21"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" red="0.81176470590000005" green="0.86274509799999999" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="mPn-4y-mSr" secondAttribute="centerX" id="2tn-3y-iu1"/>
+                        <constraint firstAttribute="width" constant="96" id="8L0-Ia-sEY"/>
+                        <constraint firstAttribute="bottom" secondItem="4kS-bv-ScM" secondAttribute="bottom" id="AYH-Tu-FfY"/>
+                        <constraint firstItem="mPn-4y-mSr" firstAttribute="top" secondItem="L6e-p2-Fmf" secondAttribute="top" id="D9J-EZ-wB0"/>
+                        <constraint firstAttribute="height" constant="120" id="HIn-sP-1iy"/>
+                        <constraint firstAttribute="centerX" secondItem="4kS-bv-ScM" secondAttribute="centerX" id="Xaf-rU-vfo"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q05-ig-zCQ">
+                    <rect key="frame" x="125" y="181" width="30" height="32"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="proceedWithExternalAuthentication:" destination="-1" eventType="touchUpInside" id="CST-av-SVr"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.97254901960784312" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+            <color key="tintColor" red="0.81176470588235294" green="0.86274509803921573" blue="0.90980392156862744" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="L6e-p2-Fmf" secondAttribute="centerY" id="JIH-pL-7ZP"/>
+                <constraint firstAttribute="centerX" secondItem="L6e-p2-Fmf" secondAttribute="centerX" id="olf-GX-dug"/>
+                <constraint firstAttribute="centerX" secondItem="Q05-ig-zCQ" secondAttribute="centerX" id="rab-re-jPy"/>
+                <constraint firstItem="Q05-ig-zCQ" firstAttribute="top" secondItem="4kS-bv-ScM" secondAttribute="bottom" constant="8" id="zlG-ir-V0D"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="securedFeature.png" width="96" height="96"/>
+    </resources>
+</document>

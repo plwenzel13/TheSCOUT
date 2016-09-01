@@ -1,0 +1,1 @@
+l={EMEA:["EMEA","\uc720\ub7fd, \uc911\ub3d9, \uc544\ud504\ub9ac\uce74"],LAT:["LAT","\ub77c\ud2f4 \uc544\uba54\ub9ac\uce74"],APAC:["APAC","\uc544\uc2dc\uc544 \ud0dc\ud3c9\uc591"],NA:["USA, CAN","\ubbf8\uad6d \ubc0f \uce90\ub098\ub2e4"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["worldRegions","regions",l]);

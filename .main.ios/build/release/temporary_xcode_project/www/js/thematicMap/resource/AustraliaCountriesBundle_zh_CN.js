@@ -1,0 +1,1 @@
+l={NZL:["NZL","\u65b0\u897f\u5170"],AUS:["AUS","\u6fb3\u5927\u5229\u4e9a"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["australia","countries",l]);

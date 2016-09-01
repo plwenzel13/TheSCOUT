@@ -1,0 +1,1 @@
+l={NC:["NC","Carolina de Nord"],ND:["ND","Dakota de Nord"],WV:["WV","Virginia de Vest"],SD:["SD","Dakota de Sud"],SC:["SC","Carolina de Sud"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","states",l]);

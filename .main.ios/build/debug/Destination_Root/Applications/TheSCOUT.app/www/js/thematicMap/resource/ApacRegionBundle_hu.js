@@ -1,0 +1,1 @@
+"use strict";var l={"APAC":["APAC","\u00C1zsia \u00E9s a Csendes-\u00F3ce\u00E1ni szigetek"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["apac","region",l]);

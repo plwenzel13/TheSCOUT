@@ -1,0 +1,3 @@
+dependencies: \
+  /Users/patriciawenzel/Documents/workspace/TheSCOUT/.main.ios/build/release/temporary_xcode_project/Oracle_ADFmc_Container_Template/Plugins/cordova-plugin-network-information/CDVReachability.m \
+  /Users/patriciawenzel/Documents/workspace/TheSCOUT/.main.ios/build/release/temporary_xcode_project/Oracle_ADFmc_Container_Template/Plugins/cordova-plugin-network-information/CDVReachability.h

@@ -1,0 +1,31 @@
+{
+  "generateBaseHtml": false,
+  "dtMode": false,
+  "messageBundleBaseUrl": "../../ToolsTrinidadJavascript",
+  "delayShowComplete": false,
+  "useBatchProcessing": true,
+  "combineJSFiles": false,
+  "cssResources": [
+  ],
+  "jsResources": [
+    "../js/JavaScriptContext.js",
+    "../js/Adfel.js",
+    "../js/AdfelBridge.js",
+    "../js/AdfLocale.js",
+    "../js/Adflog.js",
+    "../js/AdfPerfTiming.js",
+    "../js/AdfResource.js",
+    "../js/ContainerIntegration.js",
+    "../js/ELErrors.js",
+    "../js/ELParser.js",
+    "../js/ManagedBeans.js",
+    "../js/TreeNode.js",
+    "../js/Utilities.js",
+    "../../../../../www/js/resource/ADFErrorBundle.js",
+    "../../../../../www/js/resource/ADFInfoBundle.js",
+    "../../../../../www/js/cordova.js",
+    "../../../../../www/js/adf.mf.device.integration.js"
+   ],
+  "locale":
+    "../../Trinidad/Javascript/Locale.js"
+}

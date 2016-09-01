@@ -1,0 +1,1 @@
+l={EMEA:["EMEA","Europa, Mellan\u00f6stern och Afrika"],LAT:["LAT","Latinamerika"],APAC:["APAC","Stillahavsasien"],NA:["USA, CAN","USA och Kanada"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["worldRegions","regions",l]);

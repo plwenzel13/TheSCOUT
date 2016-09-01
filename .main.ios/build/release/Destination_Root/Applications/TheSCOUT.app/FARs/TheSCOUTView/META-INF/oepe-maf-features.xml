@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<omf:features xmlns:omf="http://xmlns.oracle.com/oepe/maf/features/1.0">
+   <feature featureReference="Troop">
+      <pluginReferences>
+         <core-cordova-plugin-references>
+            <plugin-reference id="CoreCamera"/>
+         </core-cordova-plugin-references>
+      </pluginReferences>
+   </feature>
+</omf:features>

@@ -1,0 +1,1 @@
+l={USA:["USA","Amerikas f\u00f6renta stater"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","country",l]);

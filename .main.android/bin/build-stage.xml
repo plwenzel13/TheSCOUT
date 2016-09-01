@@ -1,0 +1,153 @@
+<project name="build-stage">
+	<import file="build-set-globals.xml" as="globals" />
+
+    <target name="init" depends="globals.init" />
+ 
+	<target name="-createStaging">
+		<mkdir dir="${adf.build.root.dir}" />
+		<mkdir dir="${adf.build.root.dir}/src" />
+	</target>
+
+	<target name="-process-adf-android-manifest-template">
+	   <fail unless="var.app.package" />
+        <replace file="${adf.staging.manifest.abs.file}">
+			<replacefilter token="$$$$app.package$$$$" value="${var.app.package}" />
+			<replacefilter token="$$$$app.icon$$$$" value="${var.app.icon}" />
+			<replacefilter token="$$$$app.name$$$$" value="${var.app.name}" />
+			<replacefilter token="$$$$app.configChanges$$$$" value="${var.app.configChanges}" />
+			<replacefilter token="$$$$app.label$$$$" value="${var.app.label}" />
+
+            <!-- TODO: don't know what this is for -->
+            <replacefilter token="$$$$app.scheme$$$$" value="" />
+		</replace>
+	</target>
+
+	<!-- this must be done before -build-setup is called so that the Manifest 
+		file and anything else where ADF has template variables, get resolved before 
+		-build-setup and its deps set properties based on their content -->
+    <target name="-process-adf-template" depends="-process-adf-android-manifest-template" />
+
+    <!-- We need to remove the Android Settings preferences.xml each time to ensure
+     Cordova plugin preferences can be correctly merged with user sources -->
+    <target name="-ensureFreshPreferencesXml">
+        <delete file="${adf.staging.res.xml.dir}/preferences.xml" failonerror="false"/>
+    </target>
+
+    <target name="-checkPlugmanTools">
+        <echo message="Checking for cordova install tools under ${oepe.cordova.tools.root}" />
+        <condition property="cordovaToolsPresent">
+            <or>
+                <available file="${adf.build.tools.plugman}" />
+            </or>
+        </condition>
+        <echo message="cordovaToolsPresent: ${cordovaToolsPresent}" />
+        <!-- ensure tools are executable -->
+        <chmod file="${adf.rt.maf.helper.ios}" perm="755"/>
+        <!-- <chmod file="${adf.build.root.dir}/cordova/version" perm="755"/> -->
+    </target>
+    
+    <target name="-doMac" if="${oepe.build.ctrl.isMac}" unless="${cordovaToolsPresent}">
+        <mkdir dir="${oepe.cordova.tools.root}/plugman"/>
+        <exec executable="/usr/bin/tar" dir="${oepe.cordova.tools.root}" failonerror="true">
+            <arg value="xzf" />
+            <arg value="${adf.rt.tools.path}/node-darwin-x64.tar.gz" />
+        </exec>
+        <chmod perm="755" file="${oepe.cordova.tools.root}/node-darwin-x64/bin/npm" />
+        <exec executable="${oepe.cordova.tools.root}/node-darwin-x64/bin/npm" failonerror="true">
+<!--            <arg value="-l" />
+            <arg value="-c" /> 
+            <arg value="" />-->
+            <arg value="install" />
+            <arg value="-prefix" />
+            <arg value="${oepe.cordova.tools.root}/plugman" />
+            <arg value="${adf.rt.tools.path}/plugman.tgz" />
+         </exec>
+    </target>
+    
+    <target name="-doUnix" if="${oepe.build.ctrl.isLinux}" unless="${cordovaToolsPresent}">
+    <mkdir dir="${oepe.cordova.tools.root}/plugman"/>
+        <exec executable="tar" dir="${oepe.cordova.tools.root}" failonerror="true">
+              <arg value="xzf" />
+              <arg value="${adf.rt.tools.path}/node-linux-x86.tar.gz" />
+        </exec>
+        <chmod perm="755" file="${oepe.cordova.tools.root}/node-linux-x86/bin/npm" />
+        <exec executable="${oepe.cordova.tools.root}/node-linux-x86/bin/npm" failonerror="true">
+            <arg value="install" />
+            <arg value="-prefix" />
+            <arg value="${oepe.cordova.tools.root}/plugman" />
+            <arg value="${adf.rt.tools.path}/plugman.tgz" />
+         </exec>
+    </target>
+
+    <target name="-doWindows" if="${oepe.build.ctrl.isWindows}" unless="${cordovaToolsPresent}">
+        <mkdir dir="${oepe.cordova.tools.root}/plugman"/>
+        <unzip src="${adf.rt.tools.path}/npm.zip" dest="${oepe.cordova.tools.root}/plugman" />
+        <copy file="${adf.rt.tools.path}/node.exe" todir="${oepe.cordova.tools.root}/plugman"/>
+        <exec executable="${oepe.cordova.tools.root}/plugman/npm.cmd" failonerror="true">
+            <arg value="install" />
+            <arg value="-prefix" />
+            <arg value="${oepe.cordova.tools.root}/plugman" />
+            <arg value="${adf.rt.tools.path}/plugman.tgz" />
+        </exec>
+        <copy file="${adf.rt.tools.path}/node.exe" todir="${oepe.cordova.tools.root}/plugman/node_modules/.bin" />
+    </target>
+
+    <target name="-installPlugmanTools" unless="${cordovaToolsPresent}" depends="-doMac, -doUnix, -doWindows">
+       
+    </target>
+    
+    <target name="-executeBuildTemplate">
+        <echo message="${var.app.icon}" />
+        <build-template templatefile="${oepe.bin.dir}/tmpl/android-staging.json">
+            <buildTemplateMacro key="template.root.dir" value="${adf.rt.zip.root}/${adf.rt.runtime.root}"/>
+            <buildTemplateMacro key="build.root.dir" value="${adf.build.root.dir}" />
+            <buildTemplateMacro key="oepe.adfmf.build.mode" value="${oepe.adfmf.build.mode}" />
+            <buildTemplateMacro key="var.app.package" value="${var.app.package}" />
+            <buildTemplateMacro key="var.app.icon" value="${var.app.icon}" />
+            <buildTemplateMacro key="var.app.name" value="${var.app.name}" />
+            <buildTemplateMacro key="var.app.configChanges" value="${var.app.configChanges}" />
+            <buildTemplateMacro key="var.app.label" value="${var.app.label}" />
+            <buildTemplateMacro key="var.app.name.literal" value="${var.app.name.literal}" />
+        </build-template>
+    </target>
+
+    <target name="-checkJVMLibs">
+        <condition property="oepe.jvmlibs.already.split">
+            <and>
+                <available file="" />
+                <available file="" />
+            </and>
+        </condition>
+    </target>
+    <!-- <target name="-splitJVMLibs">
+        <tempfile property=""/>
+    </target> -->
+
+    <target name="build" depends="init, -createStaging, -executeBuildTemplate, -process-adf-template, -checkPlugmanTools, -installPlugmanTools" />
+
+	<target name="clean" depends="init">
+        <delete dir="${adf.build.root.dir}" includes="**/**" includeemptydirs="true" failonerror="true"/>
+	</target>
+
+   <macrodef name="install-tools">
+        <sequential>
+        <condition property="foo">
+            <os family=""/>
+        </condition>
+<!--            <mkdir dir="${adf.build.tools.dir}"/>
+            <copy todir="${adf.build.tools.dir}">
+                <fileset dir="${adf.rt.tools.path}">
+                    <include name="**" />
+                </fileset>
+            </copy>
+            <java jar="${adf.rt.maf.helper.jar}"
+                fork="true"
+                failonerror="true"
+                maxmemory="256m">
+                <arg value="installTools"/>
+                <arg value="-tools"/>
+                <arg value="${adf.build.tools.dir}"/>
+            </java>-->
+        </sequential>
+    </macrodef>
+</project>

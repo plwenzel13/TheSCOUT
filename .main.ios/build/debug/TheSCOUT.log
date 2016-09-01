@@ -1,0 +1,102 @@
+2016-08-24 19:55:33.777 TheSCOUT[13948:4263410] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-24 19:55:33.778 TheSCOUT[13948:4263410] Multi-tasking -> Device: YES, App: YES
+2016-08-24 19:55:34.198 TheSCOUT[13948:4263410] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-24 19:55:34.198 TheSCOUT[13948:4263410] Multi-tasking -> Device: YES, App: YES
+2016-08-24 19:55:34.226 TheSCOUT[13948:4263410] Using UIWebView
+2016-08-24 19:55:34.756 TheSCOUT[13948:4263410] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-24 19:55:34.756 TheSCOUT[13948:4263410] Multi-tasking -> Device: YES, App: YES
+2016-08-24 19:55:34.762 TheSCOUT[13948:4263410] Using UIWebView
+2016-08-24 19:55:34.979 TheSCOUT[13948:4263410] Resetting plugins due to page load.
+2016-08-24 19:55:35.014 TheSCOUT[13948:4263410] Gave lock 2
+2016-08-24 19:55:35.024 TheSCOUT[13948:4263410] Gave lock 3
+2016-08-24 19:55:35.027 TheSCOUT[13948:4263410] Resetting plugins due to page load.
+2016-08-24 19:55:35.355 TheSCOUT[13948:4263410] Finished load of: file:///Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/6417AA24-90CD-4AE2-82CB-7382A6DD1AA8/TheSCOUT.app/www/bootstrap.html?dir=ltr&lang=en&locale=en-us&applicationName=The%20SCOUT&applicationId=maf.thescout.TheSCOUT&featureName=Troop&featureId=Troop&profile_json_folder_override=%2FUsers%2Fpatriciawenzel%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FA683BCC5-9F67-448F-B051-C31ED9D9230F%2Fdata%2FContainers%2FData%2FApplication%2FF0E13F85-2906-42DD-99F2-2EC7389F7F58%2FDocuments%2FbaseProfiles&appStartTime=1472086529283.543945&webviewStartTime=1472086535019.382080&springboardFeature=false&file=troops-flow.xml%23troops-flow&featureRoot=../FARs/TheSCOUTView&topContentOffset=20
+2016-08-24 19:55:35.371 TheSCOUT[13948:4263410] Finished load of: file:///Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/6417AA24-90CD-4AE2-82CB-7382A6DD1AA8/TheSCOUT.app/www/bootstrap.html?dir=ltr&lang=en&locale=en-us&applicationName=The%20SCOUT&applicationId=maf.thescout.TheSCOUT&featureName=__adfmf_default_springboard&featureId=__adfmf_default_springboard&profile_json_folder_override=%2FUsers%2Fpatriciawenzel%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FA683BCC5-9F67-448F-B051-C31ED9D9230F%2Fdata%2FContainers%2FData%2FApplication%2FF0E13F85-2906-42DD-99F2-2EC7389F7F58%2FDocuments%2FbaseProfiles&appStartTime=1472086529283.543945&webviewStartTime=1472086534964.343018&springboardFeature=true&file=adfmf_default_springboard/springboard.amx&featureRoot=../FARs/adfmf.springboard&topContentOffset=20
+2016-08-24 19:55:40.150 TheSCOUT[13948:4263410] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-24 19:55:40.150 TheSCOUT[13948:4263410] Multi-tasking -> Device: YES, App: YES
+2016-08-24 19:55:40.154 TheSCOUT[13948:4263410] Using UIWebView
+2016-08-24 19:55:40.267 TheSCOUT[13948:4263410] Resetting plugins due to page load.
+2016-08-24 19:55:40.279 TheSCOUT[13948:4263410] Finished load of: file:///Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/6417AA24-90CD-4AE2-82CB-7382A6DD1AA8/TheSCOUT.app/www/bootstrap.html?dir=ltr&lang=en&locale=en-us&applicationName=The%20SCOUT&applicationId=maf.thescout.TheSCOUT&featureName=Juliette&featureId=Juliette&profile_json_folder_override=%2FUsers%2Fpatriciawenzel%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FA683BCC5-9F67-448F-B051-C31ED9D9230F%2Fdata%2FContainers%2FData%2FApplication%2FF0E13F85-2906-42DD-99F2-2EC7389F7F58%2FDocuments%2FbaseProfiles&appStartTime=1472086529283.543945&webviewStartTime=1472086540265.542969&springboardFeature=false&file=juliette-flow.xml%23juliette-flow&featureRoot=../FARs/TheSCOUTView&topContentOffset=20
+java.sql.SQLException: java.lang.NoClassDefFoundError: javax/naming/RefAddr
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:963)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:896)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:885)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:877)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:873)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:422)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:410)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:328)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at maf.thescout.data.Data.sjfkjehfkjewhfk(Data.java:47)
+	at maf.thescout.data.Data.getJuliettesDatabase(Data.java:104)
+	at maf.thescout.thescoutview.Juliettes.<init>(Juliettes.java:28)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at oracle.adfmf.dc.bean.ConcreteJavaBeanDataControlAdapter.createDataProvider(Unknown Source)
+	at oracle.adfmf.dc.bean.ConcreteJavaBeanDataControlAdapter.createDataProvider(Unknown Source)
+	at oracle.adfmf.dc.bean.ConcreteJavaBeanDataControlAdapter.setDataProvider(Unknown Source)
+	at oracle.adf.model.DataControlFactoryBase.createDataControl(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxBindingContext.loadDataControlById(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxBindingContext.fetch(Unknown Source)
+	at oracle.adfmf.cache.SimpleCache.get(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxBindingContext.getDataControlById(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxControlBinding.getDataControl(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxIteratorBinding.loadBasicIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxIteratorBinding.getIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxIteratorBinding.getIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding.getIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding.access$800(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding$BasicBehavior.getInputValue(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding.getInputValue(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at javax.el.BeanELResolver.getValue(Unknown Source)
+	at javax.el.CompositeELResolver.getValue(Unknown Source)
+	at oracle.adfmf.framework.model.DiagnosticCompositeELResolver.getValue(Unknown Source)
+	at de.odysseus.el.tree.impl.ast.AstProperty.eval(Unknown Source)
+	at de.odysseus.el.tree.impl.ast.AstEval.eval(Unknown Source)
+	at de.odysseus.el.tree.impl.ast.AstNode.getValue(Unknown Source)
+	at de.odysseus.el.TreeValueExpression.getValue(Unknown Source)
+	at oracle.adfmf.framework.api.Model.getValue(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.GenericInvokeRequestHandler.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.EmbeddedGenericInvokeRequestHandler.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.GenericInvokeRequestHandler.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.GenericInvokeRequestHandler.process(Unknown Source)
+	at oracle.adfmf.framework.FeatureContext.handle(Unknown Source)
+	at oracle.adfmf.framework.AdfChannel.handle(Unknown Source)
+	at com.oracle.vm.channel.impl.VMChannelImpl.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.NoClassDefFoundError: javax/naming/RefAddr
+	at com.mysql.jdbc.ConnectionPropertiesImpl.<init>(ConnectionPropertiesImpl.java:671)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:710)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:404)
+	... 52 more
+Caused by: java.lang.ClassNotFoundException: javax.naming.RefAddr
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.net.FactoryURLClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 60 more
+2016-08-24 20:05:46.096 TheSCOUT[13948:4269295] XPC connection interrupted
+2016-08-24 20:05:46.137 TheSCOUT[13948:4269293] Terminating since there is no system app.
+["Back Channel Hidden Feature: Received Event: deviceready"]
+["Back Channel Hidden Feature - Startup is complete."]
+[CONFIG - oracle.adfmf.framework - MafLogger - (+)getActiveLogLevel:] No *.LEVEL entry found for package 'oracle.maf.performance.monitor.observations.reported'. Defaulting to SEVERE LEVEL.
+[CONFIG - oracle.adfmf.framework - MafLogger - (+)getActiveLogLevel:] No *.LEVEL entry found for package 'oracle.maf.performance.monitor.captured'. Defaulting to SEVERE LEVEL.
+[CONFIG - oracle.adfmf.framework - MafLogger - (+)getActiveLogLevel:] No *.LEVEL entry found for package 'oracle.adfmf.amx'. Defaulting to SEVERE LEVEL.

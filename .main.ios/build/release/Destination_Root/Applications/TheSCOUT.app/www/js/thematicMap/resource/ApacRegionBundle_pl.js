@@ -1,0 +1,1 @@
+l={APAC:["APAC","Azja i Pacyfik"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["apac","region",l]);

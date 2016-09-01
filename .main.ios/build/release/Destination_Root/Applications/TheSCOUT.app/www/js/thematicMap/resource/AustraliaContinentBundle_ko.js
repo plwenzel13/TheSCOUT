@@ -1,0 +1,1 @@
+l={AU:["AU","\uc624\uc2a4\ud2b8\ub808\uc77c\ub9ac\uc544"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["australia","continent",l]);

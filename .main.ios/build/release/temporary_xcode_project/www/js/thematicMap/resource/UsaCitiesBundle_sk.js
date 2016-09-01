@@ -1,0 +1,1 @@
+l={MN_ST__PAUL:[null,"Saint Paul"],FL_ST__PETERSBURG:[null,"Petrohrad"],GA_ATHENS:[null,"At\u00e9ny"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","cities",l]);

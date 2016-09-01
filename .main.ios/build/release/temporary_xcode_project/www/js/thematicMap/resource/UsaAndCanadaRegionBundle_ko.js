@@ -1,0 +1,1 @@
+l={NA:["USA, CAN","\ubbf8\uad6d \ubc0f \uce90\ub098\ub2e4"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usaAndCanada","region",l]);

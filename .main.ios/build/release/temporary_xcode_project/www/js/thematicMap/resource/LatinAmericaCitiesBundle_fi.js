@@ -1,0 +1,1 @@
+l={CUB_HAVANA:[null,"Havanna"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["latinAmerica","cities",l]);

@@ -1,0 +1,1 @@
+"use strict";var l={"USA":["USA","Amerikas Forenede Stater"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["usaAndCanada","countries",l]);

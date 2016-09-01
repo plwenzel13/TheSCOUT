@@ -1,0 +1,1 @@
+l={USA:["\u0397.\u03a0.\u0391.","\u0397\u03bd\u03c9\u03bc\u03ad\u03bd\u03b5\u03c2 \u03a0\u03bf\u03bb\u03b9\u03c4\u03b5\u03af\u03b5\u03c2 \u0391\u03bc\u03b5\u03c1\u03b9\u03ba\u03ae\u03c2"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","country",l]);

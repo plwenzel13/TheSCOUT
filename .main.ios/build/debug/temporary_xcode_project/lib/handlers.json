@@ -1,0 +1,398 @@
+{
+   "dtrtws": {
+     "name"                     : "DtRtWS",
+     ".type"                    : "oracle.adfmf.config.client.delivery.DtRtWSBased",
+     
+     "raw": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "raw",
+       "restartRequired"      : true,
+       "transport": {
+               ".type"         : "oracle.adfmf.config.client.delivery.transport.DtRtCatalogResourceTransport",
+               "version"       : "1.0",
+               "relative"      : ""
+       },
+       "store": {
+               ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+               "root"          : ".",
+               "version"       : "1.0"
+       }
+     },
+
+     "clone": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "clone",
+       "restartRequired"      : true,
+       "transport": {
+               ".type"         : "oracle.adfmf.config.client.delivery.transport.HttpTransport",
+               "version"       : "1.0",
+               "relative"      : ""
+       },
+       "store": {
+               ".type"         : "oracle.adfmf.config.client.handler.store.CloneSystemStore",
+               "root"          : ".",
+               "version"       : "1.0"
+       }
+     },
+
+     "zip": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "clone",
+       "restartRequired"      : true,
+       "transport": {
+               ".type"         : "oracle.adfmf.config.client.delivery.transport.DtRtCatalogZipTransport",
+               "version"       : "1.0",
+               "relative"      : ""
+       },
+       "store": {
+               ".type"         : "oracle.adfmf.config.client.handler.store.DtRtCatalogZipStore",
+               "root"          : ".",
+               "version"       : "1.0"
+       }
+     },
+     
+     
+     "amd": {
+       ".type"                : "oracle.adfmf.config.client.handler.DtRtCatalogConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "amd",
+       "restartRequired"      : true,
+       "manifestName"         : "adfmf-manifest.properties",
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.DtRtCatalogTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+
+     "versions": {
+       ".type"                : "oracle.adfmf.config.client.handler.DtRtCatalogsConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "versions",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.DtRtCatalogsTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+    "sandboxes": {
+       ".type"                : "oracle.adfmf.config.client.handler.DtRtSandboxesConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "sandboxes",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.DtRtSandboxesTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     }, 
+     
+     "dup": {
+       ".type"                : "oracle.adfmf.config.client.handler.DupConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "dup",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.DuplicateTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "xml": {
+       ".type"                : "oracle.adfmf.config.client.handler.PageDefConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "xml",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.FileSystemTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     }
+   },
+   
+   "http": {
+     "name"                     : "http",
+     ".type"                    : "oracle.adfmf.config.client.delivery.HttpBased",
+     
+     "raw": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "raw",
+       "restartRequired"      : true,
+       "transport": {
+               ".type"         : "oracle.adfmf.config.client.delivery.transport.Httpv11Transport",
+               "version"       : "1.0",
+               "relative"      : ""
+       },
+       "store": {
+               ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+               "root"          : ".",
+               "version"       : "1.0"
+       }
+     },
+
+     "clone": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "clone",
+       "restartRequired"      : true,
+       "transport": {
+               ".type"         : "oracle.adfmf.config.client.delivery.transport.Httpv11Transport",
+               "version"       : "1.0",
+               "relative"      : ""
+       },
+       "store": {
+               ".type"         : "oracle.adfmf.config.client.handler.store.CloneSystemStore",
+               "root"          : ".",
+               "version"       : "1.0"
+       }
+     },
+     
+     "amd": {
+       ".type"                : "oracle.adfmf.config.client.handler.AppManifestConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "amd",
+       "restartRequired"      : true,
+       "manifestName"         : "adfmf-manifest.properties",
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.Httpv11Transport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "dup": {
+       ".type"                : "oracle.adfmf.config.client.handler.DupConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "dup",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.DuplicateTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "xml": {
+       ".type"                : "oracle.adfmf.config.client.handler.PageDefConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "xml",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.FileSystemTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     }
+   },
+
+   "dropbox": {
+     "name"                     : "dropbox",
+     ".type"                    : "oracle.adfmf.config.client.delivery.DropBoxBased",
+     "root"                     : "/tmp/dropbox",
+     
+     "amd": {
+       ".type"                : "oracle.adfmf.config.client.handler.AppManifestConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "amd",
+       "restartRequired"      : true,
+       "manifestName"         : "adfmf-manifest.properties",
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.FileSystemTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "dup": {
+       ".type"                : "oracle.adfmf.config.client.handler.DupConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "dup",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.DuplicateTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+
+     "clone": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "clone",
+       "restartRequired"      : true,
+       "transport": {
+               ".type"         : "oracle.adfmf.config.client.delivery.transport.HttpTransport",
+               "version"       : "1.0",
+               "relative"      : ""
+       },
+       "store": {
+               ".type"         : "oracle.adfmf.config.client.handler.store.CloneSystemStore",
+               "root"          : ".",
+               "version"       : "1.0"
+       }
+     },
+     
+     "raw": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "raw",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.FileSystemTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "xml": {
+       ".type"                : "oracle.adfmf.config.client.handler.PageDefConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "xml",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.FileSystemTransport",
+          "version"       : "1.0",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     }
+   },
+   
+   "rest": {
+     "name"                     : "rest",
+     ".type"                    : "oracle.adfmf.config.client.delivery.WebServiceBased",
+     "amd": {
+       ".type"                : "oracle.adfmf.config.client.handler.AppManifestConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "amd",
+       "restartRequired"      : true,
+       "manifestName"         : "adfmf-manifast.properties",
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.RestTransport",
+          "version"       : "1.0",
+          "connectionName": "PAGE_META_DATA_ENDPOINT",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "raw": {
+       ".type"                : "oracle.adfmf.config.client.handler.RawConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "raw",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.RestTransport",
+          "version"       : "1.0",
+          "connectionName": "PAGE_META_DATA_ENDPOINT",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     },
+     
+     "xml": {
+       ".type"                : "oracle.adfmf.config.client.handler.PageDefConfigurationHandler",
+       "version"              : "1.0",
+       "name"                 : "xml",
+       "restartRequired"      : true,
+
+       "transport": {
+          ".type"         : "oracle.adfmf.config.client.delivery.transport.RestTransport",
+          "version"       : "1.0",
+          "connectionName": "PAGE_META_DATA_ENDPOINT",
+          "relative"      : ""
+       },
+       "store": {
+          ".type"         : "oracle.adfmf.config.client.handler.store.FileSystemStore",
+          "root"          : ".",
+          "version"       : "1.0"
+       }
+     }
+   }
+ }

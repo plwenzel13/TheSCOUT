@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+	xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+	<amx:panelPage id="pp1">
+		<amx:facet name="header">
+			<amx:outputText value="Juliette Home Screen" id="ot1" />
+		</amx:facet>
+		<amx:facet name="primary">
+			<amx:commandButton id="cb1" text="add" action="create" />
+		</amx:facet>
+		<amx:panelSplitter id="p1">
+			<amx:facet name="navigator">
+				<!--Main-Sub Text List View bound to Juliettes.juliettes -->
+				<amx:listView var="row"
+					value="#{bindings.juliettes.collectionModel}"
+					fetchSize="#{bindings.juliettes.rangeSize}"
+					selectedRowKeys="#{bindings.juliettes.collectionModel.selectedRow}"
+					selectionListener="#{bindings.juliettes.collectionModel.makeCurrent}"
+					dividerAttribute="firstName" dividerMode="firstLetter"
+					showMoreStrategy="autoScroll" bufferStrategy="viewport"
+					layout="rows" halign="start" id="l1">
+					<amx:listItem id="l2">
+						<amx:tableLayout width="100%" id="t1">
+							<amx:rowLayout id="r1">
+								<amx:cellFormat width="10px" rowSpan="2" id="c1">
+								</amx:cellFormat>
+								<amx:cellFormat width="100%"
+									height="#{deviceScope.device.os=='Android'?'36':'32'}px"
+									id="c2">
+									<amx:outputText value="#{row.firstName}" id="o1">
+									</amx:outputText>
+								</amx:cellFormat>
+							</amx:rowLayout>
+							<amx:rowLayout id="r2">
+								<amx:cellFormat width="100%"
+									height="#{deviceScope.device.os=='Android'?'22':'19'}px"
+									id="c3">
+									<amx:outputText styleClass="adfmf-listItem-captionText"
+										value="#{row.gsLevel}" id="o2">
+									</amx:outputText>
+								</amx:cellFormat>
+							</amx:rowLayout>
+						</amx:tableLayout>
+					</amx:listItem>
+				</amx:listView>
+			</amx:facet>
+			
+			<!--Form bound to Juliettes.juliettes -->
+			
+			<amx:panelItem><amx:panelFormLayout id="p2">
+				<amx:inputText label="#{bindings.firstName.hints.label}" value="#{bindings.firstName.inputValue}" id="i1">
+				</amx:inputText>
+				<amx:inputText label="#{bindings.lastName.hints.label}" value="#{bindings.lastName.inputValue}" id="i2">
+				</amx:inputText>
+				<amx:inputText label="#{bindings.grade.hints.label}" value="#{bindings.grade.inputValue}" id="i3">
+				</amx:inputText>
+				<amx:inputText label="#{bindings.gsLevel.hints.label}" value="#{bindings.gsLevel.inputValue}" id="i4">
+				</amx:inputText>
+				<amx:inputText label="#{bindings.troopNumber.hints.label}" value="#{bindings.troopNumber.inputValue}" id="i5">
+				</amx:inputText>
+			</amx:panelFormLayout></amx:panelItem>
+		</amx:panelSplitter>
+	</amx:panelPage>
+</amx:view>

@@ -1,0 +1,21 @@
+
+
+				{
+
+					"source": "/Users/patriciawenzel/Documents/workspace/TheSCOUT",
+
+				    "output": "/Users/patriciawenzel/Documents/workspace/TheSCOUT/.main.ios/build/debug/temporary_xcode_project",
+
+					"sourceDotAdfDirectory": "/Users/patriciawenzel/Documents/workspace/TheSCOUT/.main.ios/build/debug/temporary_xcode_project/.adf",
+
+				    "sourceCoreCordovaPlugins": "/Applications/Eclipse.app/Contents/Eclipse/plugins/oracle.eclipse.tools.maf.rt.v23_2.3.0.201605191642/rt/oracle.maf.v23_20160427/CordovaPlugins",
+
+				    "plugmanExecutable": "/Users/patriciawenzel/Documents/workspace/.metadata/.plugins/oracle.eclipse.tools.adf.mobile/d/c_2.3.0/plugman/node_modules/.bin/plugman",
+
+				    "nodeExecutable": "/Users/patriciawenzel/Documents/workspace/.metadata/.plugins/oracle.eclipse.tools.adf.mobile/d/c_2.3.0/node-darwin-x64/bin/node",
+
+				    "disableAppTransportSecurity": "false"
+
+				}
+
+			

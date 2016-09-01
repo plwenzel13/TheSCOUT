@@ -1,0 +1,1 @@
+l={AS:["AS","\u00c1zia"],AU:["AU","Austr\u00e1lia"],EU:["EU","Eur\u00f3pa"],AF:["AF","Afrika"],NA:["NA","Severn\u00e1 Amerika"],SA:["SA","Ju\u017en\u00e1 Amerika"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["world","continents",l]);

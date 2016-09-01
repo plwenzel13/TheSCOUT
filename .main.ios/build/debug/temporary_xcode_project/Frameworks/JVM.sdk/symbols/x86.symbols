@@ -1,0 +1,1310 @@
+_jdwpTransport_OnLoad
+_Agent_OnLoad_hprof
+_Agent_OnUnload_hprof
+_Java_com_sun_crypto_provider_DESCrypt_useNativeCipherBlock
+_Java_com_sun_crypto_provider_DESCrypt_cipherBlock0
+_Java_com_sun_crypto_provider_DESCrypt_expandKey0
+_JNI_OnLoad_j2crypto_des
+_Java_sun_security_provider_SHA2_implCompress0
+_Java_sun_security_provider_SHA2_useNativeCompress
+_Java_sun_security_provider_SHA5_implCompress0
+_Java_sun_security_provider_SHA5_useNativeCompress
+_Java_sun_security_provider_SHA_implCompress0
+_Java_sun_security_provider_SHA_useNativeCompress
+_JNI_OnLoad_j2crypto_sha
+_Java_java_security_AccessController_doPrivileged__Ljava_security_PrivilegedAction_2
+_Java_java_security_AccessController_doPrivileged__Ljava_security_PrivilegedAction_2Ljava_security_AccessControlContext_2
+_Java_java_security_AccessController_doPrivileged__Ljava_security_PrivilegedExceptionAction_2
+_Java_java_security_AccessController_doPrivileged__Ljava_security_PrivilegedExceptionAction_2Ljava_security_AccessControlContext_2
+_Java_java_security_AccessController_getInheritedAccessControlContext
+_Java_java_security_AccessController_getStackAccessControlContext
+_Java_java_lang_reflect_Array_get
+_Java_java_lang_reflect_Array_getBoolean
+_Java_java_lang_reflect_Array_getByte
+_Java_java_lang_reflect_Array_getChar
+_Java_java_lang_reflect_Array_getDouble
+_Java_java_lang_reflect_Array_getFloat
+_Java_java_lang_reflect_Array_getInt
+_Java_java_lang_reflect_Array_getLength
+_Java_java_lang_reflect_Array_getLong
+_Java_java_lang_reflect_Array_getShort
+_Java_java_lang_reflect_Array_multiNewArray
+_Java_java_lang_reflect_Array_newArray
+_Java_java_lang_reflect_Array_set
+_Java_java_lang_reflect_Array_setBoolean
+_Java_java_lang_reflect_Array_setByte
+_Java_java_lang_reflect_Array_setChar
+_Java_java_lang_reflect_Array_setDouble
+_Java_java_lang_reflect_Array_setFloat
+_Java_java_lang_reflect_Array_setInt
+_Java_java_lang_reflect_Array_setLong
+_Java_java_lang_reflect_Array_setShort
+_Java_java_util_concurrent_atomic_AtomicLong_VMSupportsCS8
+_Java_java_nio_Bits_copyFromIntArray
+_Java_java_nio_Bits_copyFromLongArray
+_Java_java_nio_Bits_copyFromShortArray
+_Java_java_nio_Bits_copyToIntArray
+_Java_java_nio_Bits_copyToLongArray
+_Java_java_nio_Bits_copyToShortArray
+_Java_java_lang_Class_forName0
+_Java_java_lang_Class_getPrimitiveClass
+_Java_java_lang_Class_isAssignableFrom
+_Java_java_lang_Class_isInstance
+_Java_java_lang_Class_registerNatives
+_Java_java_lang_ClassLoader_00024NativeLibrary_find
+_Java_java_lang_ClassLoader_00024NativeLibrary_load
+_Java_java_lang_ClassLoader_00024NativeLibrary_unload
+_Java_java_lang_ClassLoader_defineClass0
+_Java_java_lang_ClassLoader_defineClass1
+_Java_java_lang_ClassLoader_defineClass2
+_Java_java_lang_ClassLoader_findBootstrapClass
+_Java_java_lang_ClassLoader_findBuiltinLib
+_Java_java_lang_ClassLoader_findLoadedClass0
+_Java_java_lang_ClassLoader_registerNatives
+_Java_java_lang_ClassLoader_resolveClass0
+_getUTF
+_Java_java_lang_Compiler_registerNatives
+_Java_java_io_Console_echo
+_Java_java_io_Console_encoding
+_Java_java_io_Console_istty
+_Java_sun_reflect_ConstantPool_getClassAt0
+_Java_sun_reflect_ConstantPool_getClassAtIfLoaded0
+_Java_sun_reflect_ConstantPool_getDoubleAt0
+_Java_sun_reflect_ConstantPool_getFieldAt0
+_Java_sun_reflect_ConstantPool_getFieldAtIfLoaded0
+_Java_sun_reflect_ConstantPool_getFloatAt0
+_Java_sun_reflect_ConstantPool_getIntAt0
+_Java_sun_reflect_ConstantPool_getLongAt0
+_Java_sun_reflect_ConstantPool_getMemberRefInfoAt0
+_Java_sun_reflect_ConstantPool_getMethodAt0
+_Java_sun_reflect_ConstantPool_getMethodAtIfLoaded0
+_Java_sun_reflect_ConstantPool_getSize0
+_Java_sun_reflect_ConstantPool_getStringAt0
+_Java_sun_reflect_ConstantPool_getUTF8At0
+_Java_java_lang_Double_doubleToRawLongBits
+_Java_java_lang_Double_longBitsToDouble
+_Java_java_lang_reflect_Executable_getParameters0
+_Java_java_lang_reflect_Executable_getTypeAnnotationBytes0
+_Java_java_lang_reflect_Field_getTypeAnnotationBytes0
+_Java_java_io_FileDescriptor_initIDs
+_Java_java_io_FileDescriptor_sync
+_Java_java_io_FileInputStream_available
+_Java_java_io_FileInputStream_initIDs
+_Java_java_io_FileInputStream_open0
+_Java_java_io_FileInputStream_read0
+_Java_java_io_FileInputStream_readBytes
+_Java_java_io_FileInputStream_skip
+_Java_java_io_FileInputStream_close0
+_Java_java_io_FileOutputStream_close0
+_Java_java_io_FileOutputStream_initIDs
+_Java_java_io_FileOutputStream_open0
+_Java_java_io_FileOutputStream_write
+_Java_java_io_FileOutputStream_writeBytes
+_Java_java_util_prefs_FileSystemPreferences_chmod
+_Java_java_util_prefs_FileSystemPreferences_lockFile0
+_Java_java_util_prefs_FileSystemPreferences_unlockFile0
+_Java_java_lang_Float_floatToRawIntBits
+_Java_java_lang_Float_intBitsToFloat
+_Java_sun_misc_GC_maxObjectInspectionAge
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getAmPmStrings
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getCalendarID
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getCalendarInt
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getCurrencySymbol
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getDateTimePatternNative
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getDecimalSeparator
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getDefaultLocale
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getDisplayString
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getEras
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getExponentSeparator
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getGroupingSeparator
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getInfinity
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getInternationalCurrencySymbol
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getMinusSign
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getMonetaryDecimalSeparator
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getMonths
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getNaN
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getNumberPatternNative
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getPerMill
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getPercent
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getShortMonths
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getShortWeekdays
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getTimeZoneDisplayString
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getWeekdays
+_Java_sun_util_locale_provider_HostLocaleProviderAdapterImpl_getZeroDigit
+_Java_sun_misc_MessageUtils_toStderr
+_Java_sun_misc_MessageUtils_toStdout
+_Java_sun_reflect_NativeConstructorAccessorImpl_newInstance0
+_Java_sun_reflect_NativeMethodAccessorImpl_invoke0
+_Java_sun_misc_NativeSignalHandler_handle0
+_Java_java_lang_Object_getClass
+_Java_java_lang_Object_registerNatives
+_Java_java_io_ObjectInputStream_bytesToDoubles
+_Java_java_io_ObjectInputStream_bytesToFloats
+_Java_java_io_ObjectOutputStream_doublesToBytes
+_Java_java_io_ObjectOutputStream_floatsToBytes
+_Java_java_io_ObjectStreamClass_hasStaticInitializer
+_Java_java_io_ObjectStreamClass_initNative
+_Java_java_lang_Package_getSystemPackage0
+_Java_java_lang_Package_getSystemPackages0
+_Java_java_lang_ProcessEnvironment_environ
+_Java_java_lang_reflect_Proxy_defineClass0
+_Java_java_io_RandomAccessFile_getFilePointer
+_Java_java_io_RandomAccessFile_initIDs
+_Java_java_io_RandomAccessFile_length
+_Java_java_io_RandomAccessFile_open0
+_Java_java_io_RandomAccessFile_read0
+_Java_java_io_RandomAccessFile_readBytes
+_Java_java_io_RandomAccessFile_seek0
+_Java_java_io_RandomAccessFile_setLength
+_Java_java_io_RandomAccessFile_write0
+_Java_java_io_RandomAccessFile_writeBytes
+_Java_java_io_RandomAccessFile_close0
+_Java_sun_reflect_Reflection_getCallerClass__
+_Java_sun_reflect_Reflection_getCallerClass__I
+_Java_sun_reflect_Reflection_getClassAccessFlags
+_Java_java_lang_Runtime_availableProcessors
+_Java_java_lang_Runtime_freeMemory
+_Java_java_lang_Runtime_gc
+_Java_java_lang_Runtime_maxMemory
+_Java_java_lang_Runtime_runFinalization0
+_Java_java_lang_Runtime_totalMemory
+_Java_java_lang_Runtime_traceInstructions
+_Java_java_lang_Runtime_traceMethodCalls
+_Java_java_lang_SecurityManager_classDepth
+_Java_java_lang_SecurityManager_classLoaderDepth0
+_Java_java_lang_SecurityManager_currentClassLoader0
+_Java_java_lang_SecurityManager_currentLoadedClass0
+_Java_java_lang_SecurityManager_getClassContext
+_Java_java_lang_Shutdown_halt0
+_Java_java_lang_Shutdown_runAllFinalizers
+_Java_sun_misc_Signal_findSignal
+_Java_sun_misc_Signal_handle0
+_Java_sun_misc_Signal_raise0
+_Java_java_lang_StrictMath_IEEEremainder
+_Java_java_lang_StrictMath_acos
+_Java_java_lang_StrictMath_asin
+_Java_java_lang_StrictMath_atan
+_Java_java_lang_StrictMath_atan2
+_Java_java_lang_StrictMath_cbrt
+_Java_java_lang_StrictMath_cos
+_Java_java_lang_StrictMath_cosh
+_Java_java_lang_StrictMath_exp
+_Java_java_lang_StrictMath_expm1
+_Java_java_lang_StrictMath_hypot
+_Java_java_lang_StrictMath_log
+_Java_java_lang_StrictMath_log10
+_Java_java_lang_StrictMath_log1p
+_Java_java_lang_StrictMath_pow
+_Java_java_lang_StrictMath_sin
+_Java_java_lang_StrictMath_sinh
+_Java_java_lang_StrictMath_sqrt
+_Java_java_lang_StrictMath_tan
+_Java_java_lang_StrictMath_tanh
+_Java_java_lang_String_intern
+_Java_java_lang_System_identityHashCode
+_Java_java_lang_System_initProperties
+_Java_java_lang_System_mapLibraryName
+_Java_java_lang_System_registerNatives
+_Java_java_lang_System_setErr0
+_Java_java_lang_System_setIn0
+_Java_java_lang_System_setOut0
+_fillI18nProps
+_Java_java_lang_Thread_registerNatives
+_Java_java_lang_Throwable_fillInStackTrace
+_Java_java_lang_Throwable_getStackTraceDepth
+_Java_java_lang_Throwable_getStackTraceElement
+_Java_java_util_TimeZone_getSystemGMTOffsetID
+_Java_java_util_TimeZone_getSystemTimeZoneID
+_findJavaTZ_md
+_getGMTOffsetID
+_Java_java_lang_UNIXProcess_destroyProcess
+_Java_java_lang_UNIXProcess_forkAndExec
+_Java_java_lang_UNIXProcess_init
+_Java_java_lang_UNIXProcess_waitForProcessExit
+_Java_sun_misc_URLClassPath_getLookupCacheForClassLoader
+_Java_sun_misc_URLClassPath_getLookupCacheURLs
+_Java_sun_misc_URLClassPath_knownToNotExist0
+_Java_java_io_UnixFileSystem_canonicalize0
+_Java_java_io_UnixFileSystem_checkAccess
+_Java_java_io_UnixFileSystem_createDirectory
+_Java_java_io_UnixFileSystem_createFileExclusively
+_Java_java_io_UnixFileSystem_delete0
+_Java_java_io_UnixFileSystem_getBooleanAttributes0
+_Java_java_io_UnixFileSystem_getLastModifiedTime
+_Java_java_io_UnixFileSystem_getLength
+_Java_java_io_UnixFileSystem_getSpace
+_Java_java_io_UnixFileSystem_initIDs
+_Java_java_io_UnixFileSystem_list
+_Java_java_io_UnixFileSystem_rename0
+_Java_java_io_UnixFileSystem_setLastModifiedTime
+_Java_java_io_UnixFileSystem_setPermission
+_Java_java_io_UnixFileSystem_setReadOnly
+_Java_sun_misc_VM_getThreadStateValues
+_Java_sun_misc_VM_initialize
+_Java_sun_misc_VM_latestUserDefinedLoader
+_Java_sun_misc_VMSupport_getVMTemporaryDirectory
+_Java_sun_misc_VMSupport_initAgentProperties
+_Java_sun_misc_Version_getJdkSpecialVersion
+_Java_sun_misc_Version_getJdkVersionInfo
+_Java_sun_misc_Version_getJvmSpecialVersion
+_Java_sun_misc_Version_getJvmVersionInfo
+_canonicalize
+_JNI_OnLoad_java
+_JDK_execvpe
+_childProcess
+_closeDescriptors
+_closeSafely
+_execve_as_traditional_shell_script
+_execve_with_shell_fallback
+_initVectorFromBlock
+_isAsciiDigit
+_magicNumber
+_moveDescriptor
+_readFully
+_restartableDup2
+_restartableWrite
+___j__ieee754_acos
+___j__ieee754_asin
+___j__ieee754_atan2
+___j__ieee754_atanh
+___j__ieee754_cosh
+___j__ieee754_exp
+___j__ieee754_fmod
+___j__ieee754_hypot
+___j__ieee754_log
+___j__ieee754_log10
+___j__ieee754_pow
+___j__ieee754_rem_pio2
+___j__ieee754_remainder
+___j__ieee754_scalb
+___j__ieee754_sinh
+___j__ieee754_sqrt
+_readBytes
+_readSingle
+_throwFileNotFoundException
+_writeBytes
+_writeSingle
+_fileClose
+_fileOpen
+_getLastErrorString
+_handleAvailable
+_handleOpen
+_handleRead
+_handleSetLength
+_handleWrite
+_getMacOSXLocale
+_getPosixLocale
+_getPreferredToolkit
+_isInAquaSession
+_setIOSUserDir
+_setIOSUserHome
+_setOSNameAndVersion
+_setProxyProperties
+_setUnknownOSAndVersion
+_setupMacOSXLocale
+_GetJavaProperties
+_GetStringPlatform
+_JDK_GetVersionInfo0
+_JDK_FindJvmEntry
+_JDK_InitJvmHandle
+_Canonicalize
+_GetStringPlatformChars
+_JNU_CallMethodByName
+_JNU_CallMethodByNameV
+_JNU_CallStaticMethodByName
+_JNU_ClassClass
+_JNU_ClassObject
+_JNU_ClassString
+_JNU_ClassThrowable
+_JNU_CopyObjectArray
+_JNU_Equals
+_JNU_GetEnv
+_JNU_GetFieldByName
+_JNU_GetStaticFieldByName
+_JNU_GetStringPlatformChars
+_JNU_IsInstanceOfByName
+_JNU_MonitorWait
+_JNU_NewObjectByName
+_JNU_NewStringPlatform
+_JNU_Notify
+_JNU_NotifyAll
+_JNU_PrintClass
+_JNU_PrintString
+_JNU_ReleaseStringPlatformChars
+_JNU_SetFieldByName
+_JNU_SetStaticFieldByName
+_JNU_ThrowArrayIndexOutOfBoundsException
+_JNU_ThrowByName
+_JNU_ThrowByNameWithLastError
+_JNU_ThrowClassNotFoundException
+_JNU_ThrowIOException
+_JNU_ThrowIOExceptionWithLastError
+_JNU_ThrowIllegalAccessError
+_JNU_ThrowIllegalAccessException
+_JNU_ThrowIllegalArgumentException
+_JNU_ThrowInstantiationException
+_JNU_ThrowInternalError
+_JNU_ThrowNoSuchFieldError
+_JNU_ThrowNoSuchFieldException
+_JNU_ThrowNoSuchMethodError
+_JNU_ThrowNoSuchMethodException
+_JNU_ThrowNullPointerException
+_JNU_ThrowNumberFormatException
+_JNU_ThrowOutOfMemoryError
+_JNU_ThrowStringIndexOutOfBoundsException
+_JNU_ToString
+_NewStringPlatform
+_getFastEncoding
+_initializeEncoding
+_buildJniFunctionName
+_getProcessHandle
+_nativeGetStringPlatformChars
+_nativeNewStringPlatform
+___j__kernel_cos
+___j__kernel_rem_pio2
+___j__kernel_sin
+___j__kernel_standard
+___j__kernel_tan
+_Java_java_util_logging_FileHandler_isSetUID
+_jatan
+_jcbrt
+_jceil
+_copysign
+_jcos
+_jexpm1
+_jfabs
+_finite
+_jfloor
+_frexp
+_ilogb
+_isnan
+_ldexp
+_jlog1p
+_logb
+_matherr
+_modf
+_nextafter
+_rint
+_scalbn
+_significand
+_jsin
+_jtan
+_jtanh
+_VerifyClassCodes
+_VerifyClassCodesForMajorVersion
+_jacos
+_jasin
+_jatan2
+_atanh
+_jcosh
+_jexp
+_jmod
+_jhypot
+_jlog
+_jlog10
+_jpow
+_jremainder
+_scalb
+_jsinh
+_jsqrt
+_java_crw_demo
+_java_crw_demo_classname
+_Agent_OnLoad_jdwp
+_Agent_OnUnload_jdwp
+_Java_com_oracle_net_ProxySelectorImpl_getProxyForURL
+_Java_java_net_AbstractPlainDatagramSocketImpl_init
+_Java_java_net_AbstractPlainDatagramSocketImpl_dataAvailable
+_Java_java_net_PlainSocketImpl_socketListen
+_Java_java_net_PlainDatagramSocketImpl_getTTL
+_Java_java_net_PlainDatagramSocketImpl_init
+_Java_java_net_SocketOutputStream_socketWrite0
+_Java_java_net_PlainSocketImpl_socketCreate
+_Java_java_net_PlainSocketImpl_socketAvailable
+_Java_java_net_PlainDatagramSocketImpl_join
+_Java_java_net_PlainDatagramSocketImpl_socketGetOption
+_Java_java_net_InetAddress_init
+_Java_java_net_Inet4Address_init
+_Java_java_net_Inet6Address_init
+_Java_java_net_PlainDatagramSocketImpl_setTTL
+_Java_java_net_PlainDatagramSocketImpl_socketSetOption0
+_Java_java_net_PlainDatagramSocketImpl_bind0
+_Java_java_net_PlainSocketImpl_socketAccept
+_Java_java_net_DatagramPacket_init
+_Java_java_net_PlainDatagramSocketImpl_leave
+_Java_java_net_SocketInputStream_socketRead0
+_Java_java_net_InetAddressImplFactory_isIPv6Supported
+_Java_java_net_Inet4AddressImpl_getLocalHostName
+_Java_java_net_Inet4AddressImpl_lookupAllHostAddr
+_Java_java_net_Inet4AddressImpl_getHostByAddr
+_Java_java_net_Inet4AddressImpl_isReachable0
+_Java_java_net_Inet6AddressImpl_getLocalHostName
+_Java_java_net_Inet6AddressImpl_lookupAllHostAddr
+_Java_java_net_Inet6AddressImpl_getHostByAddr
+_Java_java_net_Inet6AddressImpl_isReachable0
+_Java_java_net_NetworkInterface_init
+_Java_java_net_NetworkInterface_getByName0
+_Java_java_net_NetworkInterface_getByIndex0
+_Java_java_net_NetworkInterface_getByInetAddress0
+_Java_java_net_NetworkInterface_getAll
+_Java_java_net_NetworkInterface_isUp0
+_Java_java_net_NetworkInterface_isLoopback0
+_Java_java_net_NetworkInterface_isP2P0
+_Java_java_net_NetworkInterface_supportsMulticast0
+_Java_java_net_NetworkInterface_getMacAddr0
+_Java_java_net_NetworkInterface_getMTU0
+_Java_java_net_PlainDatagramSocketImpl_send
+_Java_java_net_PlainSocketImpl_socketClose0
+_Java_java_net_SocketOutputStream_init
+_Java_java_net_PlainDatagramSocketImpl_peek
+_Java_java_net_PlainDatagramSocketImpl_peekData
+_Java_java_net_PlainSocketImpl_socketSetOption0
+_Java_java_net_PlainSocketImpl_socketSendUrgentData
+_Java_java_net_PlainDatagramSocketImpl_datagramSocketCreate
+_Java_java_net_PlainSocketImpl_socketGetOption
+_Java_java_net_PlainDatagramSocketImpl_receive0
+_Java_java_net_PlainDatagramSocketImpl_connect0
+_Java_java_net_PlainDatagramSocketImpl_disconnect0
+_Java_java_net_PlainDatagramSocketImpl_datagramSocketClose
+_Java_java_net_PlainSocketImpl_initProto
+_Java_java_net_PlainSocketImpl_socketBind
+_Java_java_net_PlainSocketImpl_socketShutdown
+_Java_java_net_SocketInputStream_init
+_Java_java_net_PlainSocketImpl_socketConnect
+_Java_java_net_PlainDatagramSocketImpl_getTimeToLive
+_Java_java_net_PlainDatagramSocketImpl_setTimeToLive
+_Java_sun_net_PortConfig_getUpper0
+_Java_sun_net_PortConfig_getLower0
+_Java_sun_net_dns_ResolverConfigurationImpl_localDomain0
+_Java_sun_net_dns_ResolverConfigurationImpl_fallbackDomain0
+_Java_sun_net_sdp_SdpSupport_convert0
+_Java_sun_net_sdp_SdpSupport_create0
+_Java_sun_net_spi_DefaultProxySelector_init
+_Java_sun_net_spi_DefaultProxySelector_getSystemProxy
+_Java_sun_net_ExtendedOptionsImpl_init
+_Java_sun_net_ExtendedOptionsImpl_setFlowOption
+_Java_sun_net_ExtendedOptionsImpl_getFlowOption
+_Java_sun_net_ExtendedOptionsImpl_flowSupported
+_NET_AllocSockaddr
+_NET_SockaddrToInetAddress
+_NET_SockaddrEqualsInetAddress
+_NET_InetAddressToSockaddr
+_NET_GetPortFromSockaddr
+_NET_SetSockOpt
+_NET_GetSockOpt
+_NET_Bind
+_NET_MapSocketOption
+_NET_Wait
+_NET_EnableFastTcpLoopback
+_NET_ThrowNew
+_ipv6_available
+_JNI_OnLoad_net
+_Java_sun_nio_fs_BsdNativeDispatcher_endfsstat
+_Java_sun_nio_fs_BsdNativeDispatcher_fsstatEntry
+_Java_sun_nio_fs_BsdNativeDispatcher_getfsstat
+_Java_sun_nio_fs_BsdNativeDispatcher_initIDs
+_Java_sun_nio_ch_DatagramChannelImpl_disconnect0
+_Java_sun_nio_ch_DatagramChannelImpl_initIDs
+_Java_sun_nio_ch_DatagramChannelImpl_receive0
+_Java_sun_nio_ch_DatagramChannelImpl_send0
+_Java_sun_nio_ch_DatagramDispatcher_read0
+_Java_sun_nio_ch_DatagramDispatcher_readv0
+_Java_sun_nio_ch_DatagramDispatcher_write0
+_Java_sun_nio_ch_DatagramDispatcher_writev0
+_JNI_OnLoad_nio
+_Java_sun_nio_ch_FileChannelImpl_close0
+_Java_sun_nio_ch_FileChannelImpl_initIDs
+_Java_sun_nio_ch_FileChannelImpl_map0
+_Java_sun_nio_ch_FileChannelImpl_position0
+_Java_sun_nio_ch_FileChannelImpl_transferTo0
+_Java_sun_nio_ch_FileChannelImpl_unmap0
+_Java_sun_nio_ch_FileDispatcherImpl_close0
+_Java_sun_nio_ch_FileDispatcherImpl_closeIntFD
+_Java_sun_nio_ch_FileDispatcherImpl_force0
+_Java_sun_nio_ch_FileDispatcherImpl_init
+_Java_sun_nio_ch_FileDispatcherImpl_lock0
+_Java_sun_nio_ch_FileDispatcherImpl_preClose0
+_Java_sun_nio_ch_FileDispatcherImpl_pread0
+_Java_sun_nio_ch_FileDispatcherImpl_pwrite0
+_Java_sun_nio_ch_FileDispatcherImpl_read0
+_Java_sun_nio_ch_FileDispatcherImpl_readv0
+_Java_sun_nio_ch_FileDispatcherImpl_release0
+_Java_sun_nio_ch_FileDispatcherImpl_size0
+_Java_sun_nio_ch_FileDispatcherImpl_truncate0
+_Java_sun_nio_ch_FileDispatcherImpl_write0
+_Java_sun_nio_ch_FileDispatcherImpl_writev0
+_Java_sun_nio_ch_FileKey_init
+_Java_sun_nio_ch_FileKey_initIDs
+_Java_sun_nio_ch_IOUtil_configureBlocking
+_Java_sun_nio_ch_IOUtil_drain
+_Java_sun_nio_ch_IOUtil_fdLimit
+_Java_sun_nio_ch_IOUtil_fdVal
+_Java_sun_nio_ch_IOUtil_initIDs
+_Java_sun_nio_ch_IOUtil_iovMax
+_Java_sun_nio_ch_IOUtil_makePipe
+_Java_sun_nio_ch_IOUtil_randomBytes
+_Java_sun_nio_ch_IOUtil_setfdVal
+_convertLongReturnVal
+_convertReturnVal
+_fdval
+_Java_sun_nio_ch_InheritedChannel_close0
+_Java_sun_nio_ch_InheritedChannel_dup
+_Java_sun_nio_ch_InheritedChannel_dup2
+_Java_sun_nio_ch_InheritedChannel_open0
+_Java_sun_nio_ch_InheritedChannel_peerAddress0
+_Java_sun_nio_ch_InheritedChannel_peerPort0
+_Java_sun_nio_ch_InheritedChannel_soType0
+_Java_sun_nio_ch_KQueue_filterOffset
+_Java_sun_nio_ch_KQueue_flagsOffset
+_Java_sun_nio_ch_KQueue_identOffset
+_Java_sun_nio_ch_KQueue_keventPoll
+_Java_sun_nio_ch_KQueue_keventRegister
+_Java_sun_nio_ch_KQueue_keventSize
+_Java_sun_nio_ch_KQueue_kqueue
+_Java_sun_nio_ch_KQueueArrayWrapper_init
+_Java_sun_nio_ch_KQueueArrayWrapper_initStructSizes
+_Java_sun_nio_ch_KQueueArrayWrapper_interrupt
+_Java_sun_nio_ch_KQueueArrayWrapper_kevent0
+_Java_sun_nio_ch_KQueueArrayWrapper_register0
+_Java_sun_nio_ch_KQueuePort_close0
+_Java_sun_nio_ch_KQueuePort_drain1
+_Java_sun_nio_ch_KQueuePort_interrupt
+_Java_sun_nio_ch_KQueuePort_socketpair
+_Java_java_nio_MappedByteBuffer_force0
+_Java_java_nio_MappedByteBuffer_isLoaded0
+_Java_java_nio_MappedByteBuffer_load0
+_Java_sun_nio_ch_NativeThread_current
+_Java_sun_nio_ch_NativeThread_init
+_Java_sun_nio_ch_NativeThread_signal
+_Java_sun_nio_ch_Net_bind0
+_Java_sun_nio_ch_Net_blockOrUnblock4
+_Java_sun_nio_ch_Net_blockOrUnblock6
+_Java_sun_nio_ch_Net_canIPv6SocketJoinIPv4Group0
+_Java_sun_nio_ch_Net_canJoin6WithIPv4Group0
+_Java_sun_nio_ch_Net_connect0
+_Java_sun_nio_ch_Net_getIntOption0
+_Java_sun_nio_ch_Net_getInterface4
+_Java_sun_nio_ch_Net_getInterface6
+_Java_sun_nio_ch_Net_initIDs
+_Java_sun_nio_ch_Net_isExclusiveBindAvailable
+_Java_sun_nio_ch_Net_isIPv6Available0
+_Java_sun_nio_ch_Net_joinOrDrop4
+_Java_sun_nio_ch_Net_joinOrDrop6
+_Java_sun_nio_ch_Net_listen
+_Java_sun_nio_ch_Net_localInetAddress
+_Java_sun_nio_ch_Net_localPort
+_Java_sun_nio_ch_Net_poll
+_Java_sun_nio_ch_Net_pollconnValue
+_Java_sun_nio_ch_Net_pollerrValue
+_Java_sun_nio_ch_Net_pollhupValue
+_Java_sun_nio_ch_Net_pollinValue
+_Java_sun_nio_ch_Net_pollnvalValue
+_Java_sun_nio_ch_Net_polloutValue
+_Java_sun_nio_ch_Net_setIntOption0
+_Java_sun_nio_ch_Net_setInterface4
+_Java_sun_nio_ch_Net_setInterface6
+_Java_sun_nio_ch_Net_shutdown
+_Java_sun_nio_ch_Net_socket0
+_handleSocketError
+_Java_sun_nio_ch_PollArrayWrapper_interrupt
+_Java_sun_nio_ch_PollArrayWrapper_poll0
+_Java_sun_nio_ch_ServerSocketChannelImpl_accept0
+_Java_sun_nio_ch_ServerSocketChannelImpl_initIDs
+_Java_sun_nio_ch_SocketChannelImpl_checkConnect
+_Java_sun_nio_ch_SocketChannelImpl_sendOutOfBandData
+_Java_sun_nio_ch_UnixAsynchronousServerSocketChannelImpl_accept0
+_Java_sun_nio_ch_UnixAsynchronousServerSocketChannelImpl_initIDs
+_Java_sun_nio_ch_UnixAsynchronousSocketChannelImpl_checkConnect
+_Java_sun_nio_fs_UnixCopyFile_transfer
+_Java_sun_nio_fs_UnixNativeDispatcher_access0
+_Java_sun_nio_fs_UnixNativeDispatcher_chmod0
+_Java_sun_nio_fs_UnixNativeDispatcher_chown0
+_Java_sun_nio_fs_UnixNativeDispatcher_close
+_Java_sun_nio_fs_UnixNativeDispatcher_closedir
+_Java_sun_nio_fs_UnixNativeDispatcher_dup
+_Java_sun_nio_fs_UnixNativeDispatcher_fchmod
+_Java_sun_nio_fs_UnixNativeDispatcher_fchown
+_Java_sun_nio_fs_UnixNativeDispatcher_fclose
+_Java_sun_nio_fs_UnixNativeDispatcher_fdopendir
+_Java_sun_nio_fs_UnixNativeDispatcher_fopen0
+_Java_sun_nio_fs_UnixNativeDispatcher_fpathconf
+_Java_sun_nio_fs_UnixNativeDispatcher_fstat
+_Java_sun_nio_fs_UnixNativeDispatcher_fstatat0
+_Java_sun_nio_fs_UnixNativeDispatcher_futimes
+_Java_sun_nio_fs_UnixNativeDispatcher_getcwd
+_Java_sun_nio_fs_UnixNativeDispatcher_getgrgid
+_Java_sun_nio_fs_UnixNativeDispatcher_getgrnam0
+_Java_sun_nio_fs_UnixNativeDispatcher_getpwnam0
+_Java_sun_nio_fs_UnixNativeDispatcher_getpwuid
+_Java_sun_nio_fs_UnixNativeDispatcher_init
+_Java_sun_nio_fs_UnixNativeDispatcher_lchown0
+_Java_sun_nio_fs_UnixNativeDispatcher_link0
+_Java_sun_nio_fs_UnixNativeDispatcher_lstat0
+_Java_sun_nio_fs_UnixNativeDispatcher_mkdir0
+_Java_sun_nio_fs_UnixNativeDispatcher_mknod0
+_Java_sun_nio_fs_UnixNativeDispatcher_open0
+_Java_sun_nio_fs_UnixNativeDispatcher_openat0
+_Java_sun_nio_fs_UnixNativeDispatcher_opendir0
+_Java_sun_nio_fs_UnixNativeDispatcher_pathconf0
+_Java_sun_nio_fs_UnixNativeDispatcher_read
+_Java_sun_nio_fs_UnixNativeDispatcher_readdir
+_Java_sun_nio_fs_UnixNativeDispatcher_readlink0
+_Java_sun_nio_fs_UnixNativeDispatcher_realpath0
+_Java_sun_nio_fs_UnixNativeDispatcher_rename0
+_Java_sun_nio_fs_UnixNativeDispatcher_renameat0
+_Java_sun_nio_fs_UnixNativeDispatcher_rmdir0
+_Java_sun_nio_fs_UnixNativeDispatcher_stat0
+_Java_sun_nio_fs_UnixNativeDispatcher_statvfs0
+_Java_sun_nio_fs_UnixNativeDispatcher_strerror
+_Java_sun_nio_fs_UnixNativeDispatcher_symlink0
+_Java_sun_nio_fs_UnixNativeDispatcher_unlink0
+_Java_sun_nio_fs_UnixNativeDispatcher_unlinkat0
+_Java_sun_nio_fs_UnixNativeDispatcher_utimes0
+_Java_sun_nio_fs_UnixNativeDispatcher_write
+_nptInitialize
+_nptTerminate
+_JNI_OnLoad_npt
+_Java_sun_security_ec_ECKeyPairGenerator_generateECKeyPair
+_Java_sun_security_ec_ECDSASignature_signDigest
+_Java_sun_security_ec_ECDSASignature_verifySignedDigest
+_Java_sun_security_ec_ECDHKeyAgreement_deriveKey
+_JNI_OnLoad_sunec
+_VerifyClass
+_VerifyClassForMajorVersion
+_VerifyClassname
+_VerifyFixClassname
+_JNI_OnLoad_verify
+_Channel_addToPipe
+_Channel_clearPipe
+_Channel_free
+_ChannelManager_createOrGetChannel
+_ChannelManager_deleteChannel
+_Channel_new
+_Channel_peekFromPipe
+_Channel_removeFromPipe
+_Channel_sizeOfPipe
+_Channel_shutdown
+_Channel_startup
+_MessageBody_free
+_MessageBody_new
+_Message_free
+_MessageHeader_free
+_MessageHeader_new
+_Message_new
+_MessagePipe_free
+_MessagePipe_new
+_JNI_OnLoad_vmchannel_jvm
+_JNI_OnUnload_vmchannel_jvm
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_addMessageToChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_clearChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_createChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_deleteChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_peekMessageFromChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_removeMessageFromChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_shutdown
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_sizeOfChannel
+_Java_com_oracle_vm_channel_iOS_1JVM_VMChannelJNI_startup
+_Java_java_util_jar_JarFile_getMetaInfEntryNames
+_Java_java_util_zip_Adler32_update
+_Java_java_util_zip_Adler32_updateBytes
+_Java_java_util_zip_Adler32_updateByteBuffer
+_Java_java_util_zip_CRC32_update
+_Java_java_util_zip_CRC32_updateBytes
+_Java_java_util_zip_CRC32_updateByteBuffer
+_Java_java_util_zip_Deflater_deflateBytes
+_Java_java_util_zip_Deflater_end
+_Java_java_util_zip_Deflater_getAdler
+_Java_java_util_zip_Deflater_init
+_Java_java_util_zip_Deflater_initIDs
+_Java_java_util_zip_Deflater_reset
+_Java_java_util_zip_Deflater_setDictionary
+_Java_java_util_zip_Inflater_end
+_Java_java_util_zip_Inflater_getAdler
+_Java_java_util_zip_Inflater_inflateBytes
+_Java_java_util_zip_Inflater_init
+_Java_java_util_zip_Inflater_initIDs
+_Java_java_util_zip_Inflater_reset
+_Java_java_util_zip_Inflater_setDictionary
+_Java_java_util_zip_ZipFile_close
+_Java_java_util_zip_ZipFile_getCommentBytes
+_Java_java_util_zip_ZipFile_freeEntry
+_Java_java_util_zip_ZipFile_getEntry
+_Java_java_util_zip_ZipFile_getEntryBytes
+_Java_java_util_zip_ZipFile_getEntryCrc
+_Java_java_util_zip_ZipFile_getEntryCSize
+_Java_java_util_zip_ZipFile_getEntryFlag
+_Java_java_util_zip_ZipFile_getEntryMethod
+_Java_java_util_zip_ZipFile_getEntrySize
+_Java_java_util_zip_ZipFile_getEntryTime
+_Java_java_util_zip_ZipFile_getNextEntry
+_Java_java_util_zip_ZipFile_getZipMessage
+_Java_java_util_zip_ZipFile_getTotal
+_Java_java_util_zip_ZipFile_initIDs
+_Java_java_util_zip_ZipFile_open
+_Java_java_util_zip_ZipFile_read
+_Java_java_util_zip_ZipFile_startsWithLOC
+_ZIP_Close
+_ZIP_CRC32
+_ZIP_FindEntry
+_ZIP_GetEntry
+_ZIP_GetNextEntry
+_ZIP_Lock
+_ZIP_Open
+_ZIP_Read
+_ZIP_ReadEntry
+_ZIP_Unlock
+_JNI_OnLoad_zip
+_JVM_begin_signal_setting
+_JVM_end_signal_setting
+_JVM_get_signal_action
+_sigaction
+_signal
+_sigset
+#
+# Copyright (c) 2002, 2014, Oracle and/or its affiliates. All rights reserved.
+# ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# Only used for OSX/Darwin builds
+
+# Define public interface.
+                # _JNI
+                _JNI_CreateJavaVM
+                _JNI_GetCreatedJavaVMs
+                _JNI_GetDefaultJavaVMInitArgs
+
+                # _JVM
+                _JVM_Accept
+                _JVM_ActiveProcessorCount
+                _JVM_AllocateNewArray
+                _JVM_AllocateNewObject
+                _JVM_ArrayCopy
+                _JVM_AssertionStatusDirectives
+                _JVM_Available
+                _JVM_Bind
+                _JVM_ClassDepth
+                _JVM_ClassLoaderDepth
+                _JVM_Clone
+                _JVM_Close
+                _JVM_CX8Field
+                _JVM_CompileClass
+                _JVM_CompileClasses
+                _JVM_CompilerCommand
+                _JVM_Connect
+                _JVM_ConstantPoolGetClassAt
+                _JVM_ConstantPoolGetClassAtIfLoaded
+                _JVM_ConstantPoolGetDoubleAt
+                _JVM_ConstantPoolGetFieldAt
+                _JVM_ConstantPoolGetFieldAtIfLoaded
+                _JVM_ConstantPoolGetFloatAt
+                _JVM_ConstantPoolGetIntAt
+                _JVM_ConstantPoolGetLongAt
+                _JVM_ConstantPoolGetMethodAt
+                _JVM_ConstantPoolGetMethodAtIfLoaded
+                _JVM_ConstantPoolGetMemberRefInfoAt
+                _JVM_ConstantPoolGetSize
+                _JVM_ConstantPoolGetStringAt
+                _JVM_ConstantPoolGetUTF8At
+                _JVM_CountStackFrames
+                _JVM_CurrentClassLoader
+                _JVM_CurrentLoadedClass
+                _JVM_CurrentThread
+                _JVM_CurrentTimeMillis
+                _JVM_DefineClass
+                _JVM_DefineClassWithSource
+                _JVM_DefineClassWithSourceCond
+                _JVM_DesiredAssertionStatus
+                _JVM_DisableCompiler
+                _JVM_DoPrivileged
+                _JVM_DTraceGetVersion
+                _JVM_DTraceActivate
+                _JVM_DTraceIsProbeEnabled
+                _JVM_DTraceIsSupported
+                _JVM_DTraceDispose
+                _JVM_DumpAllStacks
+                _JVM_DumpThreads
+                _JVM_EnableCompiler
+                _JVM_Exit
+                _JVM_FillInStackTrace
+                _JVM_FindClassFromCaller
+                _JVM_FindClassFromClass
+                _JVM_FindClassFromClassLoader
+                _JVM_FindClassFromBootLoader
+                _JVM_FindLibraryEntry
+                _JVM_FindLoadedClass
+                _JVM_FindPrimitiveClass
+                _JVM_FindSignal
+                _JVM_FreeMemory
+                _JVM_GC
+                _JVM_GetAllThreads
+                _JVM_GetArrayElement
+                _JVM_GetArrayLength
+                _JVM_GetCPClassNameUTF
+                _JVM_GetCPFieldClassNameUTF
+                _JVM_GetCPFieldModifiers
+                _JVM_GetCPFieldNameUTF
+                _JVM_GetCPFieldSignatureUTF
+                _JVM_GetCPMethodClassNameUTF
+                _JVM_GetCPMethodModifiers
+                _JVM_GetCPMethodNameUTF
+                _JVM_GetCPMethodSignatureUTF
+                _JVM_GetCallerClass
+                _JVM_GetClassAccessFlags
+                _JVM_GetClassAnnotations
+                _JVM_GetClassCPEntriesCount
+                _JVM_GetClassCPTypes
+                _JVM_GetClassConstantPool
+                _JVM_GetClassContext
+                _JVM_GetClassDeclaredConstructors
+                _JVM_GetClassDeclaredFields
+                _JVM_GetClassDeclaredMethods
+                _JVM_GetClassFieldsCount
+                _JVM_GetClassInterfaces
+                _JVM_GetClassLoader
+                _JVM_GetClassMethodsCount
+                _JVM_GetClassModifiers
+                _JVM_GetClassName
+                _JVM_GetClassNameUTF
+                _JVM_GetClassSignature
+                _JVM_GetClassSigners
+                _JVM_GetClassTypeAnnotations
+                _JVM_GetComponentType
+                _JVM_GetDeclaredClasses
+                _JVM_GetDeclaringClass
+                _JVM_GetEnclosingMethodInfo
+                _JVM_GetFieldAnnotations
+                _JVM_GetFieldIxModifiers
+                _JVM_GetFieldTypeAnnotations
+                _JVM_GetHostName
+                _JVM_GetInheritedAccessControlContext
+                _JVM_GetInterfaceVersion
+                _JVM_GetLastErrorString
+                _JVM_GetManagement
+                _JVM_GetMethodAnnotations
+                _JVM_GetMethodDefaultAnnotationValue
+                _JVM_GetMethodIxArgsSize
+                _JVM_GetMethodIxByteCode
+                _JVM_GetMethodIxByteCodeLength
+                _JVM_GetMethodIxExceptionIndexes
+                _JVM_GetMethodIxExceptionTableEntry
+                _JVM_GetMethodIxExceptionTableLength
+                _JVM_GetMethodIxExceptionsCount
+                _JVM_GetMethodIxLocalsCount
+                _JVM_GetMethodIxMaxStack
+                _JVM_GetMethodIxModifiers
+                _JVM_GetMethodIxNameUTF
+                _JVM_GetMethodIxSignatureUTF
+                _JVM_GetMethodParameterAnnotations
+                _JVM_GetMethodParameters
+                _JVM_GetMethodTypeAnnotations
+                _JVM_GetPrimitiveArrayElement
+                _JVM_GetProtectionDomain
+                _JVM_GetSockName
+                _JVM_GetSockOpt
+                _JVM_GetStackAccessControlContext
+                _JVM_GetStackTraceDepth
+                _JVM_GetStackTraceElement
+                _JVM_GetSystemPackage
+                _JVM_GetSystemPackages
+                _JVM_GetTemporaryDirectory
+                _JVM_GetThreadStateNames
+                _JVM_GetThreadStateValues
+                _JVM_GetVersionInfo
+                _JVM_Halt
+                _JVM_HoldsLock
+                _JVM_IHashCode
+                _JVM_InitAgentProperties
+                _JVM_InitProperties
+                _JVM_InitializeCompiler
+                _JVM_InitializeSocketLibrary
+                _JVM_InternString
+                _JVM_Interrupt
+                _JVM_InvokeMethod
+                _JVM_IsArrayClass
+                _JVM_IsConstructorIx
+                _JVM_IsInterface
+                _JVM_IsInterrupted
+                _JVM_IsNaN
+                _JVM_IsPrimitiveClass
+                _JVM_IsSameClassPackage
+                _JVM_IsSilentCompiler
+                _JVM_IsSupportedJNIVersion
+                _JVM_IsThreadAlive
+                _JVM_IsVMGeneratedMethodIx
+                _JVM_KnownToNotExist
+                _JVM_GetResourceLookupCacheURLs
+                _JVM_GetResourceLookupCache
+                _JVM_LatestUserDefinedLoader
+                _JVM_Listen
+                _JVM_LoadClass0
+                _JVM_LoadLibrary
+                _JVM_Lseek
+                _JVM_MaxObjectInspectionAge
+                _JVM_MaxMemory
+                _JVM_MonitorNotify
+                _JVM_MonitorNotifyAll
+                _JVM_MonitorWait
+                _JVM_NanoTime
+                _JVM_NativePath
+                _JVM_NewArray
+                _JVM_NewInstanceFromConstructor
+                _JVM_NewMultiArray
+                _JVM_OnExit
+                _JVM_Open
+                _JVM_RaiseSignal
+                _JVM_RawMonitorCreate
+                _JVM_RawMonitorDestroy
+                _JVM_RawMonitorEnter
+                _JVM_RawMonitorExit
+                _JVM_Read
+                _JVM_Recv
+                _JVM_RecvFrom
+                _JVM_RegisterSignal
+                _JVM_ReleaseUTF
+                _JVM_ResolveClass
+                _JVM_ResumeThread
+                _JVM_Send
+                _JVM_SendTo
+                _JVM_SetArrayElement
+                _JVM_SetClassSigners
+                _JVM_SetLength
+                _JVM_SetNativeThreadName
+                _JVM_SetPrimitiveArrayElement
+                _JVM_SetSockOpt
+                _JVM_SetThreadPriority
+                _JVM_Sleep
+                _JVM_Socket
+                _JVM_SocketAvailable
+                _JVM_SocketClose
+                _JVM_SocketShutdown
+                _JVM_StartThread
+                _JVM_StopThread
+                _JVM_SuspendThread
+                _JVM_SupportsCX8
+                _JVM_Sync
+                _JVM_Timeout
+                _JVM_TotalMemory
+                _JVM_TraceInstructions
+                _JVM_TraceMethodCalls
+                _JVM_UnloadLibrary
+                _JVM_Write
+                _JVM_Yield
+                _JVM_handle_bsd_signal
+
+                # miscellaneous functions
+                _jio_fprintf
+                _jio_printf
+                _jio_snprintf
+                _jio_vfprintf
+                _jio_vsnprintf
+
+                # This is for Forte Analyzer profiling support.
+                _AsyncGetCallTrace
+
+                # Extended set of symbols.
+                _JVM_SetVmMemoryPressure
+                _JVM_GetVmMemoryPressure
+                _JVM_GetManagementExt
+
+
+#libsqlite_jni symbols
+
+_JNI_OnLoad_sqlite_jni
+_JNI_OnUnload_sqlite_jni
+_Java_SQLite_Backup__1finalize
+_Java_SQLite_Backup__1pagecount
+_Java_SQLite_Backup__1remaining
+_Java_SQLite_Backup__1step
+_Java_SQLite_Backup_internal_1init
+_Java_SQLite_Blob_close
+_Java_SQLite_Blob_finalize
+_Java_SQLite_Blob_internal_1init
+_Java_SQLite_Blob_read
+_Java_SQLite_Blob_write
+_Java_SQLite_Database__1backup
+_Java_SQLite_Database__1busy_1handler
+_Java_SQLite_Database__1busy_1timeout
+_Java_SQLite_Database__1changes
+_Java_SQLite_Database__1close
+_Java_SQLite_Database__1complete
+_Java_SQLite_Database__1create_1aggregate
+_Java_SQLite_Database__1create_1function
+_Java_SQLite_Database__1db_1status
+_Java_SQLite_Database__1enable_1shared_1cache
+_Java_SQLite_Database__1errmsg
+_Java_SQLite_Database__1exec__Ljava_lang_String_2LSQLite_Callback_2
+_Java_SQLite_Database__1exec__Ljava_lang_String_2LSQLite_Callback_2_3Ljava_lang_String_2
+_Java_SQLite_Database__1finalize
+_Java_SQLite_Database__1function_1type
+_Java_SQLite_Database__1interrupt
+_Java_SQLite_Database__1key
+_Java_SQLite_Database__1last_1insert_1rowid
+_Java_SQLite_Database__1open
+_Java_SQLite_Database__1open4
+_Java_SQLite_Database__1open_1aux_1file
+_Java_SQLite_Database__1open_1blob
+_Java_SQLite_Database__1profile
+_Java_SQLite_Database__1progress_1handler
+_Java_SQLite_Database__1rekey
+_Java_SQLite_Database__1set_1authorizer
+_Java_SQLite_Database__1set_1encoding
+_Java_SQLite_Database__1status
+_Java_SQLite_Database__1trace
+_Java_SQLite_Database_dbversion
+_Java_SQLite_Database_error_1string
+_Java_SQLite_Database_internal_1init
+_Java_SQLite_Database_is3
+_Java_SQLite_Database_stmt_1prepare
+_Java_SQLite_Database_version
+_Java_SQLite_Database_vm_1compile
+_Java_SQLite_Database_vm_1compile_1args
+_Java_SQLite_FunctionContext_count
+_Java_SQLite_FunctionContext_internal_1init
+_Java_SQLite_FunctionContext_set_1error
+_Java_SQLite_FunctionContext_set_1result_1zeroblob
+_Java_SQLite_FunctionContext_set_1result__D
+_Java_SQLite_FunctionContext_set_1result__I
+_Java_SQLite_FunctionContext_set_1result__Ljava_lang_String_2
+_Java_SQLite_FunctionContext_set_1result___3B
+_Java_SQLite_Stmt_bind_1parameter_1count
+_Java_SQLite_Stmt_bind_1parameter_1index
+_Java_SQLite_Stmt_bind_1parameter_1name
+_Java_SQLite_Stmt_bind_1zeroblob
+_Java_SQLite_Stmt_bind__I
+_Java_SQLite_Stmt_bind__ID
+_Java_SQLite_Stmt_bind__II
+_Java_SQLite_Stmt_bind__IJ
+_Java_SQLite_Stmt_bind__ILjava_lang_String_2
+_Java_SQLite_Stmt_bind__I_3B
+_Java_SQLite_Stmt_clear_1bindings
+_Java_SQLite_Stmt_close
+_Java_SQLite_Stmt_column_1bytes
+_Java_SQLite_Stmt_column_1count
+_Java_SQLite_Stmt_column_1database_1name
+_Java_SQLite_Stmt_column_1decltype
+_Java_SQLite_Stmt_column_1double
+_Java_SQLite_Stmt_column_1int
+_Java_SQLite_Stmt_column_1long
+_Java_SQLite_Stmt_column_1name
+_Java_SQLite_Stmt_column_1origin_1name
+_Java_SQLite_Stmt_column_1string
+_Java_SQLite_Stmt_column_1table_1name
+_Java_SQLite_Stmt_column_1type
+_Java_SQLite_Stmt_finalize
+_Java_SQLite_Stmt_internal_1init
+_Java_SQLite_Stmt_prepare
+_Java_SQLite_Stmt_reset
+_Java_SQLite_Stmt_status
+_Java_SQLite_Stmt_step
+_Java_SQLite_Vm_compile
+_Java_SQLite_Vm_finalize
+_Java_SQLite_Vm_internal_1init
+_Java_SQLite_Vm_step
+_Java_SQLite_Vm_stop
+_sqlite3CodecAttach
+_sqlite3CodecGetKey
+_sqlite3_activate_see
+_sqlite3_aggregate_context
+_sqlite3_aggregate_count
+_sqlite3_auto_extension
+_sqlite3_backup_finish
+_sqlite3_backup_init
+_sqlite3_backup_pagecount
+_sqlite3_backup_remaining
+_sqlite3_backup_step
+_sqlite3_bind_blob
+_sqlite3_bind_double
+_sqlite3_bind_int
+_sqlite3_bind_int64
+_sqlite3_bind_null
+_sqlite3_bind_parameter_count
+_sqlite3_bind_parameter_index
+_sqlite3_bind_parameter_name
+_sqlite3_bind_text
+_sqlite3_bind_text16
+_sqlite3_bind_value
+_sqlite3_bind_zeroblob
+_sqlite3_blob_bytes
+_sqlite3_blob_close
+_sqlite3_blob_open
+_sqlite3_blob_read
+_sqlite3_blob_reopen
+_sqlite3_blob_write
+_sqlite3_busy_handler
+_sqlite3_busy_timeout
+_sqlite3_changes
+_sqlite3_clear_bindings
+_sqlite3_close
+_sqlite3_collation_needed
+_sqlite3_collation_needed16
+_sqlite3_column_blob
+_sqlite3_column_bytes
+_sqlite3_column_bytes16
+_sqlite3_column_count
+_sqlite3_column_decltype
+_sqlite3_column_decltype16
+_sqlite3_column_double
+_sqlite3_column_int
+_sqlite3_column_int64
+_sqlite3_column_name
+_sqlite3_column_name16
+_sqlite3_column_text
+_sqlite3_column_text16
+_sqlite3_column_type
+_sqlite3_column_value
+_sqlite3_commit_hook
+_sqlite3_compileoption_get
+_sqlite3_compileoption_used
+_sqlite3_complete
+_sqlite3_complete16
+_sqlite3_config
+_sqlite3_context_db_handle
+_sqlite3_create_collation
+_sqlite3_create_collation16
+_sqlite3_create_collation_v2
+_sqlite3_create_function
+_sqlite3_create_function16
+_sqlite3_create_function_v2
+_sqlite3_create_module
+_sqlite3_create_module_v2
+_sqlite3_data_count
+_sqlite3_db_config
+_sqlite3_db_handle
+_sqlite3_db_mutex
+_sqlite3_db_status
+_sqlite3_declare_vtab
+_sqlite3_enable_shared_cache
+_sqlite3_errcode
+_sqlite3_errmsg
+_sqlite3_errmsg16
+_sqlite3_exec
+_sqlite3_expired
+_sqlite3_extended_errcode
+_sqlite3_extended_result_codes
+_sqlite3_file_control
+_sqlite3_finalize
+_sqlite3_free
+_sqlite3_free_table
+_sqlite3_get_autocommit
+_sqlite3_get_auxdata
+_sqlite3_get_table
+_sqlite3_global_recover
+_sqlite3_initialize
+_sqlite3_interrupt
+_sqlite3_key
+_sqlite3_last_insert_rowid
+_sqlite3_libversion
+_sqlite3_libversion_number
+_sqlite3_limit
+_sqlite3_log
+_sqlite3_malloc
+_sqlite3_memory_alarm
+_sqlite3_memory_highwater
+_sqlite3_memory_used
+_sqlite3_mprintf
+_sqlite3_mutex_alloc
+_sqlite3_mutex_enter
+_sqlite3_mutex_free
+_sqlite3_mutex_leave
+_sqlite3_mutex_try
+_sqlite3_next_stmt
+_sqlite3_open
+_sqlite3_open16
+_sqlite3_open_v2
+_sqlite3_os_end
+_sqlite3_os_init
+_sqlite3_overload_function
+_sqlite3_prepare
+_sqlite3_prepare16
+_sqlite3_prepare16_v2
+_sqlite3_prepare_v2
+_sqlite3_profile
+_sqlite3_progress_handler
+_sqlite3_randomness
+_sqlite3_realloc
+_sqlite3_rekey
+_sqlite3_release_memory
+_sqlite3_reset
+_sqlite3_reset_auto_extension
+_sqlite3_result_blob
+_sqlite3_result_double
+_sqlite3_result_error
+_sqlite3_result_error16
+_sqlite3_result_error_code
+_sqlite3_result_error_nomem
+_sqlite3_result_error_toobig
+_sqlite3_result_int
+_sqlite3_result_int64
+_sqlite3_result_null
+_sqlite3_result_text
+_sqlite3_result_text16
+_sqlite3_result_text16be
+_sqlite3_result_text16le
+_sqlite3_result_value
+_sqlite3_result_zeroblob
+_sqlite3_rollback_hook
+_sqlite3_rtree_geometry_callback
+_sqlite3_set_authorizer
+_sqlite3_set_auxdata
+_sqlite3_shutdown
+_sqlite3_sleep
+_sqlite3_snprintf
+_sqlite3_soft_heap_limit
+_sqlite3_soft_heap_limit64
+_sqlite3_sourceid
+_sqlite3_sql
+_sqlite3_status
+_sqlite3_step
+_sqlite3_stmt_readonly
+_sqlite3_stmt_status
+_sqlite3_strnicmp
+_sqlite3_test_control
+_sqlite3_thread_cleanup
+_sqlite3_threadsafe
+_sqlite3_total_changes
+_sqlite3_trace
+_sqlite3_transfer_bindings
+_sqlite3_update_hook
+_sqlite3_uri_parameter
+_sqlite3_user_data
+_sqlite3_value_blob
+_sqlite3_value_bytes
+_sqlite3_value_bytes16
+_sqlite3_value_double
+_sqlite3_value_int
+_sqlite3_value_int64
+_sqlite3_value_numeric_type
+_sqlite3_value_text
+_sqlite3_value_text16
+_sqlite3_value_text16be
+_sqlite3_value_text16le
+_sqlite3_value_type
+_sqlite3_version
+_sqlite3_vfs_find
+_sqlite3_vfs_register
+_sqlite3_vfs_unregister
+_sqlite3_vmprintf
+_sqlite3_vsnprintf
+_sqlite3_vtab_config
+_sqlite3_vtab_on_conflict
+_sqlite3_wal_autocheckpoint
+_sqlite3_wal_checkpoint
+_sqlite3_wal_checkpoint_v2
+_sqlite3_wal_hook

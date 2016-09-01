@@ -1,0 +1,144 @@
+<project name="buildSetGlobals">
+	<import file="configure-common.xml" as="configure-common" />
+
+	<target name="init" depends="configure-common.init">
+        <property name="adf.deploy.destination.root" value="Destination_Root" />
+
+        <property name="PlistBuddy.path" value="/usr/libexec/PlistBuddy" />
+        <property name="xcodebuild.exe" value="/Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild" />
+        <property name="xcrun.exe" value="/Applications/Xcode.app/Contents/Developer/usr/bin/xcrun" />
+<!--        <property name="ios.sdk.simulator.exe" value="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone Simulator.app/Contents/MacOS/iPhone Simulator" />
+-->
+        <property name="ios.sdk.simulator.exe" value="iOS Simulator" />
+
+        <!-- TODO: support versioned support -->
+        <property name="ios.sdk.dir" value="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${oepe.ios.sim.sdk.version}.sdk" />
+        <condition property="ios.sdk.name" value="iphonesimulator">
+            <equals arg1="${adf.deploy.target.name}" arg2="iphonesimulator"/>
+        </condition>
+        
+        <condition property="ios.sdk.name" value="iphoneos">
+            <equals arg1="${adf.deploy.target.name}" arg2="iphoneos" />
+        </condition>
+
+        <fail unless="ios.sdk.name" />
+        
+        <property name="oepe.ios.min.target.version" value="6.0"/>
+        
+        <property name="oepe.ios.xcodebuild.additional.options" value=""/>
+		<property name="oepe.ios.disable.ats" value="false"/>
+
+        <condition property="oepe.build.info.is.simulator.build" value="true">
+            <equals arg1="iphonesimulator" arg2="${ios.sdk.name}" />
+        </condition>
+        <condition property="oepe.build.info.is.device.build" value="true">
+            <equals arg1="iphoneos" arg2="${ios.sdk.name}" />
+        </condition>
+
+        <property name="ios.sim.root.dir" value="${ios.sim.root}/${oepe.ios.sim.version}" />
+	
+		<!-- the name of the source folder that contains the application controller source  -->
+		<property name="oepe.adfmf.applicationsrc.folder.name" value="application-src" />
+		<!-- the name of the web content folder in a project -->
+		<property name="oepe.adfmf.publichtml.folder.name" value="ViewContent" />
+		
+        <property name="adf.rt.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/Oracle_ADFmc_Container_Template.zip" />
+        <property name="adf.rt.js.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/javascript/ADFmf_AmxJavascript_${oepe.adfmf.build.mode}.zip" />
+
+        <property name="adf.rt.ios.debug.js.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/javascript/iOS/ADFmf_AmxJavascript_${oepe.adfmf.build.mode}_iOS.zip"/>
+        <property name="adf.rt.frameworks.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/Oracle_ADFmc_Framework_Libraries.zip" />
+        <property name="adf.rt.debug.oraclecvm.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/libraries/EmulatorJVMTI/OracleCVM.sdk.zip" />
+        <property name="adf.rt.device.oraclecvm.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/libraries/DeviceJVMTI/OracleCVM.sdk.zip" />
+		<property name="adf.rt.tools.path" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/tools"/>
+		<property name="adf.rt.maf.core.plugins" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/CordovaPlugins"/>
+		
+		<property name="adf.rt.maf.helper.jar" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/maf-helper.jar"/>
+		<property name="adf.rt.maf.helper.ios" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/iOS/maf-helper"/>
+		
+        <condition property="adf.rt.oraclecvm.zip" value="${adf.rt.debug.oraclecvm.zip}">
+            <equals arg1="${oepe.build.info.is.simulator.build}" arg2="true" />
+        </condition>
+        <condition property="adf.rt.oraclecvm.zip" value="${adf.rt.device.oraclecvm.zip}">
+            <equals arg1="${oepe.build.info.is.device.build}" arg2="true" />
+        </condition>
+        <fail unless="adf.rt.oraclecvm.zip" />
+
+        <!-- default the location for cordova deployment tools; ide should override-->
+        <property name="adf.build.tools.dir" value="${adf.build.base.dir}/tools" />
+        <property name="oepe.cordova.tools.root" value="${adf.build.tools.dir}" />
+        <property name="adf.build.tools.node" value="${oepe.cordova.tools.root}/node-darwin-x64/bin/node"/>
+        <property name="adf.build.tools.plugman" value="${oepe.cordova.tools.root}/plugman/node_modules/.bin/plugman"/>
+
+        <property name="adf.rt.properties" location="${adf.rt.zip.root}/${adf.rt.runtime.root}/properties" />
+        <property name="adf.template.ios.java_res_debug.libs.zippath" value="jvmti" />
+        <property name="adf.template.ios.java_res_debug.libs.zippath.x86" value="iOS/jvmti/x86" />
+        <property name="adf.template.ios.java_res_debug.libs.zippath.arm" value="iOS/jvmti/arm" />
+        <property name="adf.template.ios.java_res_debug.libs.zippath.jar" value="iOS" />
+        <property name="adf.template.ios.js.zippath" value="js" />
+
+
+        <property name="adf.staging.res.icon.name" value="icon.png" />
+        <property name="adf.staging.res.icon_at_2x.name" value="icon@2x.png" />
+        <property name="adf.staging.res.icon-72.name" value="icon-72.png" />
+        <property name="adf.staging.res.icon-144.name" value="icon-144.png" />
+
+
+        <property name="adf.staging.res.splash.1135h_at_2x.name" value="Default-1135h@2x.png" />
+        <property name="adf.staging.res.splash.568h_at_2x.name" value="Default-568h@2x.png" />
+        <property name="adf.staging.res.splash.Default-Land.name" value="Default-Land.png" />
+        <property name="adf.staging.res.splash.Default-Landscape-Ipad.name" value="Default-Landscape-Ipad.png" />
+        <property name="adf.staging.res.splash.Default-Landscape.name" value="Default-Landscape.png" />
+        <property name="adf.staging.res.splash.Default-Landscape_at_2x~ipad.name" value="Default-Landscape@2x~ipad.png" />
+        <property name="adf.staging.res.splash.Default-Portrain-Ipad.name" value="Default-Portrait-Ipad.png" />
+        <property name="adf.staging.res.splash.Default-Portrait.name" value="Default-Portrait.png" />
+        <property name="adf.staging.res.splash.Default-Portrait_at_2x~ipad.name" value="Default-Portrait@2x~ipad.png" />
+        <property name="adf.staging.res.splash.Default.name" value="Default.png" />
+        <property name="adf.staging.res.splash.Default-at_2x-Landscape.name" value="Default@2x-Landscape.png" />
+        <property name="adf.staging.res.splash.Default-at_2x.name" value="Default@2x.png" />
+        
+        <fileset id="adf.staging.res.customImages.fileset" dir="${adf.staging.res.dir}">
+            <include name="${adf.staging.res.icon.name}" />
+            <include name="${adf.staging.res.icon_at_2x.name}"  />
+            <include name="${adf.staging.res.icon-72.name}"  />
+            <include name="${adf.staging.res.icon-144.name}" />
+
+            
+            <include name="${adf.staging.res.splash.1135h_at_2x.name}"  />
+            <include name="${adf.staging.res.splash.568h_at_2x.name}"  />
+            <include name="${adf.staging.res.splash.Default-Land.name}" />
+            <include name="${adf.staging.res.splash.Default-Landscape-Ipad.name}" />
+            <include name="${adf.staging.res.splash.Default-Landscape.name}" />
+            <include name="${adf.staging.res.splash.Default-Landscape_at_2x~ipad.name}" />
+            <include name="${adf.staging.res.splash.Default-Portrain-Ipad.name}" />
+            <include name="${adf.staging.res.splash.Default-Portrait.name}" />
+            <include name="${adf.staging.res.splash.Default-Portrait_at_2x~ipad.name}" />
+            <include name="${adf.staging.res.splash.Default.name}" />
+            <include name="${adf.staging.res.splash.Default-at_2x-Landscape.name}"  />
+            <include name="${adf.staging.res.splash.Default-at_2x.name}" />
+        </fileset>
+
+        <!-- validation -->
+        <script language="javascript">
+            try
+            {
+                var clazz = self.getClass().getClassLoader().getResource("com/sun/tools/javac/Main.class");
+                if (clazz === null)
+                {
+                    throw "Must be JDK";
+                }
+            }
+            catch (e)
+            {
+                e.printStackTrace();
+                var fail = self.project.createTask("fail");
+                fail.setMessage("Validation failure: You must run the MAF build using a Java JDK. See documentation for instructions");
+                fail.execute();
+            }
+        </script>
+	</target>
+
+    <!-- overridable targets -->
+    <!-- NOOP by default: override in build-ios-override.xml or custom build file to execute post package task -->
+    <target name="-oepe-post-ios-dist-simulator" />
+    <target name="-oepe-post-ios-dist-itunes" />
+</project>

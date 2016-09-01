@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+	xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+	<amx:panelPage id="pp1">
+		<amx:facet name="header">
+			<amx:outputText value="Create Scout" id="ot1" />
+		</amx:facet>
+		<amx:facet name="primary">
+			<amx:commandButton id="cb1" text="back" action="__back" />
+		</amx:facet>
+				<!--Parameter Form bound to Juliettes.addJuliette(String, String, int, String, int) -->
+		<amx:panelFormLayout id="p1">
+			<amx:inputText label="#{bindings.firstName.hints.label}"
+				value="#{bindings.firstName.inputValue}" id="i1">
+			</amx:inputText>
+			<amx:inputText label="#{bindings.lastName.hints.label}"
+				value="#{bindings.lastName.inputValue}" id="i2">
+			</amx:inputText>
+			<amx:inputText label="#{bindings.grade.hints.label}"
+				value="#{bindings.grade.inputValue}" id="i3">
+			</amx:inputText>
+			<amx:inputText label="#{bindings.gsLevel.hints.label}"
+				value="#{bindings.gsLevel.inputValue}" id="i4">
+			</amx:inputText>
+			<amx:inputText label="#{bindings.troopNumber.hints.label}"
+				value="#{bindings.troopNumber.inputValue}" id="i5">
+			</amx:inputText>
+		</amx:panelFormLayout>
+		
+		<!--Button bound to Juliettes.addJuliette(String, String, int, String, int) -->
+		<amx:commandButton actionListener="#{bindings.addJuliette.execute}"
+			disabled="#{!bindings.addJuliette.enabled}" text="add" id="c1"
+			action="__back">
+		</amx:commandButton>
+
+	</amx:panelPage>
+</amx:view>

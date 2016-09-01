@@ -1,0 +1,39 @@
+% VERSION 2
+% WARNING: this file is auto-generated; do not edit
+% UNSUPPORTED: this file and its format may change and/or
+%   may be removed in a future release
+# jce.jar
+META-INF/ORACLE_J.SF
+META-INF/ORACLE_J.RSA
+javax/crypto
+sun/security
+! jsse.jar
+com/sun/net/
+sun/security
+@ resources.jar
+META-INF/mailcap.default
+META-INF/services/sun.util.spi.XmlPropertiesProvider
+sun/text
+sun/net
+sun/rmi
+META-INF/mimetypes.default
+com/sun/java/util/jar/pack/
+com/sun/org/
+java/lang
+! rt.jar
+com/sun/rmi/
+com/sun/security/
+com/sun/java_cup/
+com/oracle/
+com/sun/java/util/jar/pack/
+org/w3c/
+com/sun/org/
+java/
+jdk/
+com/sun/net/
+sun/
+javax/
+org/xml/
+com/sun/demo/
+com/sun/xml/
+com/sun/nio/

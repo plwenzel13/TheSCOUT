@@ -1,0 +1,5 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<MetadataDirectory version="1.3" xmlns="http://xmlns.oracle.com/adfm/metainf">
+   <DataControlRegistry path="maf/thescout/thescoutview/DataControls.dcx"/>
+<DataBindingRegistry path="maf/thescout/thescoutview/DataBindings.cpx"/>
+</MetadataDirectory>

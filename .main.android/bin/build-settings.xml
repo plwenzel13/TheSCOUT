@@ -1,0 +1,38 @@
+<project name="settings">
+
+	<import file="build-set-globals.xml" as="globals" />
+	
+	<path id="xslt_classpath">
+		<pathelement location="libs/xmlparserv2.jar"/>
+		<pathelement location="libs/orai18n-mapping.jar"/>
+		<pathelement location="libs/orai18n-collation.jar"/>
+        <pathelement location="libs/commons-logging-1.2.jar"/>
+        <pathelement location="libs/maf-build-common-0.0.1-SNAPSHOT.jar"/>
+	</path>
+
+	<target name="generateSettings">
+		<echo>Application XML: ${oepe.adfmf.dotadf.applicationxml.path}</echo>
+		<echo>Fars : ${adf.staging.fars.dir}</echo>
+		<echo>XSL : ${basedir}/xsl/preference_transform.xsl</echo>
+		
+        <script language="javascript" classpathref="xslt_classpath">
+            <![CDATA[
+                var farsDir = self.project.getProperty("adf.staging.fars.dir");
+                var appXmlPath = self.project.getProperty("oepe.adfmf.dotadf.applicationxml.path");
+                var xslFile = self.project.getProperty("basedir") + "/xsl/preference_transform.xsl";
+                var prefOutput = self.project.getProperty("adf.staging.pref.out");
+                
+                print(xslFile);
+                print(appXmlPath);
+                print(farsDir);
+            
+                try {
+                    Packages.oracle.tools.maf.build.settings.TransformHelper.executeAndroidTransformation(appXmlPath, xslFile, farsDir, "PackageName", prefOutput);
+                }catch (e){
+                    e.printStackTrace();
+                    throw e;
+                }
+            ]]>
+        </script>
+	</target>
+</project>

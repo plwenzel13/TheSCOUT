@@ -1,0 +1,1 @@
+l={EMEA:["EMEA","Eur\u00f3pa, K\u00f6zel-Kelet \u00e9s Afrika"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["emea","region",l]);

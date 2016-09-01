@@ -1,0 +1,76 @@
+<project name="build-stage">
+	<import file="build-set-globals.xml" as="globals"/>
+
+	<target name="init" depends="globals.init">
+		<!-- assert minimum requirements -->
+		<fail unless="adf.build.root.dir" />
+		<fail unless="adf.rt.zip" />
+	</target>
+	
+	<target name="-createStaging">
+        <mkdir dir="${adf.build.root.dir}"/>
+    </target>
+
+    <target name="-checkPlugmanTools">
+        <echo message="Checking for cordova install tools under ${oepe.cordova.tools.root}" />
+        <condition property="cordovaToolsPresent">
+            <and>
+                <!-- TODO make this better -->
+                <available file="${adf.build.tools.plugman}" />
+            </and>
+        </condition>
+        <echo message="cordovaToolsPresent: ${cordovaToolsPresent}" />
+        <!-- ensure tools are executable -->
+        <chmod file="${adf.rt.maf.helper.ios}" perm="755"/>
+        <touch file="${adf.build.root.dir}/cordova/version" ></touch>
+        <chmod perm="ug+wrx" file="${adf.build.root.dir}/cordova/version" />
+     </target>    
+    <target name="-installPlugmanTools" unless="${cordovaToolsPresent}">
+        <install-tools/>
+    </target>
+
+	<target name="clean-all" depends="init">
+        <delete dir="${adf.build.root.dir}" includeemptydirs="true"/>
+    	<delete dir="build" includeemptydirs="true" />
+    </target>
+
+	<target name="clean" depends="init">
+		<delete dir="${adf.build.root.dir}" includeemptydirs="true">
+			<exclude name="FARs"/>
+			<exclude name=".adf"/>
+			<exclude name="Configuration"/>
+		</delete>
+	</target>
+	
+    <target name="-executeBuildTemplate">
+        <build-template templatefile="${oepe.bin.dir}/tmpl/ios-staging.json">
+            <buildtemplatemacro key="template.root.dir" value="${adf.rt.zip.root}/${adf.rt.runtime.root}"/>
+            <buildtemplatemacro key="build.root.dir" value="${adf.build.root.dir}" />
+            <buildtemplatemacro key="oepe.adfmf.build.mode" value="${oepe.adfmf.build.mode}" />
+        </build-template>
+        <delete>
+			<fileset dir="${adf.build.root.dir}/lib">
+			    <include name="maf-helper"/>
+			</fileset>
+		</delete>
+    </target>
+
+    <target name="build" depends="init, -createStaging, -executeBuildTemplate, -checkPlugmanTools, -installPlugmanTools" />
+
+    <macrodef name="install-tools">
+        <sequential>
+            <mkdir dir="${oepe.cordova.tools.root}/plugman"/>
+            <exec executable="/usr/bin/tar" dir="${oepe.cordova.tools.root}">
+                <arg value="xzf" />
+                <arg value="${adf.rt.tools.path}/node-darwin-x64.tar.gz" />
+            </exec>
+            <chmod perm="755" file="${oepe.cordova.tools.root}/node-darwin-x64/bin/npm" />
+            <exec executable="${oepe.cordova.tools.root}/node-darwin-x64/bin/npm" >
+                <arg value="install" />
+                <arg value="-prefix" />
+                <arg value="${oepe.cordova.tools.root}/plugman" />
+                <arg value="${adf.rt.tools.path}/plugman.tgz" />
+             </exec>
+        </sequential>
+    </macrodef>
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+	xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+	<amx:panelPage id="pp1">
+		<amx:facet name="header">
+			<amx:outputText value="Take Picture" id="ot1" />
+		</amx:facet>
+		<amx:facet name="primary">
+			<amx:commandButton id="cb1" text="back" action="__back" />
+		</amx:facet>
+		<amx:facet name="secondary">
+			<amx:commandButton id="cb2" />
+		</amx:facet>
+		<!--Link bound to DeviceFeatures.getPicture(int, int, int, boolean, int, int, int) -->
+		<amx:commandLink actionListener="#{bindings.getPicture.execute}"
+			disabled="#{!bindings.getPicture.enabled}" text="getPicture"
+			id="c1">
+		</amx:commandLink>
+		<!--Image bound to DeviceFeatures.getPicture(int, int, int, boolean, int, int, int).String -->
+		<amx:image source="#{bindings.Return.inputValue}" id="i1"></amx:image>
+	</amx:panelPage>
+</amx:view>

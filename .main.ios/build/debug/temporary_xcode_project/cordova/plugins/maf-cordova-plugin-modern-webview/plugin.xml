@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="maf-cordova-plugin-modern-webview"
+    version="1.0.1">
+    <name>MAF Modern Webview Plugin</name>
+    <description>This plugin allows MAF to utilize the modern webview (WKWebView) on iOS when running iOS 9 or later.</description>
+	<engines>
+        <engine name="cordova-ios" version=">=4.0.0" />
+        <engine name="apple-ios" version=">=9.0" />
+	</engines>
+
+    <!-- ios -->
+    <platform name="ios">
+        <js-module src="src/www/ios/maf-modern-webview.js" name="maf-modern-webview">
+            <clobbers target="cordova.exec" />
+        </js-module>
+
+        <config-file target="config.xml" parent="/*">
+            <preference name="CordovaWebViewEngine" value="MafModernWebViewPlugin" />
+        </config-file>
+    </platform>
+
+</plugin>

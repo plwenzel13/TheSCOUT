@@ -1,0 +1,1 @@
+l={EU:["EU","\uc720\ub7fd"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["europe","continent",l]);

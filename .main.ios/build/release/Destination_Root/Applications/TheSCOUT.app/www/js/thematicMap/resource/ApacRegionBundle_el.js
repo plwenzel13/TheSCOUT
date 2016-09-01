@@ -1,0 +1,1 @@
+l={APAC:["APAC","\u0391\u03c3\u03af\u03b1 \u0395\u03b9\u03c1\u03b7\u03bd\u03b9\u03ba\u03cc\u03c2"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["apac","region",l]);

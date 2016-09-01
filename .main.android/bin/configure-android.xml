@@ -1,0 +1,329 @@
+<project name="configure-android">
+    <!-- override -->
+    <!-- Input directories -->
+    <!-- default the build mode to debug if not already set -->
+    <property name="oepe.adfmf.build.mode" value="debug" />
+
+    <condition property="oepe.adfmf.build.mode.is.debug" value="true">
+        <equals arg1="${oepe.adfmf.build.mode}" arg2="debug" />
+    </condition>
+
+    <condition property="oepe.adfmf.build.mode.is.release" value="true">
+        <equals arg1="${oepe.adfmf.build.mode}" arg2="release" />
+    </condition>
+
+    <!-- by default, only decorate images if we are in debug mode -->
+    <property name="oepe.userdebug.decorateCustomImages" value="false" />
+
+    <!-- create these here because they are needed by manifest.file -->
+    <property name="adf.build.base.dir" value="${oepe.bin.dir}/../build/${oepe.adfmf.build.mode}" />
+    <property name="adf.build.root.dir" location="${adf.build.base.dir}" />
+    <property name="basedir" value="adf.build.root.dir" />
+    <echo message="basedir = ${basedir}" />
+
+    <property name="oepe.build.info.auto.keystore" location="${adf.build.root.dir}/../debug.keystore" />
+    <echo level="verbose" message="auto keystore location is ${oepe.build.info.auto.keystore}"/>
+    <!-- if debug mode, check if the front-end is requesting a keystore autogen and if
+         doesn't already exist, set the flag to create it -->
+    <condition property="oepe.adfmf.build.debug.autogen.android.keystore" value="true">
+        <and>
+            <isset property="oepe.adfmf.build.autogen.keystore" />
+            <isset property="oepe.adfmf.build.mode.is.debug" />
+            <not>
+                <available file="${oepe.build.info.auto.keystore}" />
+            </not>
+        </and>
+    </condition>
+
+    <echo level="verbose" message="Auto Generate Keystore is ${oepe.adfmf.build.debug.autogen.android.keystore}" />
+
+    <property name="source.dir" value="${adf.build.base.dir}/src" />
+    <property name="asset.dir" value="${adf.build.base.dir}/assets" />
+    <property name="jar.libs.dir" value="${adf.build.base.dir}/libs" />
+    <property name="gen.absolute.dir" location="${adf.build.base.dir}/gen" />
+    <property name="resource.absolute.dir" location="${adf.build.base.dir}/res" />
+    
+    <property name="manifest.file.name" value="AndroidManifest.xml" />
+    <property name="manifest.file" value="${adf.build.root.dir}/AndroidManifest.xml" />
+    <echo message="manifest.file = ${manifest.file}" />
+    
+    <!-- Output directories -->
+    <property name="out.dir" value="${adf.build.base.dir}/bin" />
+
+    <!-- we include the assets folder separately in assets.zip at the root of the apk. -->
+    <!-- the docs for this attribute are in the android buld.xml.  We have to be careful what we -->
+    <!-- put here because it searches both assets and res for these exclusions.--> 
+    <!-- Currently: -->
+    <!-- de, FARs, jvm, www -->
+    <property name="aapt.ignore.assets" value="&lt;dir&gt;de:&lt;dir&gt;FARS:&lt;dir&gt;jvm:&lt;dir&gt;www" />
+
+    <!-- We force this off so that apkbuilder doesn't try to implicitly debug sign even if we are in debug.
+         This is because apkbuilder *both* zips the apk *and* signs it if this property is "true". The problem is
+         that for adfmf we need to add things to the apk (i.e. .adf) between zipping and signing. -->
+    <property name="build.is.signing.debug" value="false" /> 
+    
+    <!-- default the zip alignment value.  The IDE overrides this based on the launch configuration -->
+    <property name="oepe.maf.android.zipAlignment" value="4" />
+
+    <!-- Use an external property that we own to set the adb.device.arg property in the build
+         script.  That way we can control it later.  This property is used to tell adb where to install
+         the apk to in the install target (it is used for other args for other actions -->
+    <property name="adb.device.arg" value="-s ${maf.deploy.device.id}" />
+
+    <!-- force these here so they don't get set the Android SDK build based on key.alias and key.store
+         values that we may set after we include the sdk build.xml -->
+    <property name="has.keystore" value="true" />
+    <property name="has.password" value="true" />
+
+    <!-- Override the "-code-gen" target from the Android build.xml so that we can
+         modify the AAPT execution to include any extra packages for Cordova plugins
+         that might be part of the application. See call to exec aapt below.
+         Note that this override is still dependent on properties set in the
+         Android sdk build.xml -->
+    <target name="-code-gen">
+        <!-- always merge manifest -->
+        <mergemanifest
+                appManifest="${manifest.abs.file}"
+                outManifest="${out.manifest.abs.file}"
+                enabled="${manifestmerger.enabled}">
+            <library refid="project.library.manifest.file.path" />
+        </mergemanifest>
+
+        <do-only-if-manifest-hasCode
+                elseText="hasCode = false. Skipping aidl/renderscript/R.java">
+            <!-- For this release, there is no requirement for AIDL or
+                 Renderscript support in the build process. It is not part
+                 of JDev MAF support. This override does not include the
+                 ADT platform ANT tasks to process AIDL or Renderscript
+                 files. -->
+
+            <echo level="info">----------</echo>
+            <echo level="info">Handling Resources, Generating resource IDs...</echo>
+            <!-- This is our override for aapt. Call it directly with the desired options
+                 including the additional 'extra-packages' option for the cordova plugin
+                 support.
+                 We don't include min-sdk-version or target-sdk-version here because
+                 we add them to the AndroidManifest.xml file - causes warnings.
+                 Do we need other options that Jdev includes?
+                 version-name
+                 version-code -->
+            <exec executable="${aapt}" taskName="aapt" failonerror="true">
+                <arg value="package" />
+                <arg value="-f" />
+                <arg value="-m" />
+                <arg value="-J" />
+                <arg path="${gen.absolute.dir}" />
+                <arg value="-M" />
+                <arg path="${out.manifest.abs.file}" />
+                <!-- <arg line="${oepe.maf.aapt.extra.packages.option}" /> -->
+                <arg value="-I" />
+                <arg path="${project.target.android.jar}" />
+                <arg value="-S" />
+                <arg path="${out.res.absolute.dir}" />
+                <arg value="-S" />
+                <arg path="${resource.absolute.dir}" />
+                <!-- Jdev does not use these options - remove them??? -->
+                <arg value="--generate-dependencies" />
+                <arg value="-G" />
+                <arg path="${out.absolute.dir}/proguard.txt" />
+            </exec>
+
+            <exec executable="${aapt}" taskName="aapt" failonerror="true">
+                <arg value="package" />
+                <arg value="-f" />
+                <arg value="-m" />
+                <arg value="-J" />
+                <arg path="${gen.absolute.dir}" />
+                <arg value="-M" />
+                <arg path="${out.manifest.abs.file}" />
+                <!-- <arg line="${oepe.maf.aapt.extra.packages.option}" /> -->
+                <arg value="-I" />
+                <arg path="${project.target.android.jar}" />
+                <arg value="-S" />
+                <arg path="${out.res.absolute.dir}" />
+                <arg value="-S" />
+                <arg path="${resource.absolute.dir}" />
+                <arg value="--custom-package" />
+                <arg value="oracle.idm.mobile" />
+                <!-- Jdev does not use these options - remove them??? -->
+                <arg value="--generate-dependencies" />
+                <arg value="-G" />
+                <arg path="${out.absolute.dir}/proguard.txt" />
+            </exec>
+
+            <echo level="info">----------</echo>
+            <echo level="info">Handling BuildConfig class...</echo>
+            <buildconfig
+                    genFolder="${gen.absolute.dir}"
+                    package="${project.app.package}"
+                    buildType="${build.is.packaging.debug}"
+                    previousBuildType="${build.last.is.packaging.debug}"/>
+
+        </do-only-if-manifest-hasCode>
+    </target>
+    
+    <!-- 
+		Overrided -release-sign in adnroid's sdk build.xml to fix additional option for alignment 
+	-->
+    <target name="-release-sign" if="has.keystore" depends="release-sign, release-sign-omss">
+	</target>
+	
+    <target name="release-sign" unless="oepe.omss.enabled" >
+        <!-- only create apk if *not* a library project -->
+        <do-only-if-not-library elseText="Library project: do not create apk..." >
+            <sequential>
+                <property name="out.unaligned.file" location="${out.absolute.dir}/${ant.project.name}-release-unaligned.apk" />
+
+                <!-- Signs the APK -->
+                <echo level="info">Signing final apk...</echo>
+                <signapk
+                        input="${out.packaged.file}"
+                        output="${out.unaligned.file}"
+                        keystore="${key.store}"
+                        storepass="${key.store.password}"
+                        alias="${key.alias}"
+                        keypass="${key.alias.password}"/>
+
+                <!-- Zip aligns the APK -->
+                <zipalign-helper-full
+                		signing="${oepe.maf.android.zipAlignment}"
+                        in.package="${out.unaligned.file}"
+                        out.package="${out.final.file}" />
+                <echo level="info">Release Package: ${out.final.file}</echo>
+            </sequential>
+        </do-only-if-not-library>
+        <record-build-info />
+    </target>
+
+	    
+    <target name="release-sign-omss" if="oepe.omss.enabled" >
+        <!-- only create apk if *not* a library project -->
+        <do-only-if-not-library elseText="Library project: do not create apk..." >
+            <sequential>
+                <property name="out.unaligned.file" location="${out.absolute.dir}/${ant.project.name}-release-unaligned.apk" />
+
+                <!-- Signs the APK -->
+                <echo level="info">Signing final apk with c14n tool...</echo>
+            	<c14nbuild path="${c14n.exe}">
+    				<args>
+    					<arg value="-c" />
+    					<arg value="inject" />
+    					<arg value="-i" />
+    					<arg value="${out.packaged.file}" />
+    					<arg value="-o" />
+    					<arg value="${out.unaligned.file}"/>
+    					<arg value="-keystore" />
+    					<arg value="${key.store}" />
+    					<arg value="-storepass" />
+    					<arg value="${key.store.password}" />
+    					<arg value="-storealias" />
+    					<arg value="${key.alias}" />
+    					<arg value="-x" />
+    					<arg value="MAF=1" />
+    					<arg value="-x" />
+    					<arg value="SECURE_STORAGE=1" />
+    					<arg value="-v" />
+    				</args>
+    			</c14nbuild>
+
+                <!-- Zip aligns the APK -->
+                <zipalign-helper-full
+                		signing="${oepe.maf.android.zipAlignment}"
+                        in.package="${out.unaligned.file}"
+                        out.package="${out.final.file}" />
+                <echo level="info">Release Package: ${out.final.file}</echo>
+            </sequential>
+        </do-only-if-not-library>
+        <record-build-info />
+    </target>
+    
+    <macrodef name="c14nbuild">
+		<attribute name="path"/>
+		<element name="args" />
+		<sequential>
+			<!-- set path to cmd if not already set -->
+			<property name="c14n.cmd.path" value="@{path}" />
+			<fail unless="c14n.cmd.path" message="Need to set c14n.cmd.path explicitly" />
+			<exec executable="${c14n.cmd.path}" failonerror="true">
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<!-- This is macro which zipaligns in.package and outputs it to out.package. Used by targets
+         debug, -debug-with-emma and release.-->
+    <macrodef name="zipalign-helper-full">
+    	<attribute name="signing" />
+        <attribute name="in.package" />
+        <attribute name="out.package" />
+        <sequential>
+        	<echo>Aligning with @{signing} byte alignment</echo>
+            <zipalign
+                    executable="${zipalign}"
+            		align="@{signing}"
+                    input="@{in.package}"
+                    output="@{out.package}"
+                    verbose="${verbose}" />
+        </sequential>
+    </macrodef>
+    
+    <target name="-pre-compile">
+    	<path id="framework.jars.path">
+    		<fileset dir="${adf.staging.precompilejars.dir}" includes="*.jar"/>
+    	</path>
+    	<path id="plugins.jars.path">
+    		<fileset dir="${adk.extras.gcm.dist.dir}" includes="*.jar" />
+    	</path>
+    	<!-- 
+    	     Filter resources from disribution dir out of precompiled staging dir
+    	     This script creates aditional path from procompiled jars dir
+    	 -->
+    	<script language="javascript"><![CDATA[
+			eval(''+new String(org.apache.tools.ant.util.FileUtils.readFully(new java.io.FileReader(self.project.getProperty("oepe.bin.js.dir")+"/loader.js"))));
+			load("common.js");
+			
+			var frameworkHashMap = new java.util.HashMap();
+	        var frameworkJarsClasspath = project.getReference("framework.jars.path");
+			var frameworkPaths = frameworkJarsClasspath.list();
+			for (var i=0; i<frameworkPaths.length; i++) {
+				var file = new java.io.File(frameworkPaths[i]);
+				if (file.exists()){
+					frameworkHashMap.put(file.getName(), frameworkPaths[i]);
+				}
+			}
+			var pluginsJarsClasspath = project.getReference("plugins.jars.path");
+			var pluginsJarsPaths = pluginsJarsClasspath.list();
+			for (var i=0; i<pluginsJarsPaths.length; i++) {
+				var file = new java.io.File(pluginsJarsPaths[i]);
+				if (frameworkHashMap.containsKey(file.getName())){
+					frameworkHashMap.remove(file.getName());
+					antHelper.echo("WARNING >>> Framework archive " + file.getName() + " had been overriden by plugin");
+				}
+			}
+			var newFrameworkPaths = new org.apache.tools.ant.types.Path(project);
+			var keys = frameworkHashMap.keySet().toArray();
+			for (var i=0; i<keys.length; i++) {
+				var path = frameworkHashMap.get(keys[i]);
+				newFrameworkPaths.append(new org.apache.tools.ant.types.Path(project, path));
+			}
+			project.addReference("framework.jars.path.new", newFrameworkPaths);
+	    ]]></script>
+    	
+        <path id="project.all.jars.path">
+            <path refid="framework.jars.path.new"/>
+        	<path refid="plugins.jars.path"/>
+        </path>
+        <echo message="-pre-compile" />
+    </target>
+    
+    <target name="-set-mode-check">
+        <echo message="Override -set-mode-check to do nothing" />
+    </target>
+
+    <!-- overridable targets -->
+    <!-- NOOP by default: override in build-android-override.xml or custom build file to execute post package task -->
+    <target name="-oepe-post-android-package" />
+    <!-- NOOP by default: override in build-android-override.xml or custom build file to execute post sign task -->
+    <target name="-oepe-post-android-sign" />
+
+ </project>

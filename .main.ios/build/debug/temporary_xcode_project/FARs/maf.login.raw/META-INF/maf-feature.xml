@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (c) 2011, 2014, Oracle and/or its affiliates. All rights reserved. -->
+<adfmf:features xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adfmf="http://xmlns.oracle.com/adf/mf">
+  <adfmf:feature id="__maf_login_raw" name="__maf_login_raw" listener-class="oracle.maf.impl.authentication.RawLoginFeatureListener">
+    <adfmf:content id="__maf_login_raw.1">
+      <adfmf:localHTML url="ignored.html"/>
+    </adfmf:content>
+  </adfmf:feature>
+</adfmf:features>

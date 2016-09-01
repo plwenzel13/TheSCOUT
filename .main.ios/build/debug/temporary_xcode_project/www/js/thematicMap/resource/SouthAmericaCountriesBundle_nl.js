@@ -1,0 +1,1 @@
+"use strict";var l={"TTO":["TTO","Trinidad en Tobago"],"CHL":["CHL","Chili"],"ARG":["ARG","Argentini\u00EB"],"FLK":["FLK","Falklandeilanden"],"GUF":["GUF","Frans-Guyana"],"BRA":["BRA","Brazili\u00EB"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["southAmerica","countries",l]);

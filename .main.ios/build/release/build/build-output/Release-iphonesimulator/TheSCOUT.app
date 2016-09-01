@@ -1,0 +1,1 @@
+/Users/patriciawenzel/Documents/workspace/TheSCOUT/.main.ios/build/release/Destination_Root/Applications/TheSCOUT.app

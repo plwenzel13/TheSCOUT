@@ -1,0 +1,1 @@
+l={NY_NEW_YORK:[null,"Nowy Jork"],DC_WASHINGTON:[null,"Waszyngton"],PA_PHILADELPHIA:[null,"Filadelfia"],LA_NEW_ORLEANS:[null,"Nowy Orlean"],FL_ST__PETERSBURG:[null,"Sankt Petersburg"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","cities",l]);

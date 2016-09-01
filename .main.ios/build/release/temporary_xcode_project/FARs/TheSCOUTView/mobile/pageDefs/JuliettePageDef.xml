@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<pageDefinition version="1.3" id="JuliettePageDef" Package="mobile.pageDefs" xmlns="http://xmlns.oracle.com/adfm/uimodel">
+   <parameters/>
+   <executables>
+      <variableIterator id="variables"/>
+      <iterator Binds="root" RangeSize="25" DataControl="Juliettes" id="JuliettesIterator"/>
+      <accessorIterator MasterBinding="JuliettesIterator" Binds="juliettes" RangeSize="25" DataControl="Juliettes" BeanClass="maf.thescout.thescoutview.Juliette" id="juliettesIterator"/>
+   </executables>
+   <bindings>
+      <tree IterBinding="juliettesIterator" id="juliettes">
+         <nodeDefinition Name="juliettes0" DefName="maf.thescout.thescoutview.Juliette">
+            <AttrNames>
+               <Item Value="firstName"/>
+               <Item Value="gsLevel"/>
+            </AttrNames>
+         </nodeDefinition>
+      </tree>
+      <attributeValues IterBinding="juliettesIterator" id="name">
+         <AttrNames>
+            <Item Value="name"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="email">
+         <AttrNames>
+            <Item Value="email"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="level">
+         <AttrNames>
+            <Item Value="level"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="council">
+         <AttrNames>
+            <Item Value="council"/>
+         </AttrNames>
+      </attributeValues>
+   <attributeValues IterBinding="juliettesIterator" id="firstName">
+         <AttrNames>
+            <Item Value="firstName"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="lastName">
+         <AttrNames>
+            <Item Value="lastName"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="grade">
+         <AttrNames>
+            <Item Value="grade"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="gsLevel">
+         <AttrNames>
+            <Item Value="gsLevel"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="juliettesIterator" id="troopNumber">
+         <AttrNames>
+            <Item Value="troopNumber"/>
+         </AttrNames>
+      </attributeValues>
+      
+   </bindings>
+</pageDefinition>

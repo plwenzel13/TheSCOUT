@@ -1,0 +1,44 @@
+<project name="build-android-override">
+	
+	<!-- this is the last target called after android packaging (unsigned apk)
+	     so you can change its contents to do custom post-package actions -->
+    <target name="-oepe-post-android-package">
+        <echo message="Override -oepe-post-android-package" />
+        <property environment="env" />
+        <antcall inheritall="true" inheritrefs="true" target="-oepe-do-hudson-copy-unsigned"/>
+    </target>
+    
+    <!-- this is the last target called after android dist (signed packaging)
+         so you can change its contents to do custom post-dist actions -->
+    <target name="-oepe-post-android-sign">
+        <echo message="Override -oepe-post-android-sign" />
+        <property environment="env" />
+        <antcall inheritall="true" inheritrefs="true" target="-oepe-do-hudson-copy-signed"/>
+    </target>
+
+    <!-- The targets below are templates for you create our own custom tasks -->
+
+    <!--   HUDSON TEMPLATES -->
+
+    <!-- copy the unsigned APK to your Hudson $WORKSPACE/build/$mode folder, where $WORKSPACE
+         is the Hudson property pointing to a Hudson workspace and $mode is either "release" or
+         "debug" depending on what you've selected -->
+    <target name="-oepe-do-hudson-copy-unsigned" if="env.WORKSPACE">
+    	<mkdir dir="${env.WORKSPACE}/build/${oepe.adfmf.build.mode}" />
+    	<copy todir="${env.WORKSPACE}/build/${oepe.adfmf.build.mode}">
+    		<fileset file="${out.packaged.file}">
+    		</fileset>
+    	</copy>
+    </target>
+
+    <!-- copy the unsigned APK to your Hudson $WORKSPACE/build/$mode folder, where $WORKSPACE
+         is the Hudson property pointing to a Hudson workspace and $mode is either "release" or
+         "debug" depending on what you've selected -->
+    <target name="-oepe-do-hudson-copy-signed" if="env.WORKSPACE">
+        <mkdir dir="${env.WORKSPACE}/build/${oepe.adfmf.build.mode}" />
+        <copy todir="${env.WORKSPACE}/build/${oepe.adfmf.build.mode}">
+            <fileset file="${out.final.file}">
+            </fileset>
+        </copy>
+    </target>
+</project>

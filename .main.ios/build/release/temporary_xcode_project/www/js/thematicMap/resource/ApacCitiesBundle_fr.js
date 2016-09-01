@@ -1,0 +1,2 @@
+l={NPL_KATHMANDU:[null,"Kathmandou"],CHN_GUANGZHOU:[null,"Canton"],KOR_SEOUL:[null,"S\u00e9oul"],VNM_HANOI:[null,"Hano\u00ef"],IND_MUMBAI:[null,"Bombay"],HKG_HONG_KONG:[null,"Hong-Kong"],VNM_HO_CHI_MINH_CITY:[null,"H\u00f4-Chi-Minh-Ville"],MNG_ULAN_BATOR:[null,"Oulan-Bator"],MAC_MACAU:[null,"Macao"],PHL_MANILA:[null,"Manille"],CHN_BEIJING:[null,"P\u00e9kin"],NCL_NOUMEA:[null,"Noum\u00e9a"],SGP_SINGAPORE:[null,"Singapour"],IND_KOLKATA:[null,"Calcutta"],BTN_THIMPHU:[null,"Thimphou"]};
+(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["apac","cities",l]);

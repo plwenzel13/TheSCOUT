@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adfc-mobile-config xmlns="http://xmlns.oracle.com/adf/controller" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.oracle.com/adf/controller http://xmlns.oracle.com/adf/controller/adfc-mobile-config.xsd">
+    <task-flow-definition id="juliette-flow">
+        <default-activity>Juliette</default-activity>
+        <view id="Juliette">
+            <page>/Juliette.amx</page>
+        </view>
+        <view id="CreateJuliette">
+            <page>/CreateJuliette.amx</page>
+        </view>
+        <view id="ChooseJuliette">
+        	<page>/ChooseJuliette.amx</page>
+        </view>
+        <view id="Camera">
+            <page>/Camera.amx</page>
+        </view>
+        <view id="view0">
+            <page>/view0.amx</page>
+        </view>
+        <control-flow-rule>
+            <from-activity-id>Juliette</from-activity-id>
+            <control-flow-case>
+                <from-outcome>pic</from-outcome>
+                <to-activity-id>Camera</to-activity-id>
+            </control-flow-case>
+            <control-flow-case>
+                <from-outcome>create</from-outcome>
+                <to-activity-id>CreateJuliette</to-activity-id>
+                <transition>fade</transition>
+            </control-flow-case>
+            <control-flow-case>
+                <from-outcome>choose</from-outcome>
+                <to-activity-id>ChooseJuliette</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+    </task-flow-definition>
+</adfc-mobile-config>

@@ -1,0 +1,1 @@
+l={AUS_CANBERRA:[null,"Kanberra"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["australia","cities",l]);

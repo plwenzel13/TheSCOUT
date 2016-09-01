@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<pageDefinition version="1.3" id="CameraPageDef" Package="mobile.pageDefs" xmlns="http://xmlns.oracle.com/adfm/uimodel">
+   <parameters/>
+   <executables>
+      <variableIterator id="variables">
+         <variable Type="java.lang.String" Name="getPicture_Return" IsQueriable="false" IsUpdateable="0" DefaultValue="${bindings.getPicture.result}"/>
+      </variableIterator>
+   </executables>
+   <bindings>
+      <methodAction id="getPicture" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getPicture" IsViewObjectMethod="false" DataControl="DeviceFeatures" InstanceName="data.DeviceFeatures.dataProvider" ReturnName="data.DeviceFeatures.methodResults.getPicture_DeviceFeatures_dataProvider_getPicture_result">
+         <NamedData NDName="quality" NDValue="90" NDType="int"/>
+         <NamedData NDName="destinationType" NDValue="1" NDType="int"/>
+         <NamedData NDName="sourceType" NDValue="0" NDType="int"/>
+         <NamedData NDName="allowEdit" NDValue="true" NDType="boolean"/>
+         <NamedData NDName="encodingType" NDValue="1" NDType="int"/>
+         <NamedData NDName="targetWidth" NDValue="300" NDType="int"/>
+         <NamedData NDName="targetHeight" NDValue="200" NDType="int"/>
+      </methodAction>
+      <attributeValues IterBinding="variables" id="Return">
+         <AttrNames>
+            <Item Value="getPicture_Return"/>
+         </AttrNames>
+      </attributeValues>
+   </bindings>
+</pageDefinition>

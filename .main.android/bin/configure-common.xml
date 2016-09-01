@@ -1,0 +1,44 @@
+<project name="configure-common">
+    <target name="init">
+        <fail unless="adf.build.root.dir" />
+
+        <property name="adf.staging.lib.dir" location="${adf.build.root.dir}/lib"/>
+        <property name="adf.staging.fars.dir" location="${adf.build.root.dir}/assets/FARs" />
+        <property name="adf.staging.java_res.www.js.dir" value="${adf.staging.java_res.assets.dir}/www/js" />
+        <property name="adf.staging.configuration.dir" location="${adf.build.root.dir}/Configuration" />
+        <property name="adf.staging.dotadf.dir" location="${adf.build.root.dir}/.adf/META-INF" />
+        <property name="adf.staging.jvm.lib" location="${adf.build.root.dir}/assets/jvm/lib" />
+        <property name="adf.staging.pref.out" location="${adf.build.root.dir}/res" />        
+        
+        <property name="oepe.src.root.dir" location="${oepe.bin.dir}/../.." />
+
+        <property name="oepe.bin.js.dir" location="${oepe.bin.dir}/js" />
+
+        <!-- Common Java build parameters -->
+
+        <!-- This flag controls whether the build should compile java files before generating FARS.
+             Front-ends like OEPE should force this to "false" by default since they want to use JDT
+             to compile.  We default the value to true because command-line front-ends will assume
+             the build is taking care of compilation by default -->
+        <property name="oepe.adfmf.compile.far.java" value="true" />
+
+        <property name="oepe.adfmf.dotadf.applicationxml.root.path" value="adf" />
+        <property name="oepe.adfmf.dotadf.applicationxml.rel.path" value="META-INF/maf-application.xml" />
+        <property name="oepe.adfmf.dotadf.configxml.rel.path" value="META-INF/maf-config.xml" />
+        <property name="oepe.adfmf.dotadf.applicationxml.path" location="${adf.build.root.dir}/.${oepe.adfmf.dotadf.applicationxml.root.path}/${oepe.adfmf.dotadf.applicationxml.rel.path}"/>
+        
+        <condition property="oepe.build.ctrl.isMac">
+            <os family="mac" />
+        </condition>
+        <condition property="oepe.build.ctrl.isLinux">
+            <and>
+                <os family="unix" />
+                <not><os family="mac" /></not>
+            </and>
+        </condition>
+        <condition property="oepe.build.ctrl.isWindows">
+            <os family="windows" />
+        </condition>
+
+	</target>
+</project>

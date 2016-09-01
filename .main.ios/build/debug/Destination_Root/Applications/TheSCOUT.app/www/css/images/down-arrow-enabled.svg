@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="input_x5F_date_x5F_trigger_x5F_enabled"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="9px" height="9px"
+	 viewBox="0 0 9 9" enable-background="new 0 0 9 9" xml:space="preserve">
+<g id="date_x5F_trigger_x5F_shadow">
+	<polygon opacity="0.55" points="4.53,9 4.52,8.95 0,1 9,1 	"/>
+</g>
+<g id="date_x5F_trigger_x5F_enaabled">
+	<polygon fill="#FFFFFF" points="4.53,8 4.52,7.95 0,0 9,0 	"/>
+</g>
+</svg>

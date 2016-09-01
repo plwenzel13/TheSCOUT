@@ -1,0 +1,1 @@
+l={COL_BOGOTA:[null,"Bogot\u00e1"],BRA_SAO_PAULO:[null,"S\u00e3o Paulo"],GTM_GUATEMALA_CITY:[null,"Guatemala By"],PRY_ASUNCION:[null,"Asunci\u00f3n"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["latinAmerica","cities",l]);

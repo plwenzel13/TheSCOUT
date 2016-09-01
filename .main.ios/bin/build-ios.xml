@@ -1,0 +1,855 @@
+<project name="build-ios">
+	<import file="build-set-globals.xml" as="globals" />
+	<import file="build-settings.xml" as="settings" />
+    <import file="${oepe.user.config.override.profile.dir.build.ios.override}" as="globals" optional="true"/>
+
+	<target name="init" depends="globals.init, checkc14nfile" >
+	    <condition property="iosSimPathValid">
+            <!-- TODO: put into validate phase? -->
+            <available file="${ios.sdk.simulator.exe}"/>
+        </condition>
+	</target>
+
+	<target name="clean" depends="init, cleanCustomImages">
+   		<!-- TODO: why doesn't the xcodebuild clean take care of cleaning the product dir? -->
+   		<delete dir="${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app"  />
+		<delete dir="${adf.build.root.dir}/../build" />
+	</target>
+
+    <target name="cleanCustomImages">
+         <delete failonerror="false">
+            <fileset refid="adf.staging.res.customImages.fileset"/>
+         </delete>
+    </target>
+
+    <target name="clean-destination-root">
+		<delete dir="../${adf.deploy.destination.root}/" />
+	</target>
+
+    <target name="clean-simulator">
+        <delete dir="${ios.sim.root.dir}/Applications/${adfmf.application.app.deploy.name}/${adfmf.application.app.deploy.name}.app" />
+    </target>
+
+    <target name="clean-all" depends="clean, clean-destination-root, clean-simulator">
+    </target>
+
+    <!-- if ww don't delete the far directories in the DESTINATION_ROOT, sometimes xcodebuild won't update
+         them even if changed -->
+	<target name="-ensureFARRedeploy">
+        <delete dir="${adf.build.base.dir}/${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app/FARs" />
+	</target>
+
+	<target name="-ensurePlistConfiguration">
+		<!-- PlistBuddy command="Set :CFBundleIdentifier ${adf.deploy.bundle.identifier}" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/-->
+		<!-- TODO: test that build-settings.xml covers this case now -->
+		<PlistBuddy command="Set :CFBundleDisplayName ${adfmf.application.app.deploy.name}" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+		<PlistBuddy command="Set :CFBundleDisplayName ${adfmf.application.app.deploy.name}" filename="${adf.build.root.dir}/Strings/en.lproj/InfoPlist.strings"/>
+	</target>
+	
+	<target name="updateApplicationVersion"> 
+        <script language="javascript"  src="${oepe.bin.js.dir}/app-version-update.js"  />
+    </target>
+	
+	<target name="updateDeviceOrientationProjectPlist">
+		<PlistBuddy command="Delete :UISupportedInterfaceOrientations" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+		<PlistBuddy command="Delete :UISupportedInterfaceOrientations~ipad" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+		<PlistBuddy command="Add :UISupportedInterfaceOrientations array" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+		<PlistBuddy command="Add :UISupportedInterfaceOrientations~ipad array" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+		
+		<property name="ipad.array.index" value="0" />
+		<property name="iphone.array.index" value="0" />
+		
+        <antcall target="IpadLandscapeLeft" inheritall="true" inheritrefs="true"/>
+        <antcall target="IpadLandscapeRight" inheritall="true" inheritrefs="true"/>
+		<antcall target="IpadPortraitUpsideDown" inheritall="true" inheritrefs="true"/>
+        <antcall target="IpadPortrait" inheritall="true" inheritrefs="true"/>
+        
+        <antcall target="IphoneLandscapeLeft" inheritall="true" inheritrefs="true"/>
+        <antcall target="IphoneLandscapeRight" inheritall="true" inheritrefs="true"/>
+		<antcall target="IphonePortraitUpsideDown" inheritall="true" inheritrefs="true"/>
+        <antcall target="IphonePortrait" inheritall="true" inheritrefs="true"/>
+    </target>
+    
+    <macrodef name="increment.ipad.array.index">
+    	<sequential>
+    	<script language="javascript"> <![CDATA[
+    		var ipadIndex = project.getProperty("ipad.array.index");
+    		if (ipadIndex && !isNaN(ipadIndex)){
+    			project.setProperty("ipad.array.index", ipadIndex + 1);
+    		}else{
+    			project.setProperty("ipad.array.index", 0);
+    		}
+    	]]></script>
+    	</sequential>
+    </macrodef>
+    
+    <macrodef name="increment.iphone.array.index">
+    	<sequential>
+    	<script language="javascript"> <![CDATA[
+    		var iphoneIndex = project.getProperty("iphone.array.index");
+    		if (iphoneIndex && !isNaN(iphoneIndex)){
+    			project.setProperty("iphone.array.index", iphoneIndex + 1);
+    		}else{
+    			project.setProperty("iphone.array.index", 0);
+    		}
+    	]]></script>
+    	</sequential>
+    </macrodef>
+    
+    <target name="IpadLandscapeLeft" if="ios.device.orientation.IpadLandscapeLeft">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations~ipad:${ipad.array.index} string UIInterfaceOrientationLandscapeLeft" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.ipad.array.index/>
+    </target>
+    
+    <target name="IpadLandscapeRight" if="ios.device.orientation.IpadLandscapeRight">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations~ipad:${ipad.array.index} string UIInterfaceOrientationLandscapeRight" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.ipad.array.index/>
+    </target>
+    
+    <target name="IpadPortrait" if="ios.device.orientation.IpadPortrait">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations~ipad:${ipad.array.index} string UIInterfaceOrientationPortrait" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.ipad.array.index/>
+    </target>
+    
+    <target name="IpadPortraitUpsideDown" if="ios.device.orientation.IpadPortraitUpsideDown">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations~ipad:${ipad.array.index} string UIInterfaceOrientationPortraitUpsideDown" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.ipad.array.index/>
+    </target>
+    
+    <target name="IphoneLandscapeLeft" if="ios.device.orientation.IphoneLandscapeLeft">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations:${iphone.array.index} string UIInterfaceOrientationLandscapeLeft" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.iphone.array.index/>
+    </target>
+    
+    <target name="IphoneLandscapeRight" if="ios.device.orientation.IphoneLandscapeRight">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations:${iphone.array.index} string UIInterfaceOrientationLandscapeRight" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.iphone.array.index/>
+    </target>
+    
+    <target name="IphonePortrait" if="ios.device.orientation.IphonePortrait">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations:${iphone.array.index} string UIInterfaceOrientationPortrait" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.iphone.array.index/>
+    </target>
+    
+    <target name="IphonePortraitUpsideDown" if="ios.device.orientation.IphonePortraitUpsideDown">
+    	<PlistBuddy command="Add :UISupportedInterfaceOrientations:${iphone.array.index} string UIInterfaceOrientationPortraitUpsideDown" filename="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Oracle_ADFmc_Container_Template-Info.plist"/>
+    	<increment.iphone.array.index/>
+    </target>
+    
+	<target name="copyProperties">
+        <!-- possible that these don't exists, so failonerror=false -->
+        <copy todir="${adf.build.root.dir}/lib" overwrite="true" failonerror="false">
+            <fileset dir="${oepe.src.root.dir}/META-INF">
+                <include name="*.properties" />
+            </fileset>
+        </copy>
+        <!-- BUG 18692647 copy the app controller folder name to application.controller property in cvm.properties
+             in staging -->
+        <propertyfile
+            file="${adf.staging.jvm.lib}/maf.properties"
+            comment="cvm properties">
+            <entry key="application.controller" value="${oepe.adfmf.assembly.appControllerFolder}"/>
+        </propertyfile>
+    </target>
+
+    <target name="build" depends="-ensureFARRedeploy, -ensurePlistConfiguration, processCustomImages, copyProperties, updateDeviceOrientationProjectPlist, updateApplicationVersion, settings.generateSettings, settings.generateStrings, transformPlugins, processCordovaPlugins, stopSim, ensureSim, xcodebuild-clean, xcodebuild-install" />
+ 
+    <target name="processCustomImages" depends="copyCustomImagesNew, maybeDecorateCustomImages" />
+
+	<target name="copyCustomImagesNew">
+		
+		<property name="app.web.content.dest.dir" location="${adf.build.root.dir}/FARs/${adfmf.application.app.deploy.name}Application/public_html"/>
+		<property name="app.web.content.src.dir" location="${oepe.adfmf.assembly.project}/../${oepe.adfmf.assembly.appControllerFolder}"/>
+		
+		<property name="oepe.adfmf.assembly.project" location="../.." />
+		<property file="${oepe.adfmf.assembly.project}/res/ios/ios-resources.properties" />
+		
+		<script language="javascript">
+			<![CDATA[
+			eval(''+new String(org.apache.tools.ant.util.FileUtils.readFully(new java.io.FileReader(self.project.getProperty("oepe.bin.js.dir")+"/loader.js"))));
+			load("common.js");
+			
+			var dir = self.project.getProperty('adf.rt.zip.root');
+			var imageMap = new java.util.Properties();
+			var is = null;
+			try {
+				is = new java.io.FileInputStream(dir + '/metadata/ios-image-map.properties');
+				imageMap.load(is);
+			} catch (e) {
+				antHelper.echo(e);
+			} finally {
+				if (is != null) {
+					try{is.close();} catch(e) {}
+				}
+			}
+			for(key in imageMap) {
+				var values = imageMap.getProperty(key).split(',');
+				//antHelper.echo('copying "' + self.project.getProperty(key) + '" to ' + values[1].trim() + '/' + values[0].trim());
+				var copyIconTask = self.project.createTask("copyIcon");
+				copyIconTask.setDynamicAttribute("iconfromname", self.project.getProperty(key));
+				copyIconTask.setDynamicAttribute("icontoname", values[0].trim());
+				copyIconTask.setDynamicAttribute("destdir", values[1].trim());
+				copyIconTask.execute();
+			}
+			]]>
+		</script>
+		
+		<copy todir="${adf.build.root.dir}" overwrite="true" failonerror="false">
+	        <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.itunes.artwork}"></fileset>
+	        <mapper type="glob" from="*"  to="iTunesArtwork.png"></mapper>
+     	</copy>
+     	
+     	<condition property="web.content.dir.exists">
+	      	<available file="${app.web.content.src.dir}/ViewContent" type="dir"/>
+	    </condition>
+		<delete dir="${app.web.content.dest.dir}" verbose="true"/>
+		<antcall target="deploy-app-level-web-content"></antcall>
+	</target>
+	
+	<target name="deploy-app-level-web-content" if="web.content.dir.exists">
+		<copy todir="${app.web.content.dest.dir}" overwrite="true" verbose="true">
+			<fileset dir="${app.web.content.src.dir}/ViewContent"></fileset>
+		</copy>
+	</target>
+	
+	<macrodef name="copyIcon">
+		<attribute name="iconfromname"/>
+		<attribute name="icontoname"/>
+		<attribute name="destdir" />
+		<sequential>
+			<echo>copying "@{iconfromname}" to @{destdir}/@{icontoname}</echo>
+			<copy todir="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Images.xcassets/@{destdir}" overwrite="true" failonerror="false">
+	            <fileset file="${oepe.adfmf.assembly.project}/res/ios/@{iconfromname}"></fileset>
+	            <mapper type="glob" from="*" to="@{icontoname}"></mapper>
+	        </copy>
+		</sequential>
+	</macrodef>
+	
+    <target name="copyCustomImages"> 
+        <property name="oepe.adfmf.assembly.project" location=".." />
+        <property file="${oepe.adfmf.assembly.project}/res/ios/ios-resources.properties" />
+        
+        <property name="oepe.adfmf.appicon.dir" value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Images.xcassets/AppIcon.appiconset" />
+        <!-- copy icons -->
+         <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.icon72}"></fileset>
+            <mapper type="glob" from="*" to="Icon-72.png"></mapper>
+         </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.icon72@2x}"></fileset>
+           <mapper type="glob" from="*" to="Icon-72@2x.png"></mapper>
+        </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.icon76}"></fileset>
+           <mapper type="glob" from="*" to="Icon-76.png"></mapper>
+        </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.icon76@2x}"></fileset>
+           <mapper type="glob" from="*" to="Icon-76@2x.png"></mapper>
+        </copy>
+
+         <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.icon57}"></fileset>
+            <mapper type="glob" from="*"  to="Icon-57.png"></mapper>
+         </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.icon57@2x}"></fileset>
+           <mapper type="glob" from="*"  to="Icon-57@2x.png"></mapper>
+        </copy>
+
+         <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.icon50}"></fileset>
+            <mapper type="glob" from="*"  to="Icon-50.png"></mapper>
+         </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.icon50@2x}"></fileset>
+           <mapper type="glob" from="*"  to="Icon-50@2x.png"></mapper>
+        </copy>
+
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.icon40}"></fileset>
+            <mapper type="glob" from="*"  to="Icon-40.png"></mapper>
+         </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.icon40@2x}"></fileset>
+           <mapper type="glob" from="*"  to="Icon-40@2x.png"></mapper>
+        </copy>
+
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.icon29}"></fileset>
+            <mapper type="glob" from="*"  to="Icon-29.png"></mapper>
+         </copy>
+        <copy todir="${oepe.adfmf.appicon.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.icon120}"></fileset>
+           <mapper type="glob" from="*"  to="Icon-120.png"></mapper>
+        </copy>
+
+        <property name="oepe.adfmf.launchimage.dir" value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template/Images.xcassets/LaunchImage.launchimage" />
+ 
+        <!-- copy splash screens -->
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.portrait.splash}"></fileset>
+            <mapper type="glob" from="*" to="Default-Portrait.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.retina.portrait.splash}"></fileset>
+            <mapper type="glob" from="*" to="Default-Portrait@2x.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.landscape.splash}"></fileset>
+            <mapper type="glob" from="*" to="Default-Landscape.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.portrait.splash}"></fileset>
+            <mapper type="glob" from="*"  to="Default.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.retina35.portrait.splash}"></fileset>
+            <mapper type="glob" from="*"  to="Default@2x.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.iphone.retina40.portrait.splash}"></fileset>
+            <mapper type="glob" from="*"  to="Default-568h@2x.png"></mapper>
+         </copy>
+ 
+
+        <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.landscape.splash@2x}"></fileset>
+           <mapper type="glob" from="*" to="Default-Landscape@2x.png"></mapper>
+        </copy>
+
+        <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.landscaperetina.splash}"></fileset>
+           <mapper type="glob" from="*" to="Default-LandscapeRetina.png"></mapper>
+        </copy>
+
+        <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+           <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.landscaperetina.splash@2x}"></fileset>
+           <mapper type="glob" from="*" to="Default-LandscapeRetina@2x.png"></mapper>
+        </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.portrait.splash@2x}"></fileset>
+            <mapper type="glob" from="*"  to="Default-Portrait@2x.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.portraitretina.splash}"></fileset>
+            <mapper type="glob" from="*"  to="Default-PortraitRetina.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.portraitretina.splash@2x}"></fileset>
+            <mapper type="glob" from="*"  to="Default-PortraitRetina@2x.png"></mapper>
+         </copy>
+
+         <copy todir="${oepe.adfmf.launchimage.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.ipad.portrait.splash@2x}"></fileset>
+            <mapper type="glob" from="*"  to="Default-Portrait@2x.png"></mapper>
+         </copy>
+                
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/ios/${oepe.adfmf.res.source.itunes.artwork}"></fileset>
+            <mapper type="glob" from="*"  to="iTunesArtwork.png"></mapper>
+         </copy>
+    </target>
+
+    <target name="maybeDecorateCustomImages" if="${oepe.userdebug.decorateCustomImages}">
+        <script language="javascript" src="${oepe.bin.js.dir}/images-ios.js" />
+    </target>
+    <!-- <target name="updateDeviceAccess">
+        <property file="${adf.build.root.dir}/device-access.properties" />
+        <propertyset id="oepe.maf.device.access.propertyset">
+          <propertyref prefix="oepe.maf.device.access"/>
+        </propertyset>
+        <script language="javascript" src="${oepe.bin.js.dir}/device-access-ios.js"></script>
+    </target>-->
+    <target name="dry-run">
+		<property name="dry.run" value="-dry-run" />
+	</target>
+
+	<target name="transformPlugins">
+		<script language="javascript" src="${oepe.bin.js.dir}/transform-to-plugins-xml.js">
+			<classpath>
+				<path refid="lib.path"/>
+				<pathelement location="${adf.rt.maf.helper.jar}"/>
+			</classpath>
+		</script>
+	</target>
+	
+	<target name="processCordovaPlugins" unless="oepe.build.ctrl.disable.processCordovaPlugins">
+		<deploy-plugins/>
+	</target>
+	
+    <target name="processCordovaPlugins-old" unless="oepe.build.ctrl.disable.processCordovaPlugins">
+        <property name="adf.build.cordova.plugins.dir" location="${adf.build.base.dir}/../plugins"/>
+    	<delete dir="${adf.build.cordova.plugins.dir}" includeemptydirs="true"/>
+    	<path id="plugins_classpath">
+    		<pathelement location="libs/deploy-utils.jar"/>
+    	</path>
+        <script language="javascript" manager="javax" src="${oepe.bin.js.dir}/cordova-plugins-ios.js" classpathref="plugins_classpath"></script>
+    	<fail if="processCordovaPlugins.fail.message" message="${processCordovaPlugins.fail.message}" />
+    </target>
+
+	<target name="xcodebuild-clean" depends="init">
+		<adfbuild action="clean" />
+		<copy todir="${adf.build.base.dir}/${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app/lib" overwrite="true" verbose="true">
+            <fileset dir="${adf.build.root.dir}/lib">
+            </fileset>
+        </copy>
+	</target>
+
+	<target name="xcodebuild-build" depends="init">
+		<adfbuild action="build" />
+		<copy todir="${adf.build.base.dir}/${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app/lib" overwrite="true" verbose="true">
+            <fileset dir="${adf.build.root.dir}/lib">
+            </fileset>
+        </copy>
+	</target>
+
+	<target name="xcodebuild-install" depends="init, build-if-simulator, build-if-itunes">
+	</target>
+	
+	<target name="build-if-simulator" if="oepe.build.info.is.simulator.build" unless="oepe.build.info.is.device.build">
+		<adfbuild action="install" />
+    </target>
+	
+	<target name="build-if-itunes" if="oepe.build.info.is.device.build" unless="oepe.build.info.is.simulator.build">
+		<antcall target="omss-build" inheritall="true" inheritrefs="true" />
+		<antcall target="non-omss-build" inheritall="true" inheritrefs="true" />
+    </target>
+	
+	<target name="omss-build" if="oepe.omss.enabled.run">
+		<property name="adf.build.device.ipa.outputdir" value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Oracle_ADFmc_Container_Application/device" />
+    	<mkdir dir="${adf.build.device.ipa.outputdir}"/>
+    	<create_archive/>
+		<create_app/>
+		<antcall target="containerize" inheritall="true" inheritrefs="true" />
+	</target>
+	
+	<target name="non-omss-build" unless="oepe.omss.enabled.run">
+		<property name="adf.build.device.ipa.outputdir" value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Oracle_ADFmc_Container_Application/device" />
+    	<mkdir dir="${adf.build.device.ipa.outputdir}"/>
+    	<create_archive/>
+		<create_ipa/>
+		<antcall target="containerize" inheritall="true" inheritrefs="true" />
+		<antcall target="maybe-copy-iTunesArtwork" inheritall="true" inheritrefs="true" />
+	</target>
+
+    <target name="check-if-last-deploy-different">
+        <!-- compare whether the last simulator deployment for this application
+             was from this deploy target in this mode.  If it was _NOT_, then we 
+             should clean the simulator to ensure that all artifacts get updated -->
+        <property file="${ios.sim.root.dir}/Applications/${adfmf.application.app.deploy.name}/${adfmf.application.app.deploy.name}.app/oepe-build-info.properties" />
+
+        <condition property="oepe.build.info.simulator.has.different.target.deployed" value="true">
+            <not>
+                <equals arg1="${adf.build.base.dir}" arg2="${oepe.build.info.simulator.last.deploy.path}" />
+            </not>
+        </condition>
+        <condition property="oepe.build.info.simulator.needs.cleaning" value="true">
+            <or>
+                <istrue value="${oepe.build.info.simulator.has.different.target.deployed}" />
+                <istrue value="${oepe.build.info.last.deploy.was.different}" />
+            </or>
+        </condition>
+        <echo message="Simulator is different: ${oepe.build.info.simulator.has.different.target.deployed}" />
+        <echo message="Build is different: ${oepe.build.info.last.deploy.was.different}" />
+    </target>
+
+    <target name="force-clean-simulator">
+        <property name="oepe.build.info.simulator.needs.cleaning" value="true" />
+    </target>
+    <target name="cleanSimulatorIfModeChanged" if="oepe.build.info.simulator.needs.cleaning">
+        <echo message="Target or mode change detected, cleaning app on simulator" />
+        <antcall target="clean-simulator" />
+    </target>
+
+    <target name="deploy" depends="deploy-if-simulator, deploy-if-itunes" />
+
+    <target name="deploy-if-simulator" if="oepe.build.info.is.simulator.build" unless="oepe.build.info.is.device.build">
+        <antcall target="deploy-to-simulator" inheritall="true" inheritrefs="true"/>
+    </target>
+
+    <target name="deploy-to-simulator" depends="check-if-last-deploy-different, startSim" />
+    <target name="deploy-zip-to-simulator" depends="force-clean-simulator, deploy-zip, startSim" />
+
+    <target name="deploy-if-itunes" if="oepe.build.info.is.device.build" unless="oepe.build.info.is.simulator.build">
+        <antcall target="deploy-to-itunes" inheritall="true" inheritrefs="true"/>
+    </target>
+
+    <target name="deploy-to-itunes">
+    	<property name="adf.build.device.ipa.outputdir" value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Oracle_ADFmc_Container_Application/device" />
+		<antcall target="maybe-copy-to-itunes-directory" inheritall="true" inheritrefs="true" />
+		<antcall target="maybe-copy-to-distribution-dir" inheritall="true" inheritrefs="true" />
+	</target>
+
+	<target name="zip-non-omss-ipa" depends="oepe.omss.notenabled.check" if="oepe.omss.notenabled.run">
+		<adf_codesign xcrunpath="${xcrun.exe}" outputdir="${adf.build.device.ipa.outputdir}"/>
+		<antcall target="maybe-copy-iTunesArtwork" inheritall="true" inheritrefs="true" />
+	</target>
+	
+	<target name="maybe-copy-iTunesArtwork" if="ios.deploy.itunes.target.dir">
+		<mkdir dir="${adf.build.device.ipa.outputdir}/art" />
+		<copy todir="${adf.build.device.ipa.outputdir}/art" file="${adf.build.root.dir}/iTunesArtwork.png" failonerror="false"/>
+		<move tofile="${adf.build.device.ipa.outputdir}/art/iTunesArtwork" file="${adf.build.device.ipa.outputdir}/art/iTunesArtwork.png" failonerror="false"/>
+		<zip update="true" destfile="${adf.build.device.ipa.outputdir}/${adfmf.application.app.deploy.name}.ipa" basedir="${adf.build.device.ipa.outputdir}/art" includes="iTunesArtwork" />
+	</target>
+	
+	<target name="maybe-copy-to-itunes-directory" if="ios.deploy.itunes.target.dir" >
+        <copy file="${adf.build.device.ipa.outputdir}/${adfmf.application.app.deploy.name}.ipa" todir="${ios.deploy.itunes.target.dir}" overwrite="true" failonerror="true" />
+    </target>
+	
+    <target name="maybe-copy-to-distribution-dir" if="ios.deploy.distribution.package.outputdir">
+        <copy todir="${ios.deploy.distribution.package.outputdir}" failonerror="false" file="${adf.build.device.ipa.outputdir}/${adfmf.application.app.deploy.name}.ipa" overwrite="true" />
+    </target>
+
+   <target name="deploy-zip" depends="init, cleanSimulatorIfModeChanged">
+        <!-- delete the contents of the FARs dir to avoid overlaying old stuff -->
+        <delete dir="${ios.sim.root.dir}/Applications/${adfmf.application.app.deploy.name}/${adfmf.application.app.deploy.name}.app/FARs" />
+        <unzip src="${oepe.maf.simulator.zip.file}" dest="${ios.sim.root.dir}/Applications/${adfmf.application.app.deploy.name}/${adfmf.application.app.deploy.name}.app" />
+        <antcall target="finishSimulatorDeploy" />
+        <!-- clear the build info file so that ide deploys force a clean -->
+        <delete file="${ios.sim.root.dir}/Applications/${adfmf.application.app.deploy.name}/${adfmf.application.app.deploy.name}.app/oepe-build-info.properties" />
+    </target>
+
+    <target name="zip-AppFolder" depends="init">
+        <fail unless="oepe.maf.simulator.zip.file" description="The property oepe.maf.simulator.zip.file must point to where you want to place the zipped simulator artifacts."/>
+        <mkdir dir="${oepe.maf.simulator.zip.file}/.." />
+        <zip destfile="${oepe.maf.simulator.zip.file}" basedir="${adf.build.root.dir}/../${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app" includes="**/**"/>
+    </target>
+
+    <target name="dist-simulator" depends="init, zip-AppFolder, globals.-oepe-post-ios-dist-simulator" />
+    <target name="dist-itunes" depends="init, deploy-to-itunes, globals.-oepe-post-ios-dist-itunes" /> 
+
+    <target name="stopSim">
+        <osascript_e>
+            <args>
+                <arg value="tell application &quot;iOS Simulator&quot; to quit" />
+            </args>
+        </osascript_e>
+    </target>
+
+    <target name="ensureSim" if="oepe.build.info.is.simulator.build">
+        <simctl_start />
+    </target>
+    
+    <target name="startSim" unless="startAppOnDeploy">
+        <simctl_start/>
+        <simctl_install />
+        <simctl_launch />
+    </target>
+    <target name="checkc14nfile" depends="oepe.omss.enabled.check" if="oepe.omss.enabled.run">
+		<fail message="The Oracle mobile security suite containerization tool '${c14n.exe}' does not exist">
+    		<condition>
+        		<not>
+            		<available file="${c14n.exe}" type="file" />
+        		</not>
+   			</condition>
+		</fail>
+	</target>
+	<target name="containerize" depends="oepe.omss.enabled.check" if="oepe.omss.enabled.run">
+		<property name="adf.build.device.ipa.outputdir" value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Oracle_ADFmc_Container_Application/device" />
+		<mkdir dir="${adf.build.device.ipa.outputdir}/art" />
+		<copy todir="${adf.build.device.ipa.outputdir}/art" file="${adf.build.root.dir}/iTunesArtwork.png" failonerror="false"/>
+		<c14nbuild path="${c14n.exe}">
+			<args>
+				<arg value="-c" />
+				<arg value="inject" />
+				<arg value="-i" />
+				<arg value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app" />
+				<arg value="-o" />
+				<arg value="${adf.build.device.ipa.outputdir}/${adfmf.application.app.deploy.name}.ipa"/>
+				<arg value="-cert" />
+				<arg value="${adf.deploy.code.sign.identity}" />
+				<arg value="-p" />
+				<arg value="${adf.deploy.mobileprovision.path}" />
+				<arg value="-x" />
+				<arg value="iTunesArtwork=${adf.build.device.ipa.outputdir}/art/iTunesArtwork.png" />
+				<arg value="-x" />
+				<arg value="MAF=1" />
+				<arg value="-x" />
+				<arg value="SECURE_STORAGE=1" />
+				<arg value="-v" />
+			</args>
+		</c14nbuild>
+	</target>
+	<target name="oepe.omss.enabled.check">
+		<condition property="oepe.omss.enabled.run">
+			<equals arg1="${oepe.omss.enabled}" arg2="true"/>
+		</condition>
+	</target>
+	<target name="oepe.omss.notenabled.check">
+		<condition property="oepe.omss.notenabled.run">
+			<not>
+				<equals arg1="${oepe.omss.enabled}" arg2="true"/>
+			</not>
+		</condition>
+	</target>
+	<macrodef name="osascript_e">
+		<element name="args" />
+		<sequential>
+			<exec executable="osascript">
+				<arg value="-e" />
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="adfbuild">
+		<attribute name="action" />
+		<sequential>
+			<xcodebuild path="${xcodebuild.exe}">
+				<args>
+					<arg value="@{action}" />
+					<arg value="-project" />
+					<arg value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template.xcodeproj" />
+					<arg value="-configuration" />
+                    <arg value="${oepe.adfmf.xcodebuild.configuration}" />
+					<arg value="-sdk" />
+					<arg value="${ios.sdk.name}" />
+					<arg line="${oepe.ios.xcodebuild.additional.options}" />
+					<arg value="DSTROOT=../${adf.deploy.destination.root}/" />
+					<arg value="PRODUCT_BUNDLE_IDENTIFIER=${adf.deploy.bundle.identifier}" />
+                    <arg value="IPHONEOS_DEPLOYMENT_TARGET=${oepe.ios.min.target.version}" />
+					<arg value="TARGETED_DEVICE_FAMILY=${ios.device.targetFamily}" />
+					<arg value="PRODUCT_NAME=${adfmf.application.app.deploy.name}" />
+                    <arg value="ADD_SETTINGS_BUNDLE=YES" />
+                    <arg value="CODE_SIGN_IDENTITY=${adf.deploy.code.sign.identity}" />
+<!--                    <arg value="CODE_SIGN_IDENTITY=iPhone Distribution: Oracle Corporation (Ent 2)" /> -->
+				</args>
+			</xcodebuild>
+		</sequential>
+	</macrodef>
+    <macrodef name="adf_codesign">
+        <attribute name="xcrunpath" />
+        <attribute name="outputdir" />
+        <sequential>
+            <mkdir dir="@{outputdir}" />
+            <xcrun path="@{xcrunpath}">
+                <args>
+                    <arg value="-verbose" />
+                    <arg value="-sdk" />
+                    <arg value="${ios.sdk.name}" />
+                    <arg value="PackageApplication" />
+                    <arg value="-v" />
+                    <arg value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app" />
+                    <arg value="-o" />
+                    <arg value="@{outputdir}/${adfmf.application.app.deploy.name}.ipa" />
+                    <arg value="--sign" />
+                    <arg value="${adf.deploy.code.sign.identity}" />
+                    <arg value="--embed" />
+                    <arg value="${adf.deploy.mobileprovision.path}" />
+<!--                    <arg value="/Users/cbateman/Downloads/Ent2_Profile 2014/Oracle_Internal_Ent2.mobileprovision" />-->
+                </args>
+            </xcrun>
+        </sequential>
+    </macrodef>
+	<macrodef name="xcodebuild">
+		<attribute name="path" />
+		<element name="args" />
+		<sequential>
+			<!-- set path to cmd if not already set -->
+			<property name="xcodebuild.cmd.path" value="@{path}" />
+			<fail unless="xcodebuild.cmd.path" message="Need to set xcodebuild.cmd.path explicitly or via xcodebuild arg 'xcodebuild.path'" />
+			<exec executable="${xcodebuild.cmd.path}" failonerror="true">
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+	<macrodef name="c14nbuild">
+		<attribute name="path"/>
+		<element name="args" />
+		<sequential>
+			<!-- set path to cmd if not already set -->
+			<property name="c14n.cmd.path" value="@{path}" />
+			<fail unless="c14n.cmd.path" message="Need to set c14n.cmd.path explicitly" />
+			<exec executable="${c14n.cmd.path}" failonerror="true">
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+    <macrodef name="xcrun">
+        <attribute name="path"  />
+    	<attribute name="failonerror" default="true" />
+        <element name="args" />
+        <sequential>
+            <!-- set path to cmd if not already set -->
+            <property name="xcrun.cmd.path" value="@{path}" />
+            <fail unless="xcrun.cmd.path" message="Need to set xcrun.cmd.path explicitly or via path arg 'xcrun.cmd.path'" />
+            <exec executable="${xcrun.cmd.path}" failonerror="@{failonerror}">
+                <args />
+            </exec>
+       </sequential>
+    </macrodef>
+	<macrodef name="PlistBuddy">
+		<attribute name="command" />
+		<attribute name="filename" />
+		<attribute name="fail" default="true" />
+        <attribute name="outputproperty" default="" />
+		<sequential>
+			<property name="PlistBuddy.cmd.path" location="${PlistBuddy.path}" />
+			<fail unless="PlistBuddy.cmd.path" message="Need to set PlistBuddy.cmd.path explicitly or via PlistBuddy arg 'PlistBuddy'"/>
+            <exec executable="${PlistBuddy.cmd.path}" failonerror="@{fail}" outputproperty="@{outputproperty}">
+                <arg value="-x"/>
+				<arg value="-c"/>
+				<arg value="@{command}" />
+				<arg value="@{filename}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+    <macrodef name="PlistBuddy_NoXml">
+        <attribute name="command" />
+        <attribute name="filename" />
+        <attribute name="outputproperty" default="" />
+        <sequential>
+            <property name="PlistBuddy.cmd.path" location="${PlistBuddy.path}" />
+            <fail unless="PlistBuddy.cmd.path" message="Need to set PlistBuddy.cmd.path explicitly or via PlistBuddy arg 'PlistBuddy'"/>
+            <exec executable="${PlistBuddy.cmd.path}" failonerror="true" outputproperty="@{outputproperty}">
+                <arg value="-c"/>
+                <arg value="@{command}" />
+                <arg value="@{filename}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+    <macrodef name="create_archive">
+    	<sequential>
+			<xcodebuild path="${xcodebuild.exe}">
+				<args>
+					<arg value="archive" />
+					<arg value="-project" />
+					<arg value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template.xcodeproj" />
+					<arg value="-scheme" />
+					<arg value="Oracle_ADFmc_Container_Template" />
+					<arg value="-sdk" />
+					<arg value="iphoneos" />
+					<arg value="-archivePath" />
+                    <arg value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template.xcarchive" />
+                    <arg line="${oepe.ios.xcodebuild.additional.options}" />
+                    <arg value="PRODUCT_BUNDLE_IDENTIFIER=${adf.deploy.bundle.identifier}" />
+                    <arg value="IPHONEOS_DEPLOYMENT_TARGET=${oepe.ios.min.target.version}" />
+					<arg value="PRODUCT_NAME=${adfmf.application.app.deploy.name}" />
+                    <arg value="ADD_SETTINGS_BUNDLE=YES" />
+                    <arg value="CODE_SIGN_IDENTITY=${adf.deploy.code.sign.identity}" />
+				</args>
+			</xcodebuild>
+		</sequential>
+    </macrodef>
+	<macrodef name="create_ipa">
+    	<sequential>
+    		<delete file="${adf.build.device.ipa.outputdir}/${adfmf.application.app.deploy.name}.ipa"/>
+			<xcodebuild path="${xcodebuild.exe}">
+				<args>
+					<arg value="-exportArchive" />
+					<arg value="-exportPath" />
+					<arg value="${adf.build.device.ipa.outputdir}/${adfmf.application.app.deploy.name}.ipa" />
+					<arg value="-exportFormat" />
+					<arg value="IPA" />
+					<arg value="-archivePath" />
+					<arg value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template.xcarchive" />
+					<arg value="-sdk" />
+					<arg value="${ios.sdk.name}" />
+					<arg value="-exportProvisioningProfile" />
+					<arg value="${adf.deploy.code.sign.profile.name}" />
+					<arg line="${oepe.ios.xcodebuild.additional.options}" />
+					<arg value="DSTROOT=../${adf.deploy.destination.root}/" />
+					<arg value="PRODUCT_BUNDLE_IDENTIFIER=${adf.deploy.bundle.identifier}" />
+                    <arg value="IPHONEOS_DEPLOYMENT_TARGET=${oepe.ios.min.target.version}" />
+					<arg value="TARGETED_DEVICE_FAMILY=${ios.device.targetFamily}" />
+					<arg value="PRODUCT_NAME=${adfmf.application.app.deploy.name}" />
+                    <arg value="ADD_SETTINGS_BUNDLE=YES" />
+				</args>
+			</xcodebuild>
+		</sequential>
+    </macrodef>
+	<macrodef name="create_app">
+    	<sequential>
+    		<delete dir="${adf.build.root.dir}/../${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app"/>
+			<xcodebuild path="${xcodebuild.exe}">
+				<args>
+					<arg value="-exportArchive" />
+					<arg value="-exportPath" />
+					<arg value="${adf.build.root.dir}/../${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app" />
+					<arg value="-exportFormat" />
+					<arg value="APP" />
+					<arg value="-archivePath" />
+					<arg value="${adf.build.root.dir}/Oracle_ADFmc_Container_Template.xcarchive" />
+					<arg value="-exportProvisioningProfile" />
+					<arg value="${adf.deploy.code.sign.profile.name}" />
+					<arg line="${oepe.ios.xcodebuild.additional.options}" />
+					<arg value="DSTROOT=../${adf.deploy.destination.root}/" />
+					<arg value="PRODUCT_BUNDLE_IDENTIFIER=${adf.deploy.bundle.identifier}" />
+                    <arg value="IPHONEOS_DEPLOYMENT_TARGET=${oepe.ios.min.target.version}" />
+					<arg value="TARGETED_DEVICE_FAMILY=${ios.device.targetFamily}" />
+					<arg value="PRODUCT_NAME=${adfmf.application.app.deploy.name}" />
+                    <arg value="ADD_SETTINGS_BUNDLE=YES" />
+				</args>
+			</xcodebuild>
+		</sequential>
+    </macrodef>
+	<macrodef name="deploy-plugins">
+		<sequential>
+            <delete file="${adf.build.root.dir}/config.json"></delete>
+            <echo file="${adf.build.root.dir}/config.json" append="false">
+				{
+					"source": "${oepe.src.root.dir}",
+				    "output": "${adf.build.root.dir}",
+					"sourceDotAdfDirectory": "${adf.build.root.dir}/.adf",
+				    "sourceCoreCordovaPlugins": "${adf.rt.maf.core.plugins}",
+				    "plugmanExecutable": "${adf.build.tools.plugman}",
+				    "nodeExecutable": "${adf.build.tools.node}",
+				    "disableAppTransportSecurity": "${oepe.ios.disable.ats}"
+				}
+			</echo>
+			<exec executable="${adf.rt.maf.helper.ios}" failonerror="true">
+				<arg value="deploy"/>
+				<arg value="-config" />
+                <arg value="${adf.build.root.dir}/config.json"/>
+				<!--arg value="-dryRun"/-->
+			</exec>
+		</sequential>
+	</macrodef>
+    <macrodef name="simctl_start" >
+        <sequential>
+        	<echo>${oepe.ios.sim.id}</echo>
+        	<xcrun path="${xcrun.exe}" failonerror="false">
+                <args>
+                    <arg value="instruments" />
+                	<arg value="-w" />
+                    <arg value="${oepe.ios.sim.id}" />
+                </args>
+            </xcrun>
+        </sequential>
+    </macrodef>
+    <macrodef name="simctl_install">
+        <sequential>
+            <xcrun path="${xcrun.exe}">
+                <args>
+                    <arg value="simctl" />
+                    <arg value="install" />
+                    <arg value="${oepe.ios.sim.id}" />
+                    <arg value="${adf.build.base.dir}/${adf.deploy.destination.root}/Applications/${adfmf.application.app.deploy.name}.app" />
+                </args>
+            </xcrun>
+        </sequential>
+    </macrodef>
+    
+    <macrodef name="simctl_launch">
+        <sequential>
+            <xcrun path="${xcrun.exe}">
+                <args>
+                    <arg value="simctl" />
+                    <arg value="launch" />
+                    <arg value="${oepe.ios.sim.id}" />
+                    <arg value="${adf.deploy.bundle.identifier}" />
+                    <arg line="-consoleRedirect=${adf.build.base.dir}/${adfmf.application.app.deploy.name}.log" />
+                </args>
+            </xcrun>
+        </sequential>
+    </macrodef>
+</project>

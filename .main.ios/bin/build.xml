@@ -1,0 +1,33 @@
+<project name="adfmf">
+ 
+	 <import file="build-set-globals.xml" as="globals"/>
+	 <import file="build-stage.xml" as="stage"/>
+     <import file="${oepe.user.config.override.profile.dir.build.stage.override}" as="stage" optional="true" />
+	 <import file="build-fars.xml" as="fars"/>
+	 <import file="build-application.xml" as="application"/> 
+	 <import file="build-ios.xml"  as="ios"/>
+
+   <target name="help">
+           <!-- 80 chars wide max. for terminal screens -->
+           <!--12345678901234567890123456789012345678901234567890123456789012345678901234567890 -->
+         <echo>OEPE MAF for iOS command-line builder help</echo>
+         <echo></echo>
+         <echo>The command-line builder supports the following commands and options: </echo>
+         <echo></echo>
+         <echo>ant build -- Builds project artifacts including Java files, FARs and XLIFF</echo>
+         <echo>             conversions. </echo>
+         <echo>ant deploy -- Takes the result of the build command-line and deploys it to</echo>
+         <echo>              a simulator or iTunes (see options below).</echo>
+         <echo>ant clean -- Removes build artifacts created during previous builds.  This</echo>
+         <echo>             includes runtime staging, user artifacts and third-party fars.</echo>
+         <echo>             Only artifacts under a target's build hierarchy are removed.</echo>
+         <echo>             Artifacts copied to iTunes, packaging folders and the simulator are</echo>
+         <echo>             not affected.</echo>
+   </target>
+
+   <target name="init" depends="globals.init, stage.init, fars.init, application.init, ios.init" />
+
+   <target name="build" depends="init, stage.build, fars.build, application.build, ios.build" description="Builds artifacts in a MAF application into iOS artifacts.  See 'ant help' for info."/>
+   <target name="deploy" depends="init, ios.deploy" description="Deploys build artifacts to either an iOS simulator or iTunes for device deployment (see 'ant help')."/> 
+   <target name="clean" depends="init, stage.clean, fars.clean, application.clean, ios.clean" description="Removes build artifacts created during previous builds.  See 'ant help' for info."/>
+</project>

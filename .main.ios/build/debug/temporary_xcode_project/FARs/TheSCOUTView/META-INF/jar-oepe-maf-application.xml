@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<oma:application xmlns:oma="http://xmlns.oracle.com/oepe/maf/application/1.0">
+   <pluginReferences>
+      <core-cordova-plugin-references>
+         <plugin-reference id="CoreCamera"/>
+      </core-cordova-plugin-references>
+   </pluginReferences>
+</oma:application>

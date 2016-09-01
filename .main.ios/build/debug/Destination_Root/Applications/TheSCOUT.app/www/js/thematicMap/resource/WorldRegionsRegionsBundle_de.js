@@ -1,0 +1,1 @@
+"use strict";var l={"EMEA":["EMEA","Europa, Mittlerer Osten und Afrika"],"LAT":["LAT","Lateinamerika"],"APAC":["APAC","Asien-Pazifik"],"NA":["USA, CAN","Vereinigte Staaten und Kanada"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["worldRegions","regions",l]);

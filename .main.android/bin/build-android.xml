@@ -1,0 +1,573 @@
+<project name="build-android">
+	<import file="build-set-globals.xml" as="globals" />
+	<import file="build-settings.xml" as="settings" />
+    <import file="${oepe.user.config.override.profile.dir.build.android.override}" optional="true" as="globals"/>
+
+	<target name="init" depends="globals.init, maybeCreateKeyStore" />
+
+    <target name="validateSign">
+        <fail unless="key.store" message="PACKAGING: Missing requirement -- the key.store property must be set and point to your signing keystore." />
+        <fail unless="key.store.password" message="PACKAGING: Missing requirement -- the key.store.password property must be set to the keystore password for key.store." />
+        <fail unless="key.alias" message="PACKAGING: Missing requirement -- the key.store.alias property must be set to key alias to be used." />
+        <fail unless="key.alias.password" message="PACKAGING: Missing requirement -- the key.store.alias.password property must be set to the keystore aliase password for key.store.alias." />
+    </target>
+
+	<target name="clean" depends="globals.init, cleanCustomImages">
+		<delete dir="${adf.build.root.dir}/${out.dir}" failonerror="false"/>
+	</target>
+
+    <target name="cleanCustomImages">
+         <delete failonerror="false">
+            <fileset refid="adf.staging.res.customImages.fileset"/>
+         </delete>
+    </target>
+
+    <target name="build" depends="init, build-if-debug-mode, build-if-release-mode"/>
+
+    <target name="build-if-release-mode" if="oepe.adfmf.build.mode.is.release">
+        <antcall target="build-release" inheritall="true" inheritrefs="true"/>
+    </target>
+
+    <target name="setup-build-release" depends="-set-release-mode, -release-obfuscation-check" />
+
+    <target name="build-release" depends="updateAndroidConfig, settings.generateSettings, transformPlugins, processCordovaPlugins, setup-build-release, processCustomImages, updateAndroidManifest, copyKeyStore, -dex, copyProperties, -package-resources, zipAssets" unless="oepe.build.mode.set">
+        <property name="oepe.build.mode.set" value="true"/>
+    </target>
+    
+    <target name="updateAndroidManifest"> 
+        <script language="javascript"  src="${oepe.bin.js.dir}/manifest-update.js"  />
+    </target>
+
+    <target name="build-if-debug-mode" if="oepe.adfmf.build.mode.is.debug">
+        <antcall target="build-debug" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="setup-build-debug" depends="-set-debug-files, -set-debug-mode, -debug-obfuscation-check">
+        <echo message="Signing using key.store ${key.store} with alias ${key.alias}" />
+    </target>
+
+    <target name="build-debug" depends="updateAndroidConfig, settings.generateSettings, transformPlugins, processCordovaPlugins, setup-build-debug, processCustomImages, updateAndroidManifest, -dex, copyProperties, -package-resources, zipAssets, copyKeyStore" unless="oepe.build.mode.set">
+         <property name="oepe.build.mode.set" value="true"/>
+    </target>
+
+	<target name="copyKeyStore">
+    	<zip duplicate="add" destfile="${adf.build.root.dir}/jvmlibs.zip" update="true">
+    		<fileset dir="${adf.staging.jvm.lib}" includes="security/cacerts"></fileset>
+    	</zip>
+	</target>
+	
+    <target name="processCustomImages" depends="copyCustomImagesNew, maybeDecorateCustomImages" />
+
+    <target name="copyProperties">
+        <!-- possible that these don't exists, so failonerror=false -->
+        <copy todir="${adf.build.root.dir}/lib" overwrite="true" failonerror="false">
+            <fileset dir="${oepe.src.root.dir}/META-INF">
+                <include name="*.properties" />
+            </fileset>
+        </copy>
+        <!-- BUG 18692647 copy the app controller folder name to application.controller property in maf.properties
+             in staging -->
+        <propertyfile
+            file="${adf.staging.jvm.lib}/maf.properties"
+            comment="maf properties">
+            <entry key="application.controller" value="${oepe.adfmf.assembly.appControllerFolder}"/>
+        </propertyfile>
+    </target>
+    
+    <target name="copyCustomImagesNew">
+		
+		<property name="oepe.adfmf.assembly.project" location="../.." />
+		<property file="${oepe.adfmf.assembly.project}/res/android/android-resources.properties" />
+		
+		<script language="javascript">
+			<![CDATA[
+			eval(''+new String(org.apache.tools.ant.util.FileUtils.readFully(new java.io.FileReader(self.project.getProperty("oepe.bin.js.dir")+"/loader.js"))));
+			load("common.js");
+			
+			var dir = self.project.getProperty('adf.rt.zip.root');
+			var imageMap = new java.util.Properties();
+			var is = null;
+			try {
+				is = new java.io.FileInputStream(dir + '/metadata/android-image-map.properties');
+				imageMap.load(is);
+			} catch (e) {
+				antHelper.echo(e);
+			} finally {
+				if (is != null) {
+					try{is.close();} catch(e) {}
+				}
+			}
+			
+			for(key in imageMap) {
+				var values = imageMap.getProperty(key).split(',');
+				if (!self.project.getProperty(key)) {
+					antHelper.echo('Property '+key+' is not defined in res/android/android-resources.properties');
+					antHelper.echo('Please add this property to res/android/android-resources.properties and map its value to an appropriate image filename.');
+					
+					var fail = self.project.createTask('fail');
+					fail.setMessage('Error in copyCustomImages');
+					fail.execute();
+				}
+				
+				antHelper.echo('copying "' + self.project.getProperty(key) + '" to ' + values[1] + '/' + values[0]);
+				
+				var sourceIconName = new java.lang.String(self.project.getProperty(key));
+				var targetIconName = new java.lang.String(values[0]);
+				var targetDirectory = new java.lang.String(values[1]);
+			
+				var flipName;
+				if (targetIconName.endsWith(".9.png")){
+					flipName = targetIconName.substring(0, targetIconName.length() - 6);
+				}else if (targetIconName.endsWith(".png")){
+					flipName = targetIconName.substring(0, targetIconName.length() - 4);
+				}else{
+					flipName = targetIconName; // assuming using only png images
+				}
+				
+				if (!flipName){
+					throw "Target file must have .png extension: "+targetIconName;
+				}
+				var root = self.project.getProperty("adf.build.root.dir");
+				if(sourceIconName.endsWith(".9.png")){
+					targetIconName = new java.lang.String(flipName + ".9.png");
+					var fileToDelete = new java.io.File(root+"/"+targetDirectory, flipName + ".png");
+					if (fileToDelete.exists()) {
+						antHelper.echo('removing file: '+fileToDelete.getName());
+						fileToDelete.delete();
+					}
+				}else{
+					if(sourceIconName.endsWith(".png")){
+						targetIconName = new java.lang.String(flipName + ".png");
+						var fileToDelete = new java.io.File(root+"/"+targetDirectory, flipName + ".9.png");
+						if (fileToDelete.exists()) {
+							antHelper.echo('removing file: '+fileToDelete.getName());
+							fileToDelete.delete();
+						}
+					}else{
+						throw "Source file must have .png extention: "+sourceIconName;
+					}
+				}
+			
+				var copyIconTask = self.project.createTask("copyIcon");
+				copyIconTask.setDynamicAttribute("iconfromname", sourceIconName);
+				copyIconTask.setDynamicAttribute("icontoname", targetIconName);
+				copyIconTask.setDynamicAttribute("destdir", targetDirectory);
+				copyIconTask.execute();
+			}
+			]]>
+		</script>
+	</target>
+	
+	<macrodef name="copyIcon">
+		<attribute name="iconfromname"/>
+		<attribute name="icontoname"/>
+		<attribute name="destdir" />
+		<sequential>
+			<echo>copying "@{iconfromname}" to @{destdir}/@{icontoname}</echo>
+			<copy todir="${adf.build.root.dir}" overwrite="true"  failonerror="false">
+	            <fileset file="${oepe.adfmf.assembly.project}/res/android/@{iconfromname}"></fileset>
+	            <mapper type="glob" from="*" to="@{destdir}/@{icontoname}"></mapper>
+	        </copy>
+		</sequential>
+	</macrodef>
+	
+    <target name="copyCustomImages">
+        <!-- if not already calculated, set the assembly project -->
+        <property name="oepe.adfmf.assembly.project" location=".." />
+        <property file="${oepe.adfmf.assembly.project}/res/android/android-resources.properties" />
+        
+        <!-- copy icons -->
+         <copy todir="${adf.build.root.dir}"  failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.ldpi.icon}"></fileset>
+            <mapper type="glob" from="*" to="res/drawable-ldpi/adfmf_icon.png"></mapper>
+         </copy>
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.mdpi.icon}"></fileset>
+            <mapper type="glob" from="*" to="res/drawable-mdpi/adfmf_icon.png"></mapper>
+         </copy>
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.hdpi.icon}"></fileset>
+            <mapper type="glob" from="*"  to="res/drawable-hdpi/adfmf_icon.png"></mapper>
+         </copy>
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.xhdpi.icon}"></fileset>
+            <mapper type="glob" from="*"  to="res/drawable-xhdpi/adfmf_icon.png"></mapper>
+         </copy>
+
+        <!-- copy splash screens -->
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.ldpi.portrait.splash}"></fileset>
+            <mapper type="glob" from="*" to="res/drawable-port-ldpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.mdpi.portrait.splash}"></fileset>
+            <mapper type="glob" from="*" to="res/drawable-port-mdpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.hdpi.portrait.splash}"></fileset>
+            <mapper type="glob" from="*" to="res/drawable-port-hdpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.xhdpi.portrait.splash}"></fileset>
+            <mapper type="glob" from="*" to="res/drawable-port-xhdpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.ldpi.landscape.splash}"></fileset>
+            <mapper type="glob" from="*"  to="res/drawable-land-ldpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.mdpi.landscape.splash}"></fileset>
+            <mapper type="glob" from="*"  to="res/drawable-land-mdpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.hdpi.landscape.splash}"></fileset>
+            <mapper type="glob" from="*"  to="res/drawable-land-hdpi/adfmf_loading.png"></mapper>
+         </copy>
+
+         <copy todir="${adf.build.root.dir}" failonerror="false">
+            <fileset file="${oepe.adfmf.assembly.project}/res/android/${oepe.adfmf.res.source.android.xhdpi.landscape.splash}"></fileset>
+            <mapper type="glob" from="*"  to="res/drawable-land-xhdpi/adfmf_loading.png"></mapper>
+         </copy>
+    </target>
+
+    <target name="maybeDecorateCustomImages" if="${oepe.userdebug.decorateCustomImages}">
+        <script language="javascript" src="${oepe.bin.js.dir}/images-android.js"></script>
+    </target>
+
+   <target name="transformPlugins">
+        <script language="javascript" src="${oepe.bin.js.dir}/transform-to-plugins-xml.js">
+            <classpath>
+                <path refid="lib.path"/>
+                <pathelement location="${adf.rt.maf.helper.jar}"/>
+            </classpath>
+        </script>
+    </target>
+
+    <target name="processCordovaPlugins" unless="oepe.build.ctrl.disable.processCordovaPlugins">
+        <deploy-plugins/>
+    </target>
+    
+    <target name="processCordovaPlugins-old" unless="oepe.build.ctrl.disable.processCordovaPlugins">
+        <property name="adf.build.cordova.plugins.dir" location="${adf.build.base.dir}/../plugins"/>
+        <delete dir="${adf.build.cordova.plugins.dir}" includeemptydirs="true"/>
+        <path id="plugins_classpath">
+            <pathelement location="libs/deploy-utils.jar"/>
+        </path>
+        <script language="javascript" manager="javax" src="${oepe.bin.js.dir}/cordova-plugins-android.js" classpathref="plugins_classpath"></script>
+        <fail if="processCordovaPlugins.fail.message" message="${processCordovaPlugins.fail.message}" />
+    </target>
+
+    <target name="updateAndroidConfig" unless="oepe.build.ctrl.disable.updateAndroidConfig">
+        <script language="javascript" src="${oepe.bin.js.dir}/android-config-update.js" />
+    </target>
+
+    <target name="zipAssets">
+        <delete file="${adf.build.root.dir}/assets.zip" failonerror="false" />
+        <zip zip64Mode="never" update="true" destfile="${adf.build.root.dir}/assets.zip" basedir="${adf.build.root.dir}" includes="Configuration/**,.adf/**"/>
+        <zip zip64Mode="never" update="true" destfile="${adf.build.root.dir}/assets.zip" basedir="${adf.build.root.dir}/assets" includes="**" />
+    </target>
+
+    <target name="package" depends="package-if-release-mode, package-if-debug-mode" />
+
+    <target name="package-if-release-mode" if="oepe.adfmf.build.mode.is.release">
+        <antcall target="package-release" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="package-release" depends="init, setup-build-release, -build-setup">
+        <!-- only package apk if *not* a library project -->
+        <do-only-if-not-library elseText="Library project: do not package apk..." >
+            <if condition="${build.is.instrumented}">
+                <then>
+                    <package-helper>
+                        <extra-jars>
+                            <!-- Injected from external file -->
+                            <jarfile path="${emma.dir}/emma_device.jar" />
+                        </extra-jars>
+                    </package-helper>
+                </then>
+                <else>
+                    <package-helper />
+                </else>
+            </if>
+        </do-only-if-not-library>
+        <zip zip64Mode="never" update="true" destfile="${out.packaged.file}" basedir="${adf.build.root.dir}" includes="Configuration/**,.adf/**,lib/**,jvmlibs.zip,assets.zip,handlers.json,maf-skins-info.json" keepcompression="true"/>
+        <antcall target="globals.-oepe-post-android-package" inheritall="true"  inheritrefs="true" />
+    </target>
+
+    <target name="package-if-debug-mode" if="oepe.adfmf.build.mode.is.debug">
+        <antcall target="package-debug" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="package-debug" depends="init, setup-build-debug, -build-setup">
+        <!-- only package apk if *not* a library project -->
+        <do-only-if-not-library elseText="Library project: do not package apk..." >
+            <if condition="${build.is.instrumented}">
+                <then>
+                    <package-helper>
+                        <extra-jars>
+                            <!-- Injected from external file -->
+                            <jarfile path="${emma.dir}/emma_device.jar" />
+                        </extra-jars>
+                    </package-helper>
+                </then>
+                <else>
+                    <package-helper />
+                </else>
+            </if>
+            <if>
+				<condition>
+        			<available file="${adf.build.root.dir}/java_res" type="dir" />
+				</condition>
+        		<then>
+        			<zip update="true" destfile="${out.packaged.file}" basedir="${adf.build.root.dir}/java_res" includes="*" keepcompression="true"/>
+        		</then>
+        	</if>
+        </do-only-if-not-library>
+        <zip zip64Mode="never" update="true" destfile="${out.packaged.file}" basedir="${adf.build.root.dir}" includes="Configuration/**,.adf/**,lib/**,jvmlibs.zip,assets.zip,handlers.json,maf-skins-info.json" keepcompression="true"/>
+        <antcall target="globals.-oepe-post-android-package" inheritall="true"  inheritrefs="true" />
+    </target>
+
+    <target name="sign" depends="sign-if-release-mode, sign-if-debug-mode, sign-trace"/>
+
+    <target name="sign-if-release-mode" if="oepe.adfmf.build.mode.is.release">
+        <antcall target="sign-release" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="sign-release" depends="init, setup-build-release, -release-prompt-for-password, -build-setup, -release-sign, globals.-oepe-post-android-sign"/>
+
+    <target name="sign-if-debug-mode" if="oepe.adfmf.build.mode.is.debug">
+        <echo message="Signing debug apk using keystore ${key.store} with key alias ${key.store.alias}" />
+        <antcall target="sign-debug" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="sign-debug" depends="init, setup-build-debug, -build-setup, -release-sign, globals.-oepe-post-android-sign" />
+
+    <target name="sign-trace" if="oepe.build.info.trace.enabled">
+        <jarsigner-verify file="${out.absolute.dir}/oepe-android-build-${oepe.adfmf.build.mode}.apk" />
+    </target>
+	
+	<target name="dist" if="android.deploy.distribution.package.outputdir">
+		<echo>Source file: ${out.absolute.dir}/${ant.project.name}-${oepe.adfmf.build.mode}.apk</echo>
+		<echo>Desination file: ${android.deploy.distribution.package.outputdir}/${adf.deploy.assembly.project.name}.apk</echo>
+		
+		<property name="out.final.file" location="${out.absolute.dir}/${ant.project.name}-${oepe.adfmf.build.mode}.apk"/>
+
+		<fail message="Final APK build file not found: ${out.final.file}">
+		    <condition><not>
+		        <available file="${out.final.file}" />
+		    </not></condition>
+		</fail>
+        <copy todir="${android.deploy.distribution.package.outputdir}" overwrite="true" failonerror="true">
+            <fileset file="${out.final.file}"></fileset>
+        	<mapper type="glob" from="*" to="${adf.deploy.assembly.project.name}.apk"></mapper>
+        </copy>
+    </target>
+	
+	<target name="check-device" description="Check whether device is running">
+		<echo message="Checking whether android device is running"/>
+		<exec executable="${adb}">
+			<arg line="devices" />
+		</exec>
+		<exec executable="${adb}" failonerror="true" outputproperty="device.running.output">
+			<arg line="${adb.device.arg}" />
+			<arg value="get-state"/>
+		</exec>
+		<echo message="adb device status ${device.running.output}"/>
+		<fail message="Cannot connect to the android device ${maf.deploy.device.id}">
+		    <condition>
+		    	<not>
+		    	<equals arg1="${device.running.output}" arg2="device"/>
+		    	</not>
+		   </condition>
+		</fail>
+	</target>
+    <target name="install" depends="check-device, uninstall, install-if-release-mode, install-if-debug-mode, launch-app"/>
+    
+    <target name="install-if-release-mode" if="oepe.adfmf.build.mode.is.release">
+        <echo message="install release mode to ${maf.deploy.device.id}" />
+        <antcall target="installr" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="install-if-debug-mode" if="oepe.adfmf.build.mode.is.debug">
+    	<execute-port-forwarding/>
+        <echo message="install debug mode to ${maf.deploy.device.id}" />
+        <antcall target="installd" inheritall="true" inheritrefs="true" />
+    </target>
+
+    <target name="launch-app" unless="oepe.build.ctrl.disable.launch">
+        <echo message="Launching app on ${maf.deploy.device.id} ..." />
+        <exec executable="${adb}">
+        	<arg line="${adb.device.arg}" />
+            <arg line="shell am start -n ${var.app.package}/oracle.adfmf.Container" />
+        </exec>
+    </target>
+
+   <target name="maybeCreateKeyStore" if="oepe.adfmf.build.debug.autogen.android.keystore" depends="-ensureKeystoreProperties">
+        <fail if="oepe.adfmf.build.mode.is.release" message="Can only auto-gen key store in debug mode"/>
+        <fail unless="key.store" message="key.store already set, cannot auto-generate it" />
+        <!-- the security info for the debug keystore are published by Google and well-known, so there
+             is no issue putting them here in clear text -->
+        <oepe_genkey keystorepath="${key.store}" alias="${key.alias}" storepass="${key.store.password}" keypass="${key.alias.password}" dname="CN=Android Debug,O=Android,C=US"/>
+    </target>
+    
+    <target name="-ensureKeystoreProperties">
+        <!-- called from maybeCreateKeyStore to ensure that the keystore properties are set
+             even if the auto-gen debug.keystore file already exists -->
+        <property name="key.store" location="${oepe.build.info.auto.keystore}" />
+        <property name="key.store.password" value="android" />
+        <property name="key.alias" value="androiddebugkey" />
+        <property name="key.alias.password" value="android"/>
+    </target>
+    
+	<target name="install-avd" depends="init">
+		<android>
+			<args>
+				<arg value="create"/>
+				<arg value="avd" />
+				<arg value="-n" />
+				<arg value="AdfMobileAvd" />
+				<arg value="-t" />
+				<arg value="android-17" />
+				<arg value="--filter"/>
+				<arg value="${target}" />
+			</args>
+		</android>
+	</target>
+	<target name="install-sdk" depends="init">
+		<android>
+			<args>
+				<arg value="update"/>
+				<arg value="sdk" />
+				<arg value="-u" />
+				<arg value="-a" />
+				<arg value="--filter"/>
+				<arg value="${target}" />
+			</args>
+		</android>
+	</target>
+	<target name="install-platform" depends="install-sdk">
+		
+	</target>
+	
+	<macrodef name="android">
+		<element name="args"/>
+		<sequential>
+			<exec  executable="${android.tools.dir}/android${exe}">
+				<args />
+			</exec>
+		</sequential>
+	</macrodef>
+	
+    <macrodef name="oepe_genkey">
+        <attribute name="keystorePath"/>
+        <attribute name="alias"/>
+        <attribute name="storepass"/>
+        <attribute name="keypass" />
+        <attribute name="dname" />
+        <sequential>
+            <exec executable="keytool">
+                <arg value="-genkey" />
+                <arg value="-v" />
+                <arg value="-keystore" />
+                <arg value="@{keystorepath}" />
+                <arg value="-alias" />
+                <arg value="@{alias}" />
+                <arg value="-storepass" />
+                <arg value="@{storepass}"/>
+                <arg value="-keypass"/>
+                <arg value="@{keypass}" />
+                <arg value="-keyalg" />
+                <arg value="RSA" />
+                <arg value="-validity" />
+                <arg value="14000" />
+                <arg value="-dname" />
+                <arg value="@{dname}" />
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="jarsigner-verify">
+        <attribute name="file" />
+        <sequential>
+            <exec executable="jarsigner">
+                <arg value="-verify" />
+                <arg value="-verbose" />
+                <arg value="-certs" />
+                <arg value="@{file}" />
+            </exec>
+        </sequential>
+    </macrodef>
+    
+	<macrodef name="execute-port-forwarding">
+		<sequential>
+			<property file="${adf.staging.jvm.lib}/maf.properties"/>
+			<if>
+				<condition>
+					<and>
+						<istrue value="${java.debug.enabled}" />
+						<isset property="java.debug.port"/>
+					</and>
+				</condition>
+				<then>
+					<echo level="info">Running ADB port forwarding to ${java.debug.port} ...</echo>
+					<exec executable="${adb}" failonerror="true">
+						<arg line="${adb.device.arg}" />
+						<arg value="forward" />
+						<arg value="tcp:${java.debug.port}" />
+						<arg value="tcp:${java.debug.port}" />
+					</exec>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+	
+	   
+   <macrodef name="deploy-plugins">
+        <sequential>
+            <delete file="${adf.build.root.dir}/config.json"></delete>
+            <javasafe-pathconvert  pathtoconvert="${adf.build.root.dir}" target-attr-name="javasafe_adf.build.root.dir"/>
+            <javasafe-pathconvert  pathtoconvert="${adf.build.root.dir}/.adf" target-attr-name="javasafe_oepe.src.dot.adf.dir"/>
+            <javasafe-pathconvert  pathtoconvert="${adf.rt.maf.core.plugins}" target-attr-name="javasafe_adf.rt.maf.core.plugins"/>
+            <javasafe-pathconvert  pathtoconvert="${adf.build.tools.plugman}" target-attr-name="javasafe_adf.build.tools.plugman"/>
+            <javasafe-pathconvert  pathtoconvert="${adf.build.tools.node}" target-attr-name="javasafe_adf.build.tools.node"/>
+
+            <echo file="${adf.build.root.dir}/config.json" append="false" >
+                {
+                    "source": "${javasafe_adf.build.root.dir}",
+                    "output": "${javasafe_adf.build.root.dir}",
+                    "sourceDotAdfDirectory": "${javasafe_oepe.src.dot.adf.dir}",
+                    "sourceCoreCordovaPlugins": "${javasafe_adf.rt.maf.core.plugins}",
+                    "plugmanExecutable": "${javasafe_adf.build.tools.plugman}",
+                    "nodeExecutable": "${javasafe_adf.build.tools.node}"
+                }
+            </echo>
+            <java jar="${adf.rt.maf.helper.jar}"
+                fork="true"
+                failonerror="true"
+                maxmemory="256m">
+                <arg value="deploy"/>
+                <arg value="-config"/>
+                <arg value="${adf.build.root.dir}/config.json"/>
+            </java>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="javasafe-pathconvert">
+            <!-- On Windows, ant properties will get echoed with a single backslash char but
+                 the resulting file (config.json) must be able to read from Java and so
+                 the paths must first be converted into java-safe strings -->
+        <attribute name="pathtoconvert" />
+        <attribute name="target-attr-name" />
+        <sequential>
+            <pathconvert property="@{target-attr-name}" targetos="unix">
+                <path path="@{pathtoconvert}"/>
+            </pathconvert>
+        </sequential>
+    </macrodef>
+</project>

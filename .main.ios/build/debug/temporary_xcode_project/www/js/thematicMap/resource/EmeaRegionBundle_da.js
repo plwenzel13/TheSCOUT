@@ -1,0 +1,1 @@
+"use strict";var l={"EMEA":["EMEA","Europa, Mellem\u00F8sten og Afrika"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["emea","region",l]);

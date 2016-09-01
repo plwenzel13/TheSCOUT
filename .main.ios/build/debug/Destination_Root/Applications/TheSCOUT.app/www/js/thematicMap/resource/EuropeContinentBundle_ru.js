@@ -1,0 +1,1 @@
+"use strict";var l={"EU":["\u0415\u0412","\u0415\u0432\u0440\u043E\u043F\u0430"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["europe","continent",l]);

@@ -1,0 +1,193 @@
+buildtemplate = {
+  "unzips": {
+    "expandZip": [
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/assets",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/java_res/assets/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/java_res/assets/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/javascript/ADFmf_AmxJavascript_$${oepe.adfmf.build.mode}.zip",
+        "zipDest": "$${build.root.dir}/assets/www/js",
+        "patternSets": [
+          {
+            "includes": [
+              "www/js/**"
+            ]
+          }
+        ],
+        "globFrom": "www/js/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/javascript/Android/ADFmf_AmxJavascript_$${oepe.adfmf.build.mode}_Android.zip",
+        "zipDest": "$${build.root.dir}/assets/www/js",
+        "patternSets": [
+          {
+            "includes": [
+              "www/js/**"
+            ]
+          }
+        ],
+        "globFrom": "www/js/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/assets/jvm/lib",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Common/build/jar/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Common/build/jar/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/res",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/res/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/res/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/res",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/template/res/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/template/res/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/template/AndroidManifest.template.xml"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/template/AndroidManifest.template.xml",
+        "globTo": "AndroidManifest.xml"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/lib/x86",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/java_res/libs/x86/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/java_res/libs/x86/*",
+        "globTo": "*"
+      },
+      { 
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/lib/armeabi",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/java_res/libs/armeabi/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/java_res/libs/armeabi/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/java_res/jvmlibs.zip"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/java_res/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/java_res/assets/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/java_res/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/java_res/handlers.json",
+              "framework/Android/build/java_res/maf-skins-info.json"
+            ]
+          }
+        ],
+         "globFrom": "framework/Android/build/java_res/*",
+        "globTo": "*"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/Android/Oracle_ADFmf_Framework.zip",
+        "zipDest": "$${build.root.dir}/precompilejars",
+        "patternSets": [
+          {
+            "includes": [
+              "framework/Android/build/jar/**"
+            ]
+          }
+        ],
+        "globFrom": "framework/Android/build/jar/*",
+        "globTo": "*"
+      }
+    ]
+  },
+  "copies": {
+    "copy": [
+      {
+        "toDir": "$${build.root.dir}/.adf/META-INF",
+        "overwrite": false,
+        "force": false,
+        "fileList": [
+          {
+            "dir": "$${template.root.dir}/configService",
+            "includes": [
+              "**"
+            ]
+          }
+        ]
+      }
+     ]
+   }
+};

@@ -1,0 +1,115 @@
+<project name="configure-common">
+    <!-- Override oepe.bin.dir to override any path that is relative to the build scripts but you don't 
+         want to rely on the current basedir, for example if you are antcalling from an external script -->
+    <property name="oepe.bin.dir" location="${basedir}" />
+
+    <property name="oepe.user.config.override.profile" value="headless" />
+    <property name="oepe.user.config.override.profile.dir" value="${oepe.bin.dir}/../profile/${oepe.user.config.override.profile}" />
+    <property name="oepe.user.config.override.profile.dir.fars.override" value="${oepe.user.config.override.profile.dir}/configure-fars-override.xml" />
+    <property name="oepe.user.config.override.profile.dir.build.ios.override" value="${oepe.user.config.override.profile.dir}/build-ios-override.xml" />
+    <property name="oepe.user.config.override.profile.dir.build.stage.override" value="${oepe.user.config.override.profile.dir}/build-stage-override.xml" />
+
+    <!-- move to build-set-globals -->
+    <path id="lib.path">
+        <fileset dir="${oepe.bin.dir}/libs" includes="*.jar"/>
+    </path>
+ 
+    <taskdef resource="oracle/tools/maf/templating/antlib.xml" classpathref="lib.path"/> 
+
+	<target name="init">
+        <property file="${oepe.user.config.override.profile.dir}/build.properties"  />
+
+        <property name="oepe.adfmf.fars.copytasks.script" value="buildCompileFars.js" />
+
+        <!-- default the build mode to debug if not already set -->
+        <property name="oepe.adfmf.build.mode" value="debug" />
+        <!-- default deploy target to ios simulator if not already set -->
+        <property name="adf.deploy.target.name" value="iphonesimulator" />
+
+        <property name="adf.staging.root" value="temporary_xcode_project" description="The name of root folder where staging/building occurs"/>
+
+        <property name="adf.build.base.dir" location="${oepe.bin.dir}/../build/${oepe.adfmf.build.mode}" />
+        <property name="adf.build.root.dir" location="${adf.build.base.dir}/${adf.staging.root}" />
+
+        <property name="adf.staging.lib.dir" location="${adf.build.root.dir}/lib" />
+        <property name="adf.staging.java_res.www.js.dir" location="${adf.build.root.dir}/www/js" />
+        <property name="adf.staging.configuration.dir" location="${adf.build.root.dir}/Configuration" />
+        <property name="adf.staging.dotadf.dir" location="${adf.build.root.dir}/.adf/META-INF" />
+        <property name="adf.staging.jvm.lib" location="${adf.build.root.dir}/lib" />
+        <property name="adf.staging.res.dir" location="${adf.build.root.dir}"/>
+        <property name="adf.staging.settings.dir" location="${adf.build.root.dir}/Settings.bundle"/>
+		<property name="adf.staging.fars.dir" location="${adf.build.root.dir}/FARs"/>
+		<property name="adf.staging.strings.dir" location="${adf.build.root.dir}/Strings"/>
+
+        <property name="oepe.adfmf.staging.relpath.fars" value="FARs" />
+
+        <property name="oepe.adfmf.dotadf.applicationxml.root.path" value="adf" />
+        <property name="oepe.adfmf.dotadf.applicationxml.rel.path" value="META-INF/maf-application.xml" />
+        <property name="oepe.adfmf.dotadf.configxml.rel.path" value="META-INF/maf-config.xml" />
+        <property name="oepe.adfmf.dotadf.applicationxml.path" location="${adf.build.root.dir}/.${oepe.adfmf.dotadf.applicationxml.root.path}/${oepe.adfmf.dotadf.applicationxml.rel.path}"/>
+
+        <property name="oepe.src.root.dir" location="${oepe.bin.dir}/../.." />
+
+        <property name="oepe.bin.js.dir" location="${oepe.bin.dir}/js" />
+
+        <!-- Common Java build parameters -->
+
+        <!-- This flag controls whether the build should compile java files before generating FARS.
+             Front-ends like OEPE should force this to "false" by default since they want to use JDT
+             to compile.  We default the value to true because command-line front-ends will assume
+             the build is taking care of compilation by default -->
+        <property name="oepe.adfmf.compile.far.java" value="true" />
+
+        <!-- Read and update the build info artifacts.  These are build artifacts
+             that are used exclusive by the build to manage state between build executions -->
+        <property file="${oepe.bin.dir}/../build/oepe-build-info.properties"/>
+
+        <condition property="oepe.build.info.last.deploy.mode.changed" value="true">
+            <not>
+              <equals arg1="${oepe.build.info.last.deploy.mode}" arg2="${oepe.adfmf.build.mode}" />
+            </not>
+        </condition>
+
+        <condition property="oepe.build.info.last.deploy.was.different.target" value="true">
+            <not>
+                <equals arg1="${oepe.build.info.last.deploy.path}" arg2="${adf.build.base.dir}" />
+            </not>
+        </condition>
+        
+        <condition property="oepe.build.info.last.deploy.was.different" value="true">
+            <or>
+                <istrue value="${oepe.build.info.last.deploy.mode.changed}" />
+                <istrue value="${oepe.build.info.last.deploy.was.different.target}" />
+            </or>
+        </condition>
+
+        <!-- ensure the build directory is present; it is created as derived so won't be SCM -->
+        <mkdir dir="${oepe.bin.dir}/../build" />
+
+        <propertyfile file="${oepe.bin.dir}/../build/oepe-build-info.properties">
+            <entry key="oepe.build.info.last.deploy.mode" value="${oepe.adfmf.build.mode}"/>
+            <entry key="oepe.build.info.last.deploy.path" value="${adf.build.base.dir}" />
+        </propertyfile>
+
+        <echo message="Last build was different target: ${oepe.build.info.last.deploy.was.different}" />
+
+        <condition property="oepe.adfmf.xcodebuild.configuration" value="Debug">
+            <equals arg1="${oepe.adfmf.build.mode}" arg2="debug"/>
+        </condition>
+        <condition property="oepe.adfmf.xcodebuild.configuration" value="Release">
+            <equals arg1="${oepe.adfmf.build.mode}" arg2="release"/>
+        </condition>
+        <condition property="oepe.omss.xcodebuild.configuration" value="Debug-OMSS">
+			<and>
+				<equals arg1="${oepe.omss.enabled}" arg2="true"/>
+				<equals arg1="${oepe.adfmf.build.mode}" arg2="debug"/>
+			</and>
+		</condition>
+		<condition property="oepe.omss.xcodebuild.configuration" value="Release-OMSS">
+			<and>
+				<equals arg1="${oepe.omss.enabled}" arg2="true"/>
+				<equals arg1="${oepe.adfmf.build.mode}" arg2="release"/>
+			</and>
+		</condition>
+	</target>
+</project>

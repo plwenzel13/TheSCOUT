@@ -1,0 +1,1 @@
+l={APAC:["APAC","\uc544\uc2dc\uc544 \ud0dc\ud3c9\uc591"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["apac","region",l]);

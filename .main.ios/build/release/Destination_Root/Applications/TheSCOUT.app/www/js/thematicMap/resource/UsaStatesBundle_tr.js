@@ -1,0 +1,1 @@
+l={NC:["NC","Kuzey Carolina"],ND:["ND","Kuzey Dakota"],WV:["WV","Bat\u0131 Virginia"],SD:["SD","G\u00fcney Dakota"],SC:["SC","G\u00fcney Carolina"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","states",l]);

@@ -1,0 +1,1 @@
+l={SUR:["SUR","Surinam"],TTO:["TTO","Trinidad \u015fi Tobago"],COL:["COL","Columbia"],FLK:["FLK","Falkland, Insulele (Malvine)"],GUF:["GUF","Guyana francez\u0103"],BRA:["BRA","Brazilia"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["southAmerica","countries",l]);

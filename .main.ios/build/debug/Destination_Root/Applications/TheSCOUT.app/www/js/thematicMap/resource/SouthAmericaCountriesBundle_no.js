@@ -1,0 +1,1 @@
+"use strict";var l={"SUR":["SUR","Surinam"],"TTO":["TTO","Trinidad og Tobago"],"FLK":["FLK","Falklands\u00F8yene"],"GUF":["GUF","Fransk Guyana"],"BRA":["BRA","Brasil"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["southAmerica","countries",l]);

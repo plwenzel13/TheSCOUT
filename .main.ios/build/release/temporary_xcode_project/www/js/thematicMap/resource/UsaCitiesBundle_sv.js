@@ -1,0 +1,1 @@
+l={FL_ST__PETERSBURG:[null,"Sankt Petersburg"],GA_ATHENS:[null,"Aten"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","cities",l]);

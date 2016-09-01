@@ -1,0 +1,44 @@
+<project name="build-application">
+	<import file="build-set-globals.xml" as="globals"/>
+		
+	<target name="init" depends="globals.init">
+		<!-- TODO: need to base on user workspace -->
+        <property name="adf.userdata.dotadf.dir" location="${oepe.src.root.dir}/adf" />
+	</target>		
+
+	<target name="clean" depends="init">
+		<delete dir="${adf.staging.configuration.dir}" failonerror="false" />
+		<delete dir="${adf.staging.dotadf.dir}" failonerror="false" />
+        <delete dir="${adf.build.root.dir}/.adf" failonerror="false" />
+	</target>
+	
+     <target name="build" depends="init, copyApplicationArtifacts, createDeviceAccess" />
+
+    <target name="copyApplicationArtifacts">
+		<property name="oepe.adfmf.assembly.dotadf.dir.path" value="${adf.userdata.dotadf.dir}" />
+		<mkdir dir="${adf.staging.configuration.dir}" />
+		<copy todir="${adf.staging.configuration.dir}">
+			<fileset
+				file="${oepe.adfmf.assembly.dotadf.dir.path}/${oepe.adfmf.dotadf.applicationxml.rel.path}" />
+			<fileset
+				file="${oepe.adfmf.assembly.dotadf.dir.path}/${oepe.adfmf.dotadf.configxml.rel.path}" />
+		</copy>
+		<property name="oepe.adfmf.assembly.dotadf.dir.path" value="${adf.userdata.dotadf.dir}" />
+		<mkdir dir="${adf.staging.dotadf.dir}" />
+		<copy todir="${adf.staging.dotadf.dir}" overwrite = "true">
+			<fileset dir="${oepe.adfmf.assembly.dotadf.dir.path}/META-INF" />
+		</copy>
+
+        <copy todir="${adf.staging.jvm.lib}/security" file="${oepe.src.root.dir}/lib/security/cacerts" failonerror="false" />
+        <copy todir="${adf.staging.jvm.lib}" file="${oepe.src.root.dir}/META-INF/maf.properties"  failonerror="false" overwrite="true"/>
+        <copy todir="${adf.staging.jvm.lib}" file="${oepe.src.root.dir}/META-INF/logging.properties"  failonerror="false" overwrite="true"/>
+	</target>
+
+   <!-- Reads the staged application descriptor, parses out the device access flags and 
+        stores them to device-info.properties.  This is as common routine on all platforms.
+        Platform-specific scripts must pick up the properties file and map the contents to
+        platform-specific device permissions per the ER 16358602 specification --> 
+    <target name="createDeviceAccess">
+        <script language="javascript" src="${oepe.bin.js.dir}/device-access.js" />
+    </target>
+</project>

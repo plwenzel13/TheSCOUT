@@ -1,0 +1,38 @@
+<project name="oepe-android-build">
+
+    <import file="build-set-globals.xml" as="globals"/>
+    <import file="build-stage.xml" as="stage" />
+    <import file="${oepe.user.config.override.profile.dir.build.stage.override}" as="stage" optional="true" />
+    <import file="build-fars.xml" as="fars" />
+    <import file="build-application.xml" as="application"/>
+    <import file="build-android.xml" as="android" />
+
+    <target name="help">
+           <!-- 80 chars wide max. for terminal screens -->
+           <!--12345678901234567890123456789012345678901234567890123456789012345678901234567890 -->
+         <echo>OEPE MAF for Android command-line builder help</echo>
+         <echo></echo>
+         <echo>The command-line builder supports the following commands and options: </echo>
+         <echo></echo>
+         <echo>ant build -- Builds project artifacts including Java files, FARs and XLIFF</echo>
+         <echo>             conversions. </echo>
+         <echo>ant deploy -- Takes the result of the build command-line and deploys it to</echo>
+         <echo>              a simulator or device (see options below).</echo>
+         <echo>ant clean -- Removes build artifacts created during previous builds.  This</echo>
+         <echo>             includes runtime staging, user artifacts and third-party fars.</echo>
+         <echo>             Only artifacts under a target's build hierarchy are removed.</echo>
+    </target>
+
+    <target name="init" depends="globals.init, stage.init, fars.init, application.init, android.init" />
+
+    <target name="validateSign" depends="init, android.validateSign" /> 
+    <target name="validateAll" depends="init, validateSign" />
+
+    <target name="clean" depends="stage.clean, fars.clean, application.clean, android.clean" />
+
+    <target name="build" depends="init, stage.build, fars.build, application.build, android.build" description="Performs all the step to build the application.  If this target succeeds, then the android build (bin) directory is in a valid state to package the application for distribution or deployment." />
+    <target name="package" depends="init, android.package" description="Collects the result of running the build target into an unsigned apk file.  This apk file will still need to be signed for distribution or deployment"/>
+    <target name="sign" depends="init, validateSign, android.sign" description="Signs the currently built apk file.  The build and package steps are not dependencies of this target, so this may fail if run against an unbuilt target"/>
+    <target name="dist" depends="package, sign, android.dist" description="Called after build, this target produces a signed apk of the application in the mode and profile requested (i.e. debug vs. release)" />
+    <target name="deploy" depends="package, sign, android.dist, android.install" description="Called after build, this target creates an apk for the application and tries to install on it on the configured simulator or device."/>
+</project>

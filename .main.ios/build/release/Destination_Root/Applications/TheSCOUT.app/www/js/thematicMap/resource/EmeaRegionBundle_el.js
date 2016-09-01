@@ -1,0 +1,1 @@
+l={EMEA:["EMEA","\u0395\u03c5\u03c1\u03ce\u03c0\u03b7, \u039c\u03ad\u03c3\u03b7 \u0391\u03bd\u03b1\u03c4\u03bf\u03bb\u03ae \u03ba\u03b1\u03b9 \u0391\u03c6\u03c1\u03b9\u03ba\u03ae"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["emea","region",l]);

@@ -1,0 +1,1 @@
+l={USA_PHILADELPHIA:[null,"Filad\u00e9lfia"],USA_NEW_YORK:[null,"Nova York"],USA_SAN_FRANCISCO:[null,"S\u00e3o Francisco"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usaAndCanada","cities",l]);

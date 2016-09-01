@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Application version="1.3" ClientType="Generic" id="DataBindings" Package="maf.thescout.thescoutview" SeparateXMLFiles="false" xmlns="http://xmlns.oracle.com/adfm/application">
+   <pageMap>
+      <page path="/Juliette.amx" usageId="maf_thescout_thescoutview_"/>
+   <page path="/CreateJuliette.amx" usageId="maf_thescout_thescoutview_1"/>
+   <page path="/Camera.amx" usageId="maf_thescout_thescoutview_2"/>
+   </pageMap>
+   <pageDefinitionUsages>
+      <page id="maf_thescout_thescoutview_" path="mobile.pageDefs.JuliettePageDef"/>
+   <page id="maf_thescout_thescoutview_1" path="mobile.pageDefs.CreateJuliettePageDef"/>
+   <page id="maf_thescout_thescoutview_2" path="mobile.pageDefs.CameraPageDef"/>
+   </pageDefinitionUsages>
+   <dataControlUsages>
+      <dc id="DeviceFeatures" path="maf.thescout.thescoutapplication.DeviceFeatures"/>
+      <dc id="Juliettes" path="maf.thescout.thescoutview.Juliettes"/>
+   </dataControlUsages>
+</Application>

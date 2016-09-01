@@ -1,0 +1,9 @@
+<project name="build-ios-override">
+    <target name="-oepe-post-ios-dist-simulator">
+        <echo message="Override -oepe-post-ios-dist-simulator" />
+    </target>
+
+    <target name="-oepe-post-ios-dist-itunes">
+        <echo message="Override -oepe-post-ios-dist-itunes" />
+    </target>
+</project>

@@ -1,0 +1,122 @@
+2016-08-31 20:32:05.018 TheSCOUT[5827:159900] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-31 20:32:05.018 TheSCOUT[5827:159900] Multi-tasking -> Device: YES, App: YES
+2016-08-31 20:32:05.238 TheSCOUT[5827:159900] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-31 20:32:05.238 TheSCOUT[5827:159900] Multi-tasking -> Device: YES, App: YES
+2016-08-31 20:32:05.253 TheSCOUT[5827:159900] Using UIWebView
+2016-08-31 20:32:05.359 TheSCOUT[5827:159900] Gave lock 2
+2016-08-31 20:32:05.459 TheSCOUT[5827:159900] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-31 20:32:05.460 TheSCOUT[5827:159900] Multi-tasking -> Device: YES, App: YES
+2016-08-31 20:32:05.464 TheSCOUT[5827:159900] Using UIWebView
+2016-08-31 20:32:05.593 TheSCOUT[5827:159900] Resetting plugins due to page load.
+2016-08-31 20:32:05.656 TheSCOUT[5827:159900] Resetting plugins due to page load.
+2016-08-31 20:32:05.689 TheSCOUT[5827:159900] Finished load of: file:///Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/www/bootstrap.html?dir=ltr&lang=en&locale=en-us&applicationName=The%20SCOUT&applicationId=maf.thescout.TheSCOUT&featureName=__adfmf_default_springboard&featureId=__adfmf_default_springboard&profile_json_folder_override=%2FUsers%2Fpatriciawenzel%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FA683BCC5-9F67-448F-B051-C31ED9D9230F%2Fdata%2FContainers%2FData%2FApplication%2F610BB084-AA91-4854-B168-2BC8A80C8656%2FDocuments%2FbaseProfiles&appStartTime=1472693522634.638184&webviewStartTime=1472693525654.030029&springboardFeature=true&file=adfmf_default_springboard/springboard.amx&featureRoot=../FARs/adfmf.springboard&topContentOffset=20
+2016-08-31 20:32:05.726 TheSCOUT[5827:159900] Finished load of: file:///Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/www/bootstrap.html?dir=ltr&lang=en&locale=en-us&applicationName=The%20SCOUT&applicationId=maf.thescout.TheSCOUT&featureName=Troop&featureId=Troop&profile_json_folder_override=%2FUsers%2Fpatriciawenzel%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FA683BCC5-9F67-448F-B051-C31ED9D9230F%2Fdata%2FContainers%2FData%2FApplication%2F610BB084-AA91-4854-B168-2BC8A80C8656%2FDocuments%2FbaseProfiles&appStartTime=1472693522634.638184&webviewStartTime=1472693525576.796143&springboardFeature=false&file=troops-flow.xml%23troops-flow&featureRoot=../FARs/TheSCOUTView&topContentOffset=20
+2016-08-31 20:32:07.734 TheSCOUT[5827:159900] Apache Cordova native platform version 4.0.1 is starting.
+2016-08-31 20:32:07.734 TheSCOUT[5827:159900] Multi-tasking -> Device: YES, App: YES
+2016-08-31 20:32:07.738 TheSCOUT[5827:159900] Using UIWebView
+2016-08-31 20:32:07.852 TheSCOUT[5827:159900] Resetting plugins due to page load.
+2016-08-31 20:32:07.863 TheSCOUT[5827:159900] Finished load of: file:///Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/www/bootstrap.html?dir=ltr&lang=en&locale=en-us&applicationName=The%20SCOUT&applicationId=maf.thescout.TheSCOUT&featureName=Juliette&featureId=Juliette&profile_json_folder_override=%2FUsers%2Fpatriciawenzel%2FLibrary%2FDeveloper%2FCoreSimulator%2FDevices%2FA683BCC5-9F67-448F-B051-C31ED9D9230F%2Fdata%2FContainers%2FData%2FApplication%2F610BB084-AA91-4854-B168-2BC8A80C8656%2FDocuments%2FbaseProfiles&appStartTime=1472693522634.638184&webviewStartTime=1472693527850.492920&springboardFeature=false&file=juliette-flow.xml%23juliette-flow&featureRoot=../FARs/TheSCOUTView&topContentOffset=20
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/javax.json.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/ksoap2-j2me-core-2.1.2.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/kxml2-2.3.0.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/maf.embedded.api.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/maf.embedded.framework.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/maf.j2me.connections.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/maf.java.common.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/maf.java.shared.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/maf.juel.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/opc-sync-client-adfmf.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/sqlite.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/wsm-agent-common.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/wsm-common-platform.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/user/wsm-common.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/lib/charsets.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/lib/javax.json.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/lib/jce.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/lib/jsse.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/lib/resources.jar
+/Users/patriciawenzel/Library/Developer/CoreSimulator/Devices/A683BCC5-9F67-448F-B051-C31ED9D9230F/data/Containers/Bundle/Application/A0EBECA3-D120-4AE5-BD40-0D5025791235/TheSCOUT.app/lib/rt.jar
+java.sql.SQLException: java.lang.NoClassDefFoundError: javax/naming/RefAddr
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:963)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:896)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:885)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:860)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:877)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:873)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:422)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:410)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:328)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at maf.thescout.data.Data.loadJuliettesFromDatabase(Data.java:49)
+	at maf.thescout.data.Data.getJuliettesDatabase(Data.java:112)
+	at maf.thescout.thescoutview.Juliettes.<init>(Juliettes.java:28)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at java.lang.Class.newInstance(Unknown Source)
+	at oracle.adfmf.dc.bean.ConcreteJavaBeanDataControlAdapter.createDataProvider(Unknown Source)
+	at oracle.adfmf.dc.bean.ConcreteJavaBeanDataControlAdapter.createDataProvider(Unknown Source)
+	at oracle.adfmf.dc.bean.ConcreteJavaBeanDataControlAdapter.setDataProvider(Unknown Source)
+	at oracle.adf.model.DataControlFactoryBase.createDataControl(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxBindingContext.loadDataControlById(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxBindingContext.fetch(Unknown Source)
+	at oracle.adfmf.cache.SimpleCache.get(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxBindingContext.getDataControlById(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxControlBinding.getDataControl(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxIteratorBinding.loadBasicIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxIteratorBinding.getIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxIteratorBinding.getIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding.getIterator(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding.access$800(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding$BasicBehavior.getInputValue(Unknown Source)
+	at oracle.adfmf.bindings.dbf.AmxAttributeBinding.getInputValue(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at javax.el.BeanELResolver.getValue(Unknown Source)
+	at javax.el.CompositeELResolver.getValue(Unknown Source)
+	at oracle.adfmf.framework.model.DiagnosticCompositeELResolver.getValue(Unknown Source)
+	at de.odysseus.el.tree.impl.ast.AstProperty.eval(Unknown Source)
+	at de.odysseus.el.tree.impl.ast.AstEval.eval(Unknown Source)
+	at de.odysseus.el.tree.impl.ast.AstNode.getValue(Unknown Source)
+	at de.odysseus.el.TreeValueExpression.getValue(Unknown Source)
+	at oracle.adfmf.framework.api.Model.getValue(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.GenericInvokeRequestHandler.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.EmbeddedGenericInvokeRequestHandler.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.GenericInvokeRequestHandler.invoke(Unknown Source)
+	at oracle.adfmf.framework.contract.adf.application.GenericInvokeRequestHandler.process(Unknown Source)
+	at oracle.adfmf.framework.FeatureContext.handle(Unknown Source)
+	at oracle.adfmf.framework.AdfChannel.handle(Unknown Source)
+	at com.oracle.vm.channel.impl.VMChannelImpl.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.NoClassDefFoundError: javax/naming/RefAddr
+	at com.mysql.jdbc.ConnectionPropertiesImpl.<init>(ConnectionPropertiesImpl.java:671)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:710)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:404)
+	... 52 more
+Caused by: java.lang.ClassNotFoundException: javax.naming.RefAddr
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.net.FactoryURLClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	... 60 more
+Evil compiler!!! These are the hard-coded scouts!!!
+2016-08-31 20:33:17.803 TheSCOUT[5827:161027] Terminating since there is no system app.
+["Back Channel Hidden Feature: Received Event: deviceready"]
+["Back Channel Hidden Feature - Startup is complete."]
+[CONFIG - oracle.adfmf.framework - MafLogger - (+)getActiveLogLevel:] No *.LEVEL entry found for package 'oracle.maf.performance.monitor.observations.reported'. Defaulting to SEVERE LEVEL.
+[CONFIG - oracle.adfmf.framework - MafLogger - (+)getActiveLogLevel:] No *.LEVEL entry found for package 'oracle.maf.performance.monitor.captured'. Defaulting to SEVERE LEVEL.
+[CONFIG - oracle.adfmf.framework - MafLogger - (+)getActiveLogLevel:] No *.LEVEL entry found for package 'oracle.adfmf.amx'. Defaulting to SEVERE LEVEL.

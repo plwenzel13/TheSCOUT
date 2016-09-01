@@ -1,0 +1,1 @@
+l={EGY_CAIRO:[null,"Kairo"],ZAF_CAPE_TOWN:[null,"Kapkaupunki"],SDN_KHARTOUM_UMM_DURMAN:[null,"Khartum-Umm Durman"],DZA_ALGIERS:[null,"Alger"],SDN_KHARTOUM:[null,"Khartum"],EGY_ALEXANDRIA:[null,"Aleksandria"],ETH_ADDIS_ABABA:[null,"Addis Abeba"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["africa","cities",l]);

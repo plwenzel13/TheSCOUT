@@ -1,0 +1,2 @@
+l={VGB:["VGB","Maagdeneilanden, V.K."],HTI:["HTI","Ha\u00efti"],TCA:["TCA","Turks- en Caicoseilanden"],SPM:["SPM","Saint-Pierre en Miquelon"],DOM:["DOM","Dominicaanse Republiek"],VIR:["VIR","Maagdeneilanden, V.S."],BHS:["BHS","Bahama's"],KNA:["KNA","Saint Kitts en Nevis"],ATG:["ATG","Antigua en Barbuda"],CYM:["CYM","Caymaneilanden"],VCT:["VCT","Saint Vincent en de Grenadines"],USA:["USA","Verenigde Staten"]};
+(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["northAmerica","countries",l]);

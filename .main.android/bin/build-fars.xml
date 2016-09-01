@@ -1,0 +1,76 @@
+<project name="buildCompileFars">
+	
+	<import file="build-set-globals.xml" as="globals"/>
+	<import file="configure-fars.xml" as="configure" />
+    <import file="${oepe.user.config.override.profile.dir.fars.override}" optional="true" as="configure" />
+	
+	<target name="init" depends="globals.init, configure.configure">
+		<fail>
+			<condition>
+				<not>
+					<isreference refid="oepe.adfmf.eclipse-projects"  />
+				</not>
+			</condition>
+		</fail>
+        <property name="oepe.adfmf.fars.copytasks.script" value="buildCompileFars.js" />
+	</target>
+
+    <target name="initCopyTasks" depends="init">
+        <fail if="oepe.build.info.initFarCopyTasks.has.run"  message="Cannot run initCopyTasks if initFarCopyTasks has run"/>
+        <script language="javascript" src="${oepe.bin.js.dir}/${oepe.adfmf.fars.copytasks.script}">
+            <classpath>
+                <pathelement location="libs/maf-build-common-0.0.1-SNAPSHOT.jar" />
+                <pathelement location="libs/gson-2.2.4.jar" />
+                <pathelement location="${adf.rt.zip.root}/${adf.rt.runtime.root}/maf-helper.jar" />
+            </classpath>
+        </script>
+        <property name="oepe.build.info.initCopyTasks.has.run" value="true" />
+    </target>
+
+    <!-- this is a placeholder target. The buildCompileFars.js script
+        will add copy tasks to this target -->
+    <target name="runCopyTasks"/>
+
+    <target name="initFarCopyTasks">
+        <fail if="oepe.build.info.initCopyTasks.has.run"  message="Cannot run initFarCopyTasks if initCopyTasks has run"/>
+        <script language="javascript" src="${oepe.bin.js.dir}/far-export.js" />
+        <property name="oepe.build.info.initFarCopyTasks.has.run" value="true" />
+    </target>
+
+    <!-- this is a placeholder target.  The buildCompileFars.js script will add javac tasks to this target
+         NOTE: this is conditional on oepe.adfmf.compile.far.java which is not set when running from OEPE
+         because we let Eclipse build java.  But for external builds, this is needed. -->
+    <target name="maybeCompileJava" if="${oepe.adfmf.compile.far.java}" />
+
+    <target name="maybeCleanJava" if="${oepe.adfmf.compile.far.java}" depends="initCopyTasks">
+        
+    </target>
+
+    <target name="analyze" depends="init">
+       <script language="javascript" src="${oepe.bin.js.dir}/analyzeFars.js">
+             <classpath>
+                 <pathelement location="libs/maf-build-common-0.0.1-SNAPSHOT.jar" />
+                 <pathelement location="libs/gson-2.2.4.jar" />
+                 <pathelement location="${adf.rt.zip.root}/${adf.rt.runtime.root}/maf-helper.jar" />
+             </classpath>
+         </script>
+    </target>
+
+    <target name="clean" depends="init, maybeCleanJava">
+		<!-- TODO: use buildCompileFars to build a reference set here -->
+			<delete  failonerror="false">
+            <fileset dir="${adf.build.root.dir}/${oepe.adfmf.staging.relpath.fars}">
+				<exclude name="adfmf.springboard/**"/>
+				<exclude name="OracleStandardADFmfUiComponents/**" />
+			</fileset>
+        </delete>
+        <delete failonerror="false" dir="${adf.staging.fars.dir}"/>
+        <delete failonerror="false" dir="${adf.build.root.dir}/${oepe.adfmf.staging.relpath.fars}" includeemptydirs="true" />
+	</target>
+
+	<target name="build" depends="init, initCopyTasks, maybeCompileJava, runCopyTasks">
+		<echo message="Assembly project is: ${oepe.adfmf.assembly.project}" />
+		<echo message="appControllerFolder is: ${oepe.adfmf.assembly.appControllerFolder}" />
+		<echo message="dotAdf dir is ${oepe.adfmf.assembly.dotadf.dir.path}" />
+	</target>
+</project>

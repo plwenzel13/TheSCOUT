@@ -1,0 +1,1 @@
+"use strict";var l={"NA":["USA, CAN","\u0627\u0644\u0648\u0644\u0627\u064A\u0627\u062A \u0627\u0644\u0645\u062A\u062D\u062F\u0629 \u0648\u0643\u0646\u062F\u0627"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["usaAndCanada","region",l]);

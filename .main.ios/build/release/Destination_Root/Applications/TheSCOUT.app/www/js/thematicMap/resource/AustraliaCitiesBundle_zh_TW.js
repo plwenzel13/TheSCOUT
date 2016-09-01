@@ -1,0 +1,1 @@
+l={AUS_CANBERRA:[null,"\u574e\u57f9\u62c9"],NZL_WELLINGTON:[null,"\u5a01\u9748\u9813"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["australia","cities",l]);

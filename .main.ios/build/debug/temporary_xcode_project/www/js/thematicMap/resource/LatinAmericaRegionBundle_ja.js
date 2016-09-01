@@ -1,0 +1,1 @@
+"use strict";var l={"LAT":["LAT","\u30E9\u30C6\u30F3\u30FB\u30A2\u30E1\u30EA\u30AB"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["latinAmerica","region",l]);

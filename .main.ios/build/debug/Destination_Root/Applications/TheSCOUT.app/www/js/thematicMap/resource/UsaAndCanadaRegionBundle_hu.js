@@ -1,0 +1,1 @@
+"use strict";var l={"NA":["USA, CAN","Amerikai Egyes\u00FClt \u00C1llamok \u00E9s Kanada"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["usaAndCanada","region",l]);

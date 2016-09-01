@@ -1,0 +1,7 @@
+#:__PROLOG__:ADFMF_SyncConfig:!;ADF_DataControl:!-;ADF_BindingApp
+#:ADF_DataControl:oracle.adf.library.rc.dcxdatacontrols.DataControlURLDescriptor:0,Juliettes,maf.thescout.thescoutview.Juliettes,maf/thescout/thescoutview/DataControls.dcx,.class
+#:ADF_BindingApp:oracle.adf.library.rc.bindingapp.BindingAppURLDescriptor:0,maf/thescout/thescoutview/DataBindings.cpx
+#:__EPILOG__:
+oracle.adfmf.framework.dt.deploy.features.deployers.FarResourceServiceStrategy ADFMF_SyncConfig
+oracle.adf.library.rc.dcxdatacontrols.DataControlServiceStrategy ADF_DataControl
+oracle.adf.library.rc.bindingapp.BindingAppServiceStrategy ADF_BindingApp

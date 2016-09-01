@@ -1,0 +1,2 @@
+l={VA:["VA","Wirginia"],NM:["NM","Nowy Meksyk"],TX:["TX","Teksas"],NC:["NC","Karolina P\u00f3\u0142nocna"],ND:["ND","Dakota P\u00f3\u0142nocna"],NY:["NY","Nowy Jork"],FL:["FL","Floryda"],WV:["WV","Wirginia Zachodnia"],WA:["WA","Waszyngton"],PA:["PA","Pensylwania"],HI:["HI","Hawaje"],CA:["CA","Kalifornia"],SD:["SD","Dakota Po\u0142udniowa"],SC:["SC","Karolina Po\u0142udniowa"],DC:["DC","Waszyngton, D.C."],LA:["LA","Luizjana"],CO:["CO","Kolorado"]};
+(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","states",l]);

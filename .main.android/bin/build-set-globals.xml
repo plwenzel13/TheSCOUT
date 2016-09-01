@@ -1,0 +1,228 @@
+<project name="buildSetGlobals">
+
+    <property name="oepe.bin.dir" location="${basedir}" />
+
+    <property name="oepe.user.config.override.profile" value="headless" />
+    <property name="oepe.user.config.override.profile.dir" value="${oepe.bin.dir}/../profile/${oepe.user.config.override.profile}" />
+    <property name="oepe.user.config.override.profile.dir.fars.override" value="${oepe.user.config.override.profile.dir}/configure-fars-override.xml" />
+    <property name="oepe.user.config.override.profile.dir.build.android.override" value="${oepe.user.config.override.profile.dir}/build-android-override.xml" />
+    <property name="oepe.user.config.override.profile.dir.build.stage.override" value="${oepe.user.config.override.profile.dir}/build-stage-override.xml" />
+    <property file="${oepe.user.config.override.profile.dir}/build.properties"  />
+
+    <property name="var.app.configChanges" value="screenSize|mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation" />
+    <property name="var.app.icon" value="@drawable/adfmf_icon" />
+    <property name="var.app.name" value="@string/app_name" />
+    <property name="var.app.label" value="@string/app_name" />
+    <property name="oepe.adfmf.staging.relpath.fars" value="assets/FARs" />
+
+    <property name="oepe.maf.android.minSdkVersion" value="15" />
+    <property name="oepe.maf.android.targetSdkVersion" value="9" />
+
+    <property name="oepe.android.buildfile.location" value="tools/ant/build.xml" />
+    <property name="oepe.android.buildfile.location.dir" location="${sdk.dir}/${oepe.android.buildfile.location}" />
+
+    <!-- set up our custom tasks -->
+    <path id="lib.path">
+        <fileset dir="${oepe.bin.dir}/libs" includes="*.jar"/>
+    </path>
+ 
+    <taskdef resource="oracle/tools/maf/templating/antlib.xml" classpathref="lib.path"/> 
+ 
+	<!-- include configure-android.xml before the android sdk build file to ensure -pre-compile and other overrides get
+		 picked up-->
+	<import file="configure-android.xml" />
+    <import file="${oepe.android.buildfile.location.dir}" />
+
+    <macrodef name="gettype">
+        <attribute name="projectTypeOut" />
+        <sequential>
+            <property name="@{projectTypeOut}" value="app" />
+        </sequential>
+    </macrodef>
+
+    <taskdef name="oepe_original_gettarget" classname="com.android.ant.GetTargetTask" classpathref="android.antlibs"/>
+    <macrodef name="gettarget">
+         <attribute name="androidJarFileOut" />
+         <attribute name="androidAidlFileOut" />
+         <attribute name="bootClassPathOut" />
+         <attribute name="targetApiOut" />
+         <attribute name="minSdkVersionOut" />   
+         <sequential>
+            <property name="oepe.override.android.value.androidJarFileOut" value="@{androidJarFileOut}" />
+            <property name="oepe.override.android.value.androidAidlFileOut" value="@{androidAidlFileOut}" />
+            <property name="oepe.override.android.value.bootClassPathOut" value="@{bootClassPathOut}" />
+            <property name="oepe.override.android.value.targetApiOut" value="@{targetApiOut}" />
+            <property name="oepe.override.android.value.minSdkVersionOut" value="@{minSdkVersionOut}" />   
+            <script src="${oepe.bin.js.dir}/android-override.js" language="javascript"/>
+         </sequential>
+     </macrodef>
+
+	<!-- these properties must be set before we include configure-common.xml --> 
+    <property name="adf.staging.java_res.assets" value="${adf.build.base.dir}/assets" />
+    <property name="adf.staging.java_res.assets.dir" value="${adf.staging.java_res.assets}" />
+	<import file="configure-common.xml" as="configure-common" />
+
+	<target name="init" depends="configure-common.init">
+		
+		<!-- the name of the source folder that contains the application controller source  -->
+		<property name="oepe.adfmf.applicationsrc.folder.name" value="application-src" />
+		<!-- the name of the web content folder in a project -->
+		<property name="oepe.adfmf.publichtml.folder.name" value="ViewContent" />
+
+	    <!-- staging -->
+	
+	    <property name="adf.staging.res" value="${adf.build.root.dir}/res" />
+	    <property name="adf.staging.res.dir" location="${adf.staging.res}" />
+	    <property name="adf.staging.res.values.dir" location="${adf.staging.res.dir}/values" />
+	    <property name="adf.staging.res.xml.dir" location="${adf.staging.res.dir}/xml" />
+	    
+	    <property name="adf.staging.gcmintentservice.dir" location="${adf.build.root.dir}/src/${adf-android-src-path}" />
+	    <property name="adf.staging.gcmintentservice.java.src" location="${adf.staging.gcmintentservice.dir}/GCMIntentService.java" />
+
+        <property name="adf.staging.precompilejars.dir" location="${adf.build.root.dir}/precompilejars" />
+        <property name="adf.staging.manifest.abs.file" location="${adf.build.root.dir}/${manifest.file.name}" />
+        
+        <!-- template source  -->
+        <property name="adf.rt.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/Android/Oracle_ADFmf_Framework.zip" />
+        <property name="adf.rt.js.zip" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/javascript/ADFmf_AmxJavascript_debug.zip" />
+
+        <property name="adf.template.android.manifest.template.path" value="Android/AndroidManifest.template.xml" />
+
+        <property name="adf.template.gcmintent.template.path" value="framework/Android/template/GCMIntentService.java" />
+        <property name="adf.template.gcmintent.template.zippath" value="framework/Android/template/GCMIntentService.java" />
+        
+        <property name="adf.template.android.java_res.assets.path" value="framework/Android/build/java_res/assets" />
+        <property name="adf.template.android.java_res.assets.zippath" value="framework/Android/build/java_res/assets" />
+        
+        <!-- TODO: need to base on the build-type -->
+        <property name="adf.template.android.java_res_debug.libs.zippath" value="framework/Android/build/java_res/libs/x86" />
+        <property name="adf.template.android.java_res_debug_arm.libs.zippath" value="framework/Android/build/java_res/libs/armeabi" />
+
+        <property name="adf.template.android.res.path" value="framework/Android/build/res" />
+        <property name="adf.template.android.res.zippath" value="framework/Android/build/res" />
+
+        <property name="adf.template.android.res.template.path" value="framework/Android/template/res" />
+        <property name="adf.template.android.res.template.zippath" value="framework/Android/template/res" />
+
+        <property name="adf.template.android.jar.template.path" value="framework/Android/build/jar" />
+        
+        <property name="adf.template.android.js.zippath" value="Template/www/js" />
+
+       <property name="adf.rt.maf.helper.jar" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/maf-helper.jar"/>
+
+        <property name="adf.rt.tools.path" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/tools"/>
+        <property name="adf.rt.maf.core.plugins" value="${adf.rt.zip.root}/${adf.rt.runtime.root}/CordovaPlugins" description="The location of the Cordova core plugins" />
+        
+        <property name="adf.build.tools.dir" value="${adf.build.root.dir}/../tools" />
+        <property name="oepe.cordova.tools.root" value="${adf.build.tools.dir}" />
+
+        <condition property="adf.build.tools.node" value="${oepe.cordova.tools.root}/node-darwin-x64/bin/node">
+            <istrue value="${oepe.build.ctrl.isMac}" />
+        </condition>
+        
+        <condition property="adf.build.tools.node" value="${oepe.cordova.tools.root}/node.exe">
+            <istrue value="${oepe.build.ctrl.isWindows}" />
+        </condition>
+
+        <condition property="adf.build.tools.node" value="${oepe.cordova.tools.root}/node-linux-x86/bin/node">
+            <istrue value="${oepe.build.ctrl.isLinux}" />
+        </condition>
+
+        <property name="adf.build.tools.plugman" value="${oepe.cordova.tools.root}/plugman/node_modules/.bin/plugman"/>
+
+
+        <!-- Parameterize javascript sources because there is a debug and a release version -->
+        <!-- The debug version causes a red triangle to appear at the top left of the web view to show it is not release -->
+        <property name="adf.template.js.path" value="javascript/ADFmf_AmxJavascript_${oepe.adfmf.build.mode}.zip" />
+        <property name="adf.template.js.path.android" value="javascript/Android/ADFmf_AmxJavascript_${oepe.adfmf.build.mode}_Android.zip" />
+
+        <property name="adf.template.android.temp.strings.zippath" value="strings.xml" />
+        
+        <property name="adf.template.build.jar.zippath" value="framework/Android/build/jar" />
+
+	    <!-- Android SDK locations -->
+        <property name="adk.extras.gcm.dist.dir" location="${adf.build.base.dir}/libs" />
+
+        <!-- Custom Image Target/Staging locations -->
+        <property name="adf.staging.res.icon.name" value="adfmf_icon.png" />
+        <property name="adf.staging.res.splash.name" value="adfmf_loading.png" />
+        
+        <property name="adf.staging.res.drawable-xhdpi.path" value="drawable-xhdpi" />
+        <property name="adf.staging.res.icon.xhdpi.path" value="${adf.staging.res.drawable-xhdpi.path}/${adf.staging.res.icon.name}" />
+      
+        <property name="adf.staging.res.drawable-hdpi.path" value="drawable-hdpi" />
+        <property name="adf.staging.res.icon.hdpi.path" value="${adf.staging.res.drawable-hdpi.path}/${adf.staging.res.icon.name}" />
+
+        <property name="adf.staging.res.drawable-mdpi.path" value="drawable-mdpi" />
+        <property name="adf.staging.res.icon.mdpi.path" value="${adf.staging.res.drawable-mdpi.path}/${adf.staging.res.icon.name}" />
+
+        <property name="adf.staging.res.drawable-ldpi.path" value="drawable-ldpi" />
+        <property name="adf.staging.res.icon.ldpi.path" value="${adf.staging.res.drawable-ldpi.path}/${adf.staging.res.icon.name}" />
+
+        <property name="adf.staging.res.drawable-land-xhdpi.path" value="drawable-land-xhdpi" />
+        <property name="adf.staging.res.splash.land-xhdpi.path" value="${adf.staging.res.drawable-land-xhdpi.path}/${adf.staging.res.splash.name}" />
+    
+        <property name="adf.staging.res.drawable-land-hdpi.path" value="drawable-land-hdpi" />
+        <property name="adf.staging.res.splash.land-hdpi.path" value="${adf.staging.res.drawable-land-hdpi.path}/${adf.staging.res.splash.name}" />
+
+        <property name="adf.staging.res.drawable-land-mdpi.path" value="drawable-land-mdpi" />
+        <property name="adf.staging.res.splash.land-mdpi.path" value="${adf.staging.res.drawable-land-mdpi.path}/${adf.staging.res.splash.name}" />
+
+        <property name="adf.staging.res.drawable-land-ldpi.path" value="drawable-land-ldpi" />
+        <property name="adf.staging.res.splash.land-ldpi.path" value="${adf.staging.res.drawable-land-ldpi.path}/${adf.staging.res.splash.name}" />
+
+        <property name="adf.staging.res.drawable-port-xhdpi.path" value="drawable-port-xhdpi" />
+        <property name="adf.staging.res.splash.port-xhdpi.path" value="${adf.staging.res.drawable-port-xhdpi.path}/${adf.staging.res.splash.name}" />
+    
+        <property name="adf.staging.res.drawable-port-hdpi.path" value="drawable-port-hdpi" />
+        <property name="adf.staging.res.splash.port-hdpi.path" value="${adf.staging.res.drawable-port-hdpi.path}/${adf.staging.res.splash.name}" />
+
+        <property name="adf.staging.res.drawable-port-mdpi.path" value="drawable-port-mdpi" />
+        <property name="adf.staging.res.splash.port-mdpi.path" value="${adf.staging.res.drawable-port-mdpi.path}/${adf.staging.res.splash.name}" />
+
+        <property name="adf.staging.res.drawable-port-ldpi.path" value="drawable-port-ldpi" />
+        <property name="adf.staging.res.splash.port-ldpi.path" value="${adf.staging.res.drawable-port-ldpi.path}/${adf.staging.res.splash.name}" />
+
+        <propertyset id="adf.staging.res.customImages">
+            <propertyref name="adf.stating.res.splash." />
+            <propertyref name="adf.stating.res.icon." />
+        </propertyset>
+
+    
+        <fileset id="adf.staging.res.customImages.fileset" dir="${adf.staging.res.dir}">
+            <include name="${adf.staging.res.icon.xhdpi.path}"/>
+            <include name="${adf.staging.res.icon.hdpi.path}"/>
+            <include name="${adf.staging.res.icon.mdpi.path}"/>
+            <include name="${adf.staging.res.icon.ldpi.path}"/>
+
+            <include name="${adf.staging.res.splash.land-xhdpi.path}" />
+            <include name="${adf.staging.res.splash.land-hdpi.path}" />
+            <include name="${adf.staging.res.splash.land-mdpi.path}" />
+            <include name="${adf.staging.res.splash.land-ldpi.path}" />
+
+            <include name="${adf.staging.res.splash.port-xhdpi.path}" />
+            <include name="${adf.staging.res.splash.port-hdpi.path}" />
+            <include name="${adf.staging.res.splash.port-mdpi.path}" />
+            <include name="${adf.staging.res.splash.port-ldpi.path}" />
+        </fileset>
+
+        <!-- validation -->
+        <script language="javascript">
+            try
+            {
+                var clazz = self.getClass().getClassLoader().getResource("com/sun/tools/javac/Main.class");
+                if (clazz === null)
+                {
+                    throw "Must be JDK";
+                }
+            }
+            catch (e)
+            {
+                e.printStackTrace();
+                var fail = self.project.createTask("fail");
+                fail.setMessage("Validation failure: You must run the MAF build using a Java JDK. See documentation for instructions");
+                fail.execute();
+            }
+        </script>
+    </target>
+</project>

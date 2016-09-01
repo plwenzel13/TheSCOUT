@@ -1,0 +1,1 @@
+l={IND_HYDERABAD:[null,"Haiderabad"],HKG_HONG_KONG:[null,"Hongkong"],VNM_HO_CHI_MINH_CITY:[null,"Ho Chi Minhstad"],JPN_TOKYO:[null,"Tokio"],PHL_MANILA:[null,"Manilla"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["apac","cities",l]);

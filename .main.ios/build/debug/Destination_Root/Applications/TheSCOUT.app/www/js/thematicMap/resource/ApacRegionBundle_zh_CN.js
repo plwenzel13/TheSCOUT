@@ -1,0 +1,1 @@
+"use strict";var l={"APAC":["APAC","\u4E9A\u592A\u5730\u533A"]};(this?this:window)['DvtBaseMapManager']['_UNPROCESSED_MAPS'][2].push(["apac","region",l]);

@@ -1,0 +1,66 @@
+<project name="settings">
+
+	<import file="build-set-globals.xml" as="globals" />
+	
+    <path id="xslt_classpath">
+        <pathelement location="libs/xmlparserv2.jar"/>
+        <pathelement location="libs/orai18n-mapping.jar"/>
+        <pathelement location="libs/orai18n-collation.jar"/>
+        <pathelement location="libs/commons-logging-1.2.jar"/>
+        <pathelement location="libs/maf-build-common-0.0.1-SNAPSHOT.jar"/>
+    </path>
+
+	<target name="generateSettings">
+		<echo>Application XML: ${oepe.adfmf.dotadf.applicationxml.path}</echo>
+		<echo>Settings Dir: ${adf.staging.settings.dir}</echo>
+		<echo>Fars : ${adf.staging.fars.dir}</echo>
+		<echo>XSL : ${basedir}/xsl/preference_transform.xsl</echo>
+		
+		<script language="javascript" classpathref="xslt_classpath">
+			<![CDATA[
+				var farsDir = self.project.getProperty("adf.staging.fars.dir");
+				var appXmlPath = self.project.getProperty("oepe.adfmf.dotadf.applicationxml.path");
+				var settingsDir = self.project.getProperty("adf.staging.settings.dir");
+				var xslFile = self.project.getProperty("basedir") + "/xsl/preference_transform.xsl";
+				
+				print(xslFile);
+				print(settingsDir);
+				print(appXmlPath);
+				print(farsDir);
+			
+				Packages.oracle.tools.maf.build.settings.TransformHelper.executeIosTransformation(appXmlPath, xslFile, settingsDir, farsDir);
+			]]>
+		</script>
+	</target>
+	
+	<target name="generateStrings">
+		<echo>Application XML: ${oepe.adfmf.dotadf.applicationxml.path}</echo>
+		<echo>Settings Dir: ${adf.staging.settings.dir}</echo>
+		<echo>Fars : ${adf.staging.fars.dir}</echo>
+		<echo>XSL : ${basedir}/xsl/strings_transform.xsl</echo>
+		
+		<script language="javascript" classpathref="xslt_classpath">
+			<![CDATA[
+				var farsDir = self.project.getProperty("adf.staging.fars.dir");
+				var appXmlPath = self.project.getProperty("oepe.adfmf.dotadf.applicationxml.path");
+				var settingsDir = self.project.getProperty("adf.staging.settings.dir");
+				var xslFile = self.project.getProperty("basedir") + "/xsl/strings_transform.xsl";
+				var appSrcPath = self.project.getProperty("adf.build.root.dir") + "/.adf/META-INF";
+				var stringsDir = self.project.getProperty("adf.staging.strings.dir");
+				
+				print(xslFile);
+				print(settingsDir);
+				print(appXmlPath);
+				print(farsDir);
+				print(appSrcPath);
+				print(stringsDir);
+			
+				Packages.oracle.tools.maf.build.settings.TransformHelper.executeIosStringsTransformation(appXmlPath, xslFile, stringsDir, appSrcPath, farsDir);
+			]]>
+		</script>
+		
+		<copydir src= "${adf.staging.strings.dir}"
+           	     dest="${adf.staging.settings.dir}"
+  		/>
+	</target>
+</project>

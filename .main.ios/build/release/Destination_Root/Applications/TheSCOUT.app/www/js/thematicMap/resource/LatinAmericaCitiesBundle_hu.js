@@ -1,0 +1,1 @@
+l={GTM_GUATEMALA_CITY:[null,"Guatemala v\u00e1ros"],PAN_PANAMA_CITY:[null,"Panama v\u00e1ros"],CUB_HAVANA:[null,"Havanna"],PRY_ASUNCION:[null,"Asunci\u00f3n"],MEX_MEXICO_CITY:[null,"Mexik\u00f3v\u00e1ros"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["latinAmerica","cities",l]);

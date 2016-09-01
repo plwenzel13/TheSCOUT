@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<adfmf:features xmlns:adfmf="http://xmlns.oracle.com/adf/mf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <adfmf:feature icon="Troops.png" id="Troop" image="Troops.png" name="Troop">
+      <adfmf:content id="Troop.1">
+         <adfmf:amx file="troops-flow.xml#troops-flow"/>
+      </adfmf:content>
+   </adfmf:feature>
+   <adfmf:feature icon="Juliette.png" id="Juliette" image="Juliette.png" name="Juliette">
+      <adfmf:content id="Juliette.1">
+         <adfmf:amx file="juliette-flow.xml#juliette-flow"/>
+      </adfmf:content>
+   </adfmf:feature>
+</adfmf:features>

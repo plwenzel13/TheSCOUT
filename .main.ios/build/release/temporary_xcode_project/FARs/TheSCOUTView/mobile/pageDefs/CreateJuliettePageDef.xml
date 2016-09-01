@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<pageDefinition version="1.3" id="CreateJuliettePageDef" Package="mobile.pageDefs" xmlns="http://xmlns.oracle.com/adfm/uimodel">
+   <parameters/>
+   <executables>
+      <variableIterator id="variables">
+         
+         
+         
+         
+         
+      <variable Type="boolean" Name="addJuliette_Return" IsQueriable="false" IsUpdateable="0" DefaultValue="${bindings.addJuliette1.result}"/>
+         <variable Type="java.lang.String" Name="addJuliette_firstName" IsQueriable="false"/>
+         <variable Type="java.lang.String" Name="addJuliette_lastName" IsQueriable="false"/>
+         <variable Type="int" Name="addJuliette_grade" IsQueriable="false"/>
+         <variable Type="java.lang.String" Name="addJuliette_gsLevel" IsQueriable="false"/>
+         <variable Type="int" Name="addJuliette_troopNumber" IsQueriable="false"/>
+      
+      </variableIterator>
+   </executables>
+   <bindings>
+      
+      
+      
+      
+      
+   
+      <attributeValues IterBinding="variables" id="firstName">
+         <AttrNames>
+            <Item Value="addJuliette_firstName"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="variables" id="lastName">
+         <AttrNames>
+            <Item Value="addJuliette_lastName"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="variables" id="grade">
+         <AttrNames>
+            <Item Value="addJuliette_grade"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="variables" id="gsLevel">
+         <AttrNames>
+            <Item Value="addJuliette_gsLevel"/>
+         </AttrNames>
+      </attributeValues>
+      <attributeValues IterBinding="variables" id="troopNumber">
+         <AttrNames>
+            <Item Value="addJuliette_troopNumber"/>
+         </AttrNames>
+      </attributeValues>
+   <methodAction id="addJuliette" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addJuliette" IsViewObjectMethod="false" DataControl="Juliettes" InstanceName="data.Juliettes.dataProvider" ReturnName="data.Juliettes.methodResults.addJuliette_Juliettes_dataProvider_addJuliette_result">
+         <NamedData NDName="firstName" NDType="java.lang.String"/>
+         <NamedData NDName="lastName" NDType="java.lang.String"/>
+         <NamedData NDName="grade" NDType="int"/>
+         <NamedData NDName="gsLevel" NDType="java.lang.String"/>
+         <NamedData NDName="troopNumber" NDType="int"/>
+      </methodAction>
+   </bindings>
+</pageDefinition>

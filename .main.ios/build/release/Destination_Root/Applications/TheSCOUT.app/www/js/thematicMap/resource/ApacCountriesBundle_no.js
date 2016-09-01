@@ -1,0 +1,2 @@
+l={FSM:["FSM","Mikronesiaf\u00f8derasjonen"],NFK:["NFK","Norfolk\u00f8ya"],TLS:["TLS","\u00d8st-Timor"],PNG:["PNG","Papua Ny-Guinea"],MNP:["MNP","Nord-Marianene"],MDV:["MDV","Maldivene"],PHL:["PHL","Filippinene"],SLB:["SLB","Salomon\u00f8yene"],PRK:["PRK","Korea, Den demokratiske folkerepublikken"],NCL:["NCL","Ny-Caledonia"],VNM:["VNM","Vietnam"],CHN:["CHN","Kina"],HKG:["HKG","Hongkong"],KHM:["KHM","Kambodsja"],MHL:["MHL","Marshall\u00f8yene"],MAC:["MAC","Macao"]};
+(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["apac","countries",l]);

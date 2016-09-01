@@ -1,0 +1,66 @@
+buildtemplate = {
+  "copies": {
+    "copy": [
+      {
+        "toDir": "$${build.root.dir}/lib",
+        "overwrite": false,
+        "force": false,
+        "mapper": {
+          "from": "iOS/*",
+          "to": "*",
+          "type": "glob"
+        },
+        "fileList": [
+          {
+            "dir": "$${template.root.dir}",
+            "includes": [
+              "iOS/*"
+            ]
+          }
+        ]
+      },
+      {
+        "toDir": "$${build.root.dir}/lib",
+        "overwrite": false,
+        "force": false,
+        "fileList": [
+          {
+            "dir": "$${template.root.dir}/properties",
+            "includes": [
+              "**"
+            ]
+          }
+        ]
+      },
+      {
+        "toDir": "$${build.root.dir}/.adf/META-INF",
+        "overwrite": false,
+        "force": false,
+        "fileList": [
+          {
+            "dir": "$${template.root.dir}/configService",
+            "includes": [
+              "**"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "unzips": {
+    "expandZip": [
+      {
+        "zipSrc": "$${template.root.dir}/Oracle_ADFmc_Container_Template.zip",
+        "zipDest": "$${build.root.dir}"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/javascript/ADFmf_AmxJavascript_${oepe.adfmf.build.mode}.zip",
+        "zipDest": "$${build.root.dir}"
+      },
+      {
+        "zipSrc": "$${template.root.dir}/javascript/iOS/ADFmf_AmxJavascript_${oepe.adfmf.build.mode}_iOS.zip",
+        "zipDest": "$${build.root.dir}"
+      }
+    ]
+  }
+};

@@ -1,0 +1,1 @@
+l={GA:["GA","Georgien"],ID:["Id","Idaho"],CA:["CA","Kalifornien"]};(this?this:window).DvtBaseMapManager._UNPROCESSED_MAPS[2].push(["usa","states",l]);

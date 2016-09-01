@@ -1,0 +1,465 @@
+{
+  "http://xmlns.oracle.com/adf/mf/amx":
+  {
+    "accessoryLayout":
+    {
+      "js":
+      [
+        "js/AdfAnimationUtils.js",
+        "js/amx-accessoryLayout.js"
+      ]
+    },
+    "actionListener": {},
+    "attributeListIterator":
+    {
+      "js": "js/fragment/amx-attributeListIterator.js"
+    },
+    "carousel":
+    {
+      "js": "js/amx-carousel.js"
+    },
+    "cellFormat":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "commandButton":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "commandLink":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "convertDateTime":
+    {
+      "js": "js/amx-converter.js"
+    },
+    "convertNumber":
+    {
+      "js": "js/amx-converter.js"
+    },
+    "deck":
+    {
+      "js":
+      [
+        "js/AdfAnimationUtils.js",
+        "js/amx-deck.js"
+      ]
+    },
+    "facet": {},
+    "facetRef":
+    {
+      "js": "js/fragment/amx-facetRef.js"
+    },
+   "flexLayout":
+    {
+      "js": "js/amx-flexLayout.js"
+    },
+    "fragment":
+    {
+      "js":
+      [
+        "js/fragment/amx-fragmentUtils.js",
+        "js/fragment/amx-fragment.js"
+      ]
+    },
+    "fragmentDef":
+    {
+      "js": "js/fragment/amx-fragmentDef.js"
+    },
+    "goLink":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "image":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "inputDate":
+    {
+      "js": "js/amx-inputDate.js"
+    },
+    "inputNumberSlider":
+    {
+      "js": "js/amx-inputNumberSlider.js"
+    },
+    "inputText":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "iterator":
+    {
+      "js": "js/amx-listView.js"
+    },
+    "listItem":
+    {
+      "js": "js/amx-listView.js"
+    },
+    "listView":
+    {
+      "js": "js/amx-listView.js"
+    },
+    "filmStrip":
+    {
+      "js": "js/amx-filmStrip.js"
+    },
+    "loadBundle": {},
+    "masonryLayout":
+    {
+      "js":
+      [
+        "js/MasonryLayoutCommon.js",
+        "js/amx-masonryLayout.js"
+      ]
+    },
+    "outputText":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "outputHtml":
+    {
+      "js": "js/sanitize/html-css-sanitizer-bundle.js"
+    },
+    "panelFormLayout":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "panelGroupLayout":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "panelLabelAndMessage":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "panelPage":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "panelSplitter":
+    {
+      "js":
+      [
+        "js/AdfAnimationUtils.js",
+        "js/amx-panelSplitter.js"
+      ]
+    },
+    "panelStretchLayout":
+    {
+      "js":
+      [
+        "js/amx-panels.js"
+      ]
+    },
+    "popup":
+    {
+      "js": "js/amx-popup.js"
+    },
+    "refreshContainer":
+    {
+      "js": "js/amx-refreshContainer.js"
+    },
+    "rowLayout":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "selectBooleanCheckbox":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectBooleanSwitch":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectItem":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectItems":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectManyCheckbox":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectManyChoice":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectOneButton":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectOneChoice":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "selectOneRadio":
+    {
+      "js": "js/amx-selects.js"
+    },
+    "setPropertyListener": {},
+    "spacer":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "tableLayout":
+    {
+      "js": "js/amx-panels.js"
+    },
+    "verbatim":
+    {
+      "js": "js/amx-commonTags.js"
+    },
+    "view":
+    {
+      "js":
+      [
+        "js/AdfAnimationUtils.js",
+        "js/amx-commonTags.js"
+      ]
+    }
+  },
+  "http://xmlns.oracle.com/adf/mf/amx/dvt":
+  {
+    "*":
+    {
+      "js": "js/dvtm/dvtm-renderer.js"
+    },
+    "areaChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "barChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "bubbleChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "comboChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "funnelChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },        
+    "horizontalBarChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "legend":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtLegend.js"
+      ]
+    },
+    "lineChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "nBox":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtSubcomponent.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtNBox.js"
+      ]
+    },
+    "pieChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "scatterChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "sparkChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "ledGauge":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtGauge.js"
+      ]
+    },
+    "statusMeterGauge":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtGauge.js"
+      ]
+    },
+    "dialGauge":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtGauge.js"
+      ]
+    },
+    "ratingGauge":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtGauge.js"
+      ]
+    },
+    "stockChart":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtAxis.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtChart.js"
+      ]
+    },
+    "thematicMap":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+	"js/toolkit/DvtSubcomponent.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtPanZoomCanvas.js",
+        "js/toolkit/DvtThematicMap.js"
+      ]
+    },
+    "timeline":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtOverview.js",
+        "js/toolkit/DvtTimelineOverview.js",
+        "js/toolkit/DvtTimeline.js"
+      ]
+    },
+    "sunburst":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+	"js/toolkit/DvtSubcomponent.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtBaseTreeView.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtSunburst.js"
+      ]
+    },
+    "treemap":
+    {
+      "js":
+      [
+        "js/toolkit/DvtToolkit.js",
+	"js/toolkit/DvtSubcomponent.js",
+        "js/toolkit/DvtAfComponent.js",
+        "js/toolkit/DvtBaseTreeView.js",
+        "js/toolkit/DvtLegend.js",
+        "js/toolkit/DvtSunburst.js",
+        "js/toolkit/DvtTreemap.js"
+      ]
+    }
+  }
+}

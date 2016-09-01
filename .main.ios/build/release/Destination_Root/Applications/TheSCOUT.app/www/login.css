@@ -1,0 +1,852 @@
+html {
+  -webkit-text-size-adjust: none;
+}
+body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  color: #000000;
+  background-color: #6B76A4;
+}
+
+/* Entire page background photo */
+#bodyPage:before {
+  content: ' ';
+  position: fixed;
+  top: -170px;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-image: url(login-photo.jpg);
+  background-size: cover;
+  background-position: left 40%;
+}
+html[dir=ltr] #bodyPage:before {
+  left: -40px;
+  right: 0;
+}
+html[dir=rtl] #bodyPage:before {
+  right: -40px;
+  left: 0;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+body,
+label,
+.field-value,
+.commandButton {
+  font-size: 17px;
+  font-family: system, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}
+.login-uwp body,
+.login-uwp .field-value,
+.login-uwp .commandButton {
+  font-size: 15px;
+  font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;
+}
+
+/* Android appearance for the text fields */
+.login-android .field-value {
+  -webkit-appearance: none;
+  background-color: #FFFFFF;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+  border-width: 0;
+  outline: none;
+}
+.login-android .login-panelFormLayout:after {
+  content: ' ';
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.30);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.login-android .login-panelFormLayout.login-selected:after {
+  height: 2px;
+  background-color: #0572CE;
+}
+
+/* Android appearance for the checkboxes */
+.login-android input[type=checkbox] {
+  -webkit-appearance: none;
+  border-width: 0;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  background-repeat: no-repeat;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJlbmFibGVkQ2hlY2tCb3hVbnNlbGVjdGVkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIgoJIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDhweCIgaGVpZ2h0PSI0OHB4IiB2aWV3Qm94PSItOS41IDEwLjUgNDggNDgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgLTkuNSAxMC41IDQ4IDQ4IgoJIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cGF0aCBmaWxsPSIjNkQ2RDZEIiBkPSJNMjMuNSw0Mi40OWMwLDAuNTUtMC40NSwxLTEsMWgtMTZjLTAuNTUsMC0xLTAuNDUtMS0xdi0xNmMwLTAuNTUsMC40NS0xLDEtMWgxNmMwLjU1LDAsMSwwLjQ1LDEsMVY0Mi40OXoKCSBNMjEuNzUsMjcuNjRoLTE0djE0aDE0VjI3LjY0eiIvPgo8L3N2Zz4K);
+}
+.login-android input[type=checkbox].login-selected,
+.login-android input[type=checkbox]:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB3aWR0aD0iNDhweCIgaGVpZ2h0PSI0OHB4IiB2aWV3Qm94PSIwIDAgNDggNDgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQ4IDQ4IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGcgaWQ9ImVsbGlwc2UiPgoJPGNpcmNsZSBvcGFjaXR5PSIwLjYiIGZpbGw9IiNDNEM0QzUiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgICAgIiBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiLz4KPC9nPgo8ZyBpZD0iY2hlY2tfYm94Ij4KCTxwYXRoIGZpbGw9IiM2RDZENkQiIGQ9Ik0zMywzMS45OWMwLDAuNTUtMC40NSwxLTEsMUgxNmMtMC41NSwwLTEtMC40NS0xLTF2LTE2YzAtMC41NSwwLjQ1LTEsMS0xaDE2YzAuNTUsMCwxLDAuNDUsMSwxVjMxLjk5egoJCSBNMzEuMjUsMTcuMTRoLTE0djE0aDE0VjE3LjE0eiIvPgo8L2c+Cjwvc3ZnPgo=);
+}
+.login-android input[type=checkbox]:checked {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJwcmVzc2VkQ2hlY2tlZENoZWNrYm94IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIgoJIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDhweCIgaGVpZ2h0PSI0OHB4IiB2aWV3Qm94PSItOS41IDEwLjUgNDggNDgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgLTkuNSAxMC41IDQ4IDQ4IgoJIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cGF0aCBpZD0iY2hlY2tfYm94IiBmaWxsPSIjMDU3MkNFIiBkPSJNMjMuNTEsNDIuNTNjMCwwLjU1LTAuNDUsMS0xLDFoLTE2Yy0wLjU1LDAtMS0wLjQ1LTEtMXYtMTZjMC0wLjU1LDAuNDUtMSwxLTFoMTYKCWMwLjU1LDAsMSwwLjQ1LDEsMVY0Mi41M3oiLz4KPHBvbHlnb24gaWQ9ImNoZWNrX21hcmsiIGZpbGw9IiNGRkZGRkYiIHBvaW50cz0iMTIuNTMsMzkuMDYgOC41NCwzNS4wOCAxMC4wNCwzMy41OCAxMi41NCwzNi4wOSAxOS4wMywyOS42IDIwLjUxLDMxLjA4ICIvPgo8L3N2Zz4K);
+}
+.login-android input[type=checkbox].login-selected:checked,
+.login-android input[type=checkbox]:checked:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJwcmVzc2VkQ2hlY2tlZENoZWNrYm94IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIgoJIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDhweCIgaGVpZ2h0PSI0OHB4IiB2aWV3Qm94PSIwIDAgNDggNDgiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQ4IDQ4IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGNpcmNsZSBpZD0iZWxsaXBzZSIgb3BhY2l0eT0iMC42IiBmaWxsPSIjOUREOUZGIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3ICAgICIgY3g9IjI0IiBjeT0iMjQiIHI9IjI0Ii8+CjxwYXRoIGlkPSJjaGVja19ib3giIGZpbGw9IiMwNTcyQ0UiIGQ9Ik0zMy4wMSwzMi4wM2MwLDAuNTUtMC40NSwxLTEsMWgtMTZjLTAuNTUsMC0xLTAuNDUtMS0xdi0xNmMwLTAuNTUsMC40NS0xLDEtMWgxNgoJYzAuNTUsMCwxLDAuNDUsMSwxVjMyLjAzeiIvPgo8cG9seWdvbiBpZD0iY2hlY2tfbWFyayIgZmlsbD0iI0ZGRkZGRiIgcG9pbnRzPSIyMi4wMywyOC41NiAxOC4wNCwyNC41OCAxOS41NCwyMy4wOCAyMi4wNCwyNS41OSAyOC41MywxOS4xIDMwLjAxLDIwLjU4ICIvPgo8L3N2Zz4K);
+}
+.login-android .checkbox {
+  margin-top: 0;
+  margin-bottom: -22px;
+}
+html[dir=ltr].login-android input.checkbox-text {
+  margin-left: -15px;
+  margin-right: 0;
+}
+html[dir=rtl].login-android input.checkbox-text {
+  margin-right: -15px;
+  margin-left: 0;
+}
+.login-android .commandButton {
+  -webkit-transition: background-color .2s, color .2s;
+  transition: background-color .2s, color .2s;
+  border-radius: 2px;
+  white-space: nowrap;
+  text-align: center;
+  outline: none;
+  margin: 5px 0;
+  margin-top: 10px;
+  box-sizing: border-box;
+  min-height: 36px;
+  background-color: #0572CE;
+  color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.40);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 8px;
+}
+.login-android .commandButton.login-selected {
+  background-color: #044F91;
+}
+.login-android .possible-column {
+  margin-bottom: 14px;
+}
+.login-android .possible-column:first-child {
+  margin-bottom: 0;
+}
+
+/* iOS appearance for the checkboxes */
+.login-ios input[type=checkbox] {
+  -webkit-appearance: none;
+  border-width: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  width: 22px;
+  height: 22px;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iI0ZGRkZGRiIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8L3N2Zz4NCg==);
+}
+.login-ios input[type=checkbox].login-selected,
+.login-ios input[type=checkbox]:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iI0RBRUFGOCIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8L3N2Zz4NCg==);
+}
+.login-ios input[type=checkbox]:checked {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iIzA1NzJDRSIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRzPSI1LDEwIDEwLDE1IDE3LDcgIi8+DQo8L3N2Zz4NCg==);
+}
+.login-ios input[type=checkbox].login-selected:checked,
+.login-ios input[type=checkbox]:checked:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iI0RBRUFGOCIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRzPSI1LDEwIDEwLDE1IDE3LDcgIi8+DQo8L3N2Zz4NCg==);
+}
+
+.login-uwp .login-panelPage-header {
+  font-weight: lighter;
+}
+.login-uwp form {
+  padding-top: 38px;
+  padding-bottom: 38px;
+}
+.login-uwp .error-panelFormLayout {
+  margin-bottom: 3px;
+}
+.login-uwp .form-row {
+  padding-bottom: 4px;
+}
+/* UWP appearance for the text fields */
+.login-uwp .field-value {
+  -webkit-appearance: none;
+  background-color: #FFFFFF;
+  height: 31px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 0;
+  border: 2px solid rgba(0,0,0,.27);
+}
+.login-uwp .field-value.login-selected {
+  border-color: #0572CE;
+  outline: none;
+}
+.login-uwp .login-panelFormLayout {
+  margin-bottom: 10px;
+}
+
+/* uwp appearance for the checkboxes */
+.login-uwp input[type=checkbox] {
+  -webkit-appearance: none;
+  border-width: 0;
+  background-color: transparent;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJlbmFibGVkX3g1Rl91bmNoZWNrZWQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgkgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyMXB4IiBoZWlnaHQ9IjIxcHgiIHZpZXdCb3g9IjAgMCAyMSAyMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjEgMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cmVjdCB4PSIwIiBvcGFjaXR5PSIwLjgiIGZpbGw9IiNGRkZGRkYiIHdpZHRoPSIyMSIgaGVpZ2h0PSIyMSIvPgo8cGF0aCBmaWxsPSIjMDU3MkNFIiBkPSJNMjEsMjFIMFYwaDIxVjIxeiBNMTksMkgydjE3aDE3VjJ6Ii8+Cjwvc3ZnPgo=);
+}
+.login-uwp input[type=checkbox].login-selected,
+.login-uwp input[type=checkbox]:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJwcmVzc2VkX3g1Rl91bmNoZWNrZWQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCgkgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyMXB4IiBoZWlnaHQ9IjIxcHgiIHZpZXdCb3g9IjAgMCAyMSAyMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjEgMjEiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cmVjdCB4PSIwIiBvcGFjaXR5PSIwLjE1IiBmaWxsPSIjMDU3MkNFIiB3aWR0aD0iMjEiIGhlaWdodD0iMjEiLz4KPHBhdGggZmlsbD0iIzA1NzJDRSIgZD0iTTIxLDIxSDBWMGgyMVYyMXogTTE5LDJIMnYxN2gxN1YyeiIvPgo8L3N2Zz4K);
+}
+.login-uwp input[type=checkbox]:checked {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJkaXNhYmxlZF94NUZfY2hlY2tlZCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIKCSB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjIxcHgiIGhlaWdodD0iMjFweCIgdmlld0JveD0iMCAwIDIxIDIxIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyMSAyMSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGZpbGw9IiMwNTcyQ0UiIGQ9Ik0yMSwyMUgwVjBoMjFWMjF6IE0zLDExLjQ1bDYuMDQsNi41NGgwLjk4bDktMTEuNjVsLTIuNzgtMi4zNmwtNi42Myw5LjAySDkuMTVMNS40Myw4LjkyTDMsMTEuNDV6Ii8+Cjwvc3ZnPgo=);
+}
+.login-uwp input[type=checkbox].login-selected:checked,
+.login-uwp input[type=checkbox]:checked:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJwcmVzc2VkX3g1Rl9jaGVja2VkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIgoJIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjFweCIgaGVpZ2h0PSIyMXB4IiB2aWV3Qm94PSIwIDAgMjEgMjEiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIxIDIxIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHJlY3QgeD0iMCIgb3BhY2l0eT0iMC4xNSIgZmlsbD0iIzA1NzJDRSIgd2lkdGg9IjIxIiBoZWlnaHQ9IjIxIi8+CjxwYXRoIGZpbGw9IiMwNTcyQ0UiIGQ9Ik0yMSwyMUgwVjBoMjFWMjF6IE0xOSwySDJ2MTdoMTdWMnoiLz4KPHBvbHlnb24gaWQ9ImNoZWNrX21hcmsiIGZpbGw9IiMwNTcyQ0UiIHBvaW50cz0iMywxMS40NSA5LjA0LDE3Ljk5IDEwLjAyLDE3Ljk5IDE5LjAyLDYuMzQgMTYuMjQsMy45OCA5LjYxLDEzLjAxIDkuMTUsMTMuMDEgCgk1LjQzLDguOTIgIi8+Cjwvc3ZnPgo=);
+}
+.login-uwp .checkbox {
+  margin-top: 16px;
+  margin-bottom: -6px;
+}
+html[dir=ltr].login-uwp input.checkbox-text {
+  margin-left: -2px;
+  margin-right: 12px;
+}
+html[dir=rtl].login-uwp input.checkbox-text {
+  margin-right: -2px;
+  margin-left: 12px;
+}
+.login-uwp .commandButton {
+  -webkit-transition: background-color .2s, color .2s;
+  transition: background-color .2s, color .2s;
+  border-radius: 0;
+  white-space: nowrap;
+  text-align: center;
+  outline: none;
+  margin: 5px 0;
+  margin-top: 11px;
+  box-sizing: border-box;
+  min-height: 36px;
+  background-color: #0572CE;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0 22px;
+}
+.login-uwp .commandButton.login-selected {
+  background-color: #044F91;
+}
+
+/* iOS appearance for the checkboxes */
+.login-ios input[type=checkbox] {
+  -webkit-appearance: none;
+  border-width: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  width: 22px;
+  height: 22px;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iI0ZGRkZGRiIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8L3N2Zz4NCg==);
+}
+.login-ios input[type=checkbox].login-selected,
+.login-ios input[type=checkbox]:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iI0RBRUFGOCIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8L3N2Zz4NCg==);
+}
+.login-ios input[type=checkbox]:checked {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iIzA1NzJDRSIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRzPSI1LDEwIDEwLDE1IDE3LDcgIi8+DQo8L3N2Zz4NCg==);
+}
+.login-ios input[type=checkbox].login-selected:checked,
+.login-ios input[type=checkbox]:checked:active {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjJweCIgaGVpZ2h0PSIyMnB4IiB2aWV3Qm94PSIwIDAgMjIgMjIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIyIDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxjaXJjbGUgZmlsbD0iI0RBRUFGOCIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIGN4PSIxMSIgY3k9IjExIiByPSIxMC41Ii8+DQo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDU3MkNFIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRzPSI1LDEwIDEwLDE1IDE3LDcgIi8+DQo8L3N2Zz4NCg==);
+}
+
+label,
+input[type=checkbox],
+button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+}
+
+#bodyPage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Compare with spec */
+body.testMode.overlay:after {
+  content: 'tablet landscape';
+  box-sizing: border-box;
+  padding-top: 100px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 72px;
+  color: purple;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: .3;
+  -webkit-transform: scale(.5);
+  transform: scale(.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transform-origin: top right;
+  transform-origin: top right;
+  width: 200%;
+  height: 200%;
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-image: url(overlay-tab-h-ios.jpg);
+}
+.login-android  body.testMode.overlay:after {
+  background-image: url(overlay-tab-h-and.jpg);
+}
+.login-uwp  body.testMode.overlay:after {
+  background-image: url(overlay-tab-h-uwp.jpg);
+}
+.testButtons {
+  display: none;
+}
+body.testMode .testButtons {
+  display: block;
+}
+
+.login-panelPage-header {
+  color: #000000;
+  font-weight: 300;
+  position: absolute;
+  top: -76px;
+  font-size: 36px;
+}
+
+/* Icon */
+.login-icon {
+  background-image: url(login-icon.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 70px;
+  width: 156px;
+  height: 156px;
+}
+html[dir=ltr] .login-icon {
+  right: 85px;
+  background-position: right top;
+}
+html[dir=rtl] .login-icon {
+  left: 85px;
+  background-position: left top;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+/* Oracle logo */
+.login-logo {
+  background-image: url(login-logo.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  bottom: 40px;
+  width: 137px;
+  height: 17px;
+}
+html[dir=ltr] .login-logo {
+  right: 52px;
+}
+html[dir=rtl] .login-logo {
+  left: 52px;
+}
+html[dir=ltr] .login-logo {
+  background-position: right bottom;
+}
+html[dir=rtl] .login-logo {
+  background-position: left bottom;
+}
+
+.login-form-wrapper {
+  background-color: rgba(255,255,255,.25);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+html[dir=ltr] .login-form-wrapper {
+  box-shadow: 1px 0 0 0 rgba(255,255,255,.25) inset;
+  left: 279px;
+  right: 0;
+}
+html[dir=rtl] .login-form-wrapper {
+  box-shadow: -1px 0 0 0 rgba(255,255,255,.25) inset;
+  right: 279px;
+  left: 0;
+}
+
+form {
+  background-color: #FFFFFF;
+  padding-left: 37px;
+  padding-right: 37px;
+  padding-top: 41px;
+  padding-bottom: 37px;
+  position: relative;
+  top: 326px;
+}
+html[dir=ltr] form {
+  right: 0;
+  box-shadow: -6px 0 0 0 #0572CE;
+}
+html[dir=rtl] form {
+  left: 0;
+  box-shadow: 6px 0 0 0 #0572CE;
+}
+.login-android form {
+  padding-bottom: 44px;
+}
+
+.commandButton {
+  margin-top: 11px;
+  margin-bottom: 19px;
+}
+
+.login-panelFormLayout {
+  position: relative;
+}
+
+.commandButton,
+.login-panelFormLayout,
+.checkbox {
+  white-space: nowrap;
+  margin-bottom: 11px;
+}
+
+.login-panelFormLayout,
+.checkbox {
+  font-size: 1px; /* allows whitespace in the HTML without side-effects */
+}
+.checkbox {
+  margin-top: 9px;
+  margin-bottom: 10px;
+}
+.checkbox label {
+  display: inline-block;
+  white-space: normal;
+}
+
+/* The checkbox text */
+input.checkbox-text {
+  color: #000000;
+}
+html[dir=ltr] input.checkbox-text {
+  margin-right: 10px;
+}
+html[dir=rtl] input.checkbox-text {
+  margin-left: 10px;
+}
+
+.field-label {
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.field-value {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  border: 1px solid #C8CFD5;
+  border-radius: 5px;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #FCFDFE;
+  color: #000000;
+  width: 100%;
+  height: 30px;
+}
+.login-ios .field-value {
+  border-width: 0;
+}
+.login-android ::-webkit-input-placeholder {
+  font-style: italic;
+  color: #595959;
+}
+.login-ios ::-webkit-input-placeholder {
+  font-style: italic;
+  color: #646464;
+}
+.login-uwp ::-webkit-input-placeholder {
+  color: #6B6B6B;
+}
+
+.error-panelFormLayout {
+  position: relative;
+  margin-top: -20px;
+  top: -10px;
+}
+
+.error-text,
+.message-text {
+  font-size: 14px;
+}
+.error-text {
+  color: #E40007;
+}
+.error-text:empty:after {
+  content: '\00a0'; /* non-breaking space */
+}
+
+.commandButton {
+  -webkit-appearance: none;
+  height: 35px;
+  padding: 0px 14px;
+  border-radius: 2px;
+  border-width: 0;
+  background-color: #0572CE;
+  color: #FFFFFF;
+}
+.commandButton.login-selected {
+  background-color: #0487F2;
+}
+
+/* Hide the logo if the height is too small on "tablet landscape" */
+@media only screen and (max-height: 675px) {
+  .login-logo {
+    display: none;
+  }
+}
+
+/* "Tablet portrait" */
+@media only screen and (max-width: 768px) and (min-height: 900px),
+  only screen and (min-height: 1360px) {
+  body.testMode.overlay:after {
+    background-image: url(overlay-tab-v-ios.jpg);
+    content: 'tablet portrait';
+  }
+  .login-android  body.testMode.overlay:after {
+    background-image: url(overlay-tab-v-and.jpg);
+  }
+  .login-uwp  body.testMode.overlay:after {
+    background-image: url(overlay-tab-v-uwp.jpg);
+  }
+
+  .login-icon {
+    top: 88px;
+  }
+  html[dir=ltr] .login-icon {
+    right: 50px;
+  }
+  html[dir=rtl] .login-icon {
+    left: 50px;
+  }
+
+  html[dir=ltr] .login-form-wrapper {
+    left: 262px;
+  }
+  html[dir=rtl] .login-form-wrapper {
+    right: 262px;
+  }
+
+  form {
+    top: 434px;
+  }
+
+  .login-logo {
+    display: block;
+  }
+}
+@media only screen and (min-width: 1115px) {
+  html[dir=ltr] #bodyPage:before {
+    left: -110px;
+  }
+  html[dir=rtl] #bodyPage:before {
+    right: -110px;
+  }
+}
+@media only screen and (min-height: 1360px) {
+  #bodyPage:before {
+    top: 0;
+    left: -88px;
+  }
+  html[dir=ltr] #bodyPage:before {
+    left: -88px;
+  }
+  html[dir=rtl] #bodyPage:before {
+    right: -88px;
+  }
+}
+
+/* "Phone portrait" */
+@media only screen and (max-width: 736px) {
+  body.testMode.overlay:after {
+    background-image: url(overlay-phone-v-ios.jpg);
+    content: 'phone portrait';
+  }
+  .login-android  body.testMode.overlay:after {
+    background-image: url(overlay-phone-v-and.jpg);
+  }
+  .login-uwp  body.testMode.overlay:after {
+    background-image: url(overlay-phone-v-uwp.jpg);
+  }
+
+  #bodyPage:before {
+    top: -100px;
+    bottom: -30px;
+  }
+  html[dir=ltr] #bodyPage:before {
+    left: -80px;
+  }
+  html[dir=rtl] #bodyPage:before {
+    right: -80px;
+  }
+
+  .login-icon {
+    top: 47px;
+    width: 101px;
+    height: 101px;
+  }
+  html[dir=ltr] .login-icon {
+    right: 30px;
+  }
+  html[dir=rtl] .login-icon {
+    left: 30px;
+  }
+
+  html[dir=ltr] .login-form-wrapper {
+    left: 97px;
+  }
+  html[dir=rtl] .login-form-wrapper {
+    right: 97px;
+  }
+
+  form {
+    top: 271px;
+    padding-top: 31px;
+    padding-bottom: 21px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .login-android form {
+    padding-bottom: 30px;
+  }
+  .login-uwp form {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .login-panelPage-header {
+    top: -50px;
+    font-size: 30px;
+  }
+
+  .error-panelFormLayout {
+    top: -4px;
+  }
+
+  .login-logo {
+    display: block;
+    bottom: 25px;
+    width: 87px;
+    height: 11px;
+  }
+  html[dir=ltr] .login-logo {
+    right: 36px;
+  }
+  html[dir=rtl] .login-logo {
+    left: 36px;
+  }
+}
+
+/* "Phone landscape" */
+@media only screen and (max-height: 414px) {
+  body.testMode.overlay:after {
+    background-image: url(overlay-phone-h-ios.jpg);
+    content: 'phone landscape';
+  }
+  .login-android  body.testMode.overlay:after {
+    background-image: url(overlay-phone-h-and.jpg);
+  }
+  .login-uwp  body.testMode.overlay:after {
+    background-image: url(overlay-phone-h-uwp.jpg);
+  }
+
+  #bodyPage:before {
+    top: -20px;
+    bottom: -100px;
+  }
+  html[dir=ltr] #bodyPage:before {
+    left: -1px;
+  }
+  html[dir=rtl] #bodyPage:before {
+    right: -1px;
+  }
+
+  .login-icon {
+    display: none;
+  }
+
+  html[dir=ltr] .login-form-wrapper {
+    left: auto;
+  }
+  html[dir=rtl] .login-form-wrapper {
+    right: auto;
+  }
+
+  form {
+    top: 92px;
+    padding-top: 31px;
+    padding-bottom: 21px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .login-android form {
+    padding-bottom: 28px;
+  }
+  .login-uwp form {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .login-panelPage-header {
+    top: -50px;
+    font-size: 30px;
+  }
+
+  .error-panelFormLayout {
+    top: -4px;
+  }
+
+  .login-logo {
+    display: block;
+    bottom: 15px;
+    width: 78px;
+    height: 10px;
+  }
+  html[dir=ltr] .login-logo {
+    right: 34px;
+  }
+  html[dir=rtl] .login-logo {
+    left: 34px;
+  }
+}
+
+/* "tiny width" */
+@media only screen and (max-width: 340px) {
+  body.testMode.overlay:after {
+    background-image: none;
+    content: 'tiny width';
+  }
+
+  #bodyPage:before {
+    background-image: none;
+  }
+
+  .login-icon {
+    display: none;
+  }
+
+  html[dir=ltr] .login-form-wrapper {
+    left: 65px;
+  }
+  html[dir=rtl] .login-form-wrapper {
+    right: 65px;
+  }
+
+  form {
+    top: 80px;
+    padding-top: 31px;
+    padding-bottom: 21px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .login-panelPage-header {
+    top: -50px;
+    font-size: 30px;
+  }
+
+  .error-panelFormLayout {
+    top: -4px;
+  }
+
+  .login-logo {
+    display: none;
+  }
+}
+
+/* Use a 2-column form when "tablet" wide enough and "phone" wide enough */
+@media only screen and (min-width: 770px),
+  only screen and (min-width: 666px) and (max-height: 450px) {
+  .possible-columns {
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
+
+  .possible-column {
+    display: inline-block;
+    vertical-align: top;
+    width: 49%;
+    box-sizing: border-box;
+  }
+  .login-android .possible-column {
+    padding-top: 3px;
+    margin-bottom: 22px;
+  }
+  .login-uwp .possible-column {
+    padding-top: 3px;
+    margin-bottom: 0;
+  }
+
+  .possible-column:first-child {
+    min-width: 180px;
+  }
+  html[dir=ltr] .possible-column:first-child {
+    padding-right: 25px;
+  }
+  html[dir=rtl] .possible-column:first-child {
+    padding-left: 25px;
+  }
+  html[dir=ltr].login-uwp .possible-column:first-child {
+    padding-right: 47px;
+  }
+  html[dir=rtl].login-uwp .possible-column:first-child {
+    padding-left: 47px;
+  }
+  .login-android .possible-column:first-child {
+    padding-top: 0;
+  }
+
+  .login-android .checkbox {
+    padding-bottom: 9px;
+  }
+  html[dir=ltr].login-android input.checkbox-text {
+    margin-left: 0;
+  }
+  html[dir=rtl].login-android input.checkbox-text {
+    margin-right: 0;
+  }
+
+  .checkbox {
+    margin-top: 4px;
+    margin-bottom: 19px;
+  }
+}
+
+/* Use a 2-column form when "tablet" wide enough */
+@media only screen and (min-width: 770px) {
+  html[dir=ltr].login-uwp .possible-column:first-child {
+    padding-right: 74px;
+  }
+  html[dir=rtl].login-uwp .possible-column:first-child {
+    padding-left: 74px;
+  }
+}
